@@ -40,13 +40,18 @@ public class FourInARow implements IGame {
 
     @Override
     public int getComputerMove() {
-        // TODO Auto-generated method stub
+
         return 0;
     }
 
     @Override
     public int checkForWinner() {
-        //the number of tiles in a row a player needs
+
+        for(int i = 0; i < COLS; i++) {
+            if(board[0][i] == EMPTY) {
+                return PLAYING;
+            }
+        }
 
         //I'm pretty sure this works
         int c = 4;
@@ -58,13 +63,13 @@ public class FourInARow implements IGame {
                         if (board[row + dy * i][col + dx * i] != board[row][col]) {
                             break;
                         } else if (i == c - 1) {
-                            return board[row][col];
+                            return board[row][col] == BLUE ? BLUE_WON : RED_WON;
                         }
                     }
                 }
             }
         }
-        return 0;
+        return TIE;
     }
 
     /**
