@@ -1,2 +1,4 @@
 # SER210-Assignment-1
-a Four-in-a-row Android game
+A Four-in-a-row Android game created for SER-210 (Android Development Class)
+
+by Thomas Kwashnak
