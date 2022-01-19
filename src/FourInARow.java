@@ -19,10 +19,14 @@ public class FourInARow implements IGame {
 	public FourInARow(){
 		
 	}
+	
 	@Override
 	public void clearBoard() {
-		// TODO Auto-generated method stub
-
+		for(int i = 0; i < ROWS; i++) {
+			for(int j = 0; j < COLS; j++) {
+				board[i][j] = EMPTY; //huh?
+			}
+		}
 	}
 
 	@Override
