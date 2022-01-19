@@ -1,3 +1,8 @@
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 /**
  * TicTacToe class implements the interface
  *
@@ -10,6 +15,7 @@ public class FourInARow implements IGame {
     // The game board and the game status
     private static final int ROWS = 6, COLS = 6; // number of rows and columns
     private final int[][] board = new int[ROWS][COLS]; // game board in 2D array
+    private static final int COMPUTER_COLOR = BLUE, PLAYER_COLOR = RED;
 
     /**
      * clear board and set current player
@@ -29,30 +35,61 @@ public class FourInARow implements IGame {
 
     @Override
     public void setMove(int player, int location) {
-        int row = getColumnOpenings(location);
-        if(row != -1) {
-            board[row][location] = player;
+        if(getLocation(location) == EMPTY) {
+            setLocation(location,player);
         }
     }
 
     @Override
     public int getComputerMove() {
-        /*
-        Computer Strategy:
-        1. If the opponent is able to win, prevent it
-        2. Place a piece on the location that makes the longest line
 
-         */
+        List<Integer> validMoves = new ArrayList<>();
+
+        for(int i = 0; i < ROWS * COLS; i++) {
+            if(getLocation(i) == EMPTY) {
+                validMoves.add(i);
+            }
+        }
+
+        //Check if any will win
+        for(Integer move : validMoves) {
+            setLocation(move,COMPUTER_COLOR);
+            int winner = checkForWinner();
+            setLocation(move,EMPTY);
+            if(winner != PLAYING) {
+                return move;
+            }
+        }
+
+        //Check if any will lose
+        for(Integer move : validMoves) {
+            setLocation(move,PLAYER_COLOR);
+            int winner = checkForWinner();
+            setLocation(move,EMPTY);
+            if(winner != PLAYING) {
+                return move;
+            }
+        }
 
         return 0;
+    }
+
+    public int getLocation(int location) {
+        return board[location / COLS][location % COLS];
+    }
+
+    public void setLocation(int location, int value) {
+        board[location / COLS][location % COLS] = value;
     }
 
     @Override
     public int checkForWinner() {
 
-        for(int i = 0; i < COLS; i++) {
-            if(board[0][i] == EMPTY) {
-                return PLAYING;
+        for(int col = 0; col < COLS; col++) {
+            for(int row = 0; row < ROWS; row++) {
+                if(board[row][col] == EMPTY) {
+                    return PLAYING;
+                }
             }
         }
 
@@ -73,20 +110,6 @@ public class FourInARow implements IGame {
             }
         }
         return TIE;
-    }
-
-    /**
-     * Returns the first open spot from a given column
-     * @param col Column to check the height for
-     * @return
-     */
-    private int getColumnOpenings(int col) {
-        for(int i = 0; i < ROWS; i++) {
-            if(board[col][i] != EMPTY) {
-                return i - 1;
-            }
-        }
-        return -1;
     }
 
     /**
