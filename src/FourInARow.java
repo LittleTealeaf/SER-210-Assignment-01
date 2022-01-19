@@ -29,17 +29,20 @@ public class FourInARow implements IGame {
 
     @Override
     public void setMove(int player, int location) {
-        int row = 0;
-        while (board[row][location] == EMPTY) {
-            row++;
-        }
-        if (row > 0) {
-            board[row - 1][location] = player;
+        int row = getColumnOpenings(location);
+        if(row != -1) {
+            board[row][location] = player;
         }
     }
 
     @Override
     public int getComputerMove() {
+        /*
+        Computer Strategy:
+        1. If the opponent is able to win, prevent it
+        2. Place a piece on the location that makes the longest line
+
+         */
 
         return 0;
     }
@@ -70,6 +73,20 @@ public class FourInARow implements IGame {
             }
         }
         return TIE;
+    }
+
+    /**
+     * Returns the first open spot from a given column
+     * @param col Column to check the height for
+     * @return
+     */
+    private int getColumnOpenings(int col) {
+        for(int i = 0; i < ROWS; i++) {
+            if(board[col][i] != EMPTY) {
+                return i - 1;
+            }
+        }
+        return -1;
     }
 
     /**
