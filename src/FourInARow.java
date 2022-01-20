@@ -15,13 +15,15 @@ public class FourInARow implements IGame {
     // The game board and the game status
     private static final int ROWS = 6, COLS = 6; // number of rows and columns
     private final int[][] board = new int[ROWS][COLS]; // game board in 2D array
-    private static final int COMPUTER_COLOR = BLUE, PLAYER_COLOR = RED;
+
+    public static int COLOR_PLAYER = RED, COLOR_COMPUTER = BLUE;
+
 
     /**
-     * clear board and set current player
+     * clear board and set current player (???)
      */
     public FourInARow() {
-
+        clearBoard();
     }
 
     @Override
@@ -42,7 +44,6 @@ public class FourInARow implements IGame {
 
     @Override
     public int getComputerMove() {
-
         List<Integer> validMoves = new ArrayList<>();
 
         for(int i = 0; i < ROWS * COLS; i++) {
@@ -53,20 +54,14 @@ public class FourInARow implements IGame {
 
         //Check if any will win
         for(Integer move : validMoves) {
-            setLocation(move,COMPUTER_COLOR);
-            int winner = checkForWinner();
-            setLocation(move,EMPTY);
-            if(winner != PLAYING) {
+            if(checkMoveResult(COLOR_COMPUTER,move) != PLAYING) {
                 return move;
             }
         }
 
         //Check if any will lose
         for(Integer move : validMoves) {
-            setLocation(move,PLAYER_COLOR);
-            int winner = checkForWinner();
-            setLocation(move,EMPTY);
-            if(winner != PLAYING) {
+            if(checkMoveResult(COLOR_PLAYER,move) != PLAYING) {
                 return move;
             }
         }
@@ -80,6 +75,20 @@ public class FourInARow implements IGame {
 
     public void setLocation(int location, int value) {
         board[location / COLS][location % COLS] = value;
+    }
+
+    /**
+     * Temporarily makes a move, checks for winner, reverts the move, and returns the result.
+     * @param player
+     * @param location
+     * @return
+     */
+    private int checkMoveResult(int player, int location) {
+        int original = getLocation(location);
+        setLocation(location,player);
+        int result = checkForWinner();
+        setLocation(location,original);
+        return result;
     }
 
     @Override
