@@ -96,7 +96,7 @@ public class FourInARow implements IGame {
 
         int eval = 0;
 
-        for (int d : new int[]{1, COLS, COLS + 1}) {
+        for (int d : new int[]{1, COLS - 1, COLS, COLS + 1}) {
             //Check the range
             int length = 0, count = 0;
             boolean goPos = true, goNeg = true;
@@ -156,17 +156,16 @@ public class FourInARow implements IGame {
 
     @Override
     public int checkForWinner() {
-        int c = 4;
-        for (int row = 0; row < ROWS - c; row++) {
-            for (int col = 0; col < COLS - c; col++) {
+        for (int row = 0; row < ROWS; row++) {
+            for (int col = 0; col < COLS; col++) {
                 int location = row * COLS + col;
                 int value = getLocation(location);
                 if (value != EMPTY) {
-                    for (int d : new int[]{1, COLS, COLS + 1}) {
-                        for (int i = 0; i < c; i++) {
+                    for (int d : new int[]{1, COLS - 1, COLS, COLS + 1}) {
+                        for (int i = 0; i < 4; i++) {
                             if (getLocation(location + d * i) != value) {
                                 break;
-                            } else if (i == c - 1) {
+                            } else if (i == 3) {
                                 return value == BLUE ? BLUE_WON : RED_WON;
                             }
                         }
@@ -199,7 +198,7 @@ public class FourInARow implements IGame {
             }
             System.out.println();
             if (row != ROWS - 1) {
-                System.out.println("----------------------"); // print horizontal partition
+                System.out.println("-----------------------"); // print horizontal partition
             }
         }
         System.out.println();

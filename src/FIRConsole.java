@@ -15,8 +15,8 @@ public class FIRConsole {
     /** The entry main method (the program starts here) */
     public static void main(String[] args) {
 
-        int currentState = FourInARow.PLAYING;
-        String userInput = "";
+        int currentState;
+        String userInput;
         //game loop
         do {
             FIRboard.printBoard();
@@ -30,12 +30,18 @@ public class FIRConsole {
             userInput = in.nextLine();
 
             try {
-                FIRboard.setMove(IGame.RED,Integer.parseInt(userInput));
-                FIRboard.setMove(IGame.BLUE,FIRboard.getComputerMove());
-            } catch(Exception ignored) {}
+                FIRboard.setMove(IGame.RED, Integer.parseInt(userInput));
+                FIRboard.setMove(IGame.BLUE, FIRboard.getComputerMove());
+            } catch (Exception ignored) {
+            }
 
             currentState = FIRboard.checkForWinner();
-
         } while ((currentState == IGame.PLAYING) && (!userInput.equals("q"))); // repeat if not game-over
+        FIRboard.printBoard();
+        switch (currentState) {
+            case IGame.RED_WON -> System.out.println("YOU WON!");
+            case IGame.BLUE_WON -> System.out.println("YOU LOST!");
+            default -> System.out.println("TIE!");
+        }
     }
 }
