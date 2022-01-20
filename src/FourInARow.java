@@ -198,7 +198,7 @@ public class FourInARow implements IGame {
             }
             System.out.println();
             if (row != ROWS - 1) {
-                System.out.println("-----------"); // print horizontal partition
+                System.out.println("----------------------"); // print horizontal partition
             }
         }
         System.out.println();
