@@ -34,6 +34,7 @@ public class FIRConsole {
                 FIRboard.setMove(IGame.BLUE,FIRboard.getComputerMove());
             } catch(Exception ignored) {}
 
+            currentState = FIRboard.checkForWinner();
 
         } while ((currentState == IGame.PLAYING) && (!userInput.equals("q"))); // repeat if not game-over
     }

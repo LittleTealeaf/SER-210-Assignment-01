@@ -156,28 +156,29 @@ public class FourInARow implements IGame {
 
     @Override
     public int checkForWinner() {
-
-        for(int col = 0; col < COLS; col++) {
-            for(int row = 0; row < ROWS; row++) {
-                if(board[row][col] == EMPTY) {
-                    return PLAYING;
+        int c = 4;
+        for (int row = 0; row < ROWS - c; row++) {
+            for (int col = 0; col < COLS - c; col++) {
+                int location = row * COLS + col;
+                int value = getLocation(location);
+                if (value != EMPTY) {
+                    for (int d : new int[]{1, COLS, COLS + 1}) {
+                        for (int i = 0; i < c; i++) {
+                            if (getLocation(location + d * i) != value) {
+                                break;
+                            } else if (i == c - 1) {
+                                return value == BLUE ? BLUE_WON : RED_WON;
+                            }
+                        }
+                    }
                 }
             }
         }
 
-        //I'm pretty sure this works
-        int c = 4;
-        for (int row = 0; row < ROWS - c; row++) {
-            for (int col = 0; col < COLS - c; col++) {
-                for (int d = 1; d <= 3; d++) {
-                    int dx = d / 2, dy = d % 2;
-                    for (int i = 0; i < c; i++) {
-                        if (board[row + dy * i][col + dx * i] != board[row][col]) {
-                            break;
-                        } else if (i == c - 1) {
-                            return board[row][col] == BLUE ? BLUE_WON : RED_WON;
-                        }
-                    }
+        for (int col = 0; col < COLS; col++) {
+            for (int row = 0; row < ROWS; row++) {
+                if (board[row][col] == EMPTY) {
+                    return PLAYING;
                 }
             }
         }
