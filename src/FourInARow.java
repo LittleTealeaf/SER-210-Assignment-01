@@ -130,7 +130,7 @@ public class FourInARow implements IGame {
         return eval;
     }
 
-    private boolean inBounds(int location) {
+    public boolean inBounds(int location) {
         return location >= 0 && location < ROWS * COLS;
     }
 
