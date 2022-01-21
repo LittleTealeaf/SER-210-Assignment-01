@@ -74,8 +74,10 @@ public class FourInARow implements IGame {
         List<Integer> bestMoves = new ArrayList<>();
         int bestEval = 0;
 
+        final int COMPUTER_COEFF = 1, PLAYER_COEFF = 1;
+
         for (Integer move : validMoves) {
-            int eval = evaluatePosition(move, COLOR_COMPUTER);
+            int eval = evaluatePosition(move, COLOR_COMPUTER) * COMPUTER_COEFF + evaluatePosition(move, COLOR_PLAYER) * PLAYER_COEFF;
             if (eval > bestEval) {
                 bestEval = eval;
                 bestMoves.clear();
@@ -84,6 +86,8 @@ public class FourInARow implements IGame {
                 bestMoves.add(move);
             }
         }
+
+        System.out.println("FINAL MOVES: " + bestMoves);
 
         return bestMoves.get(random.nextInt(bestMoves.size()));
     }
@@ -100,73 +104,38 @@ public class FourInARow implements IGame {
     private int evaluatePosition(int location, int player) {
         int y = location / COLS, x = location % COLS;
 
-        if (getLocation(location) != EMPTY) {
+        final int EVAL_EMPTY = 1, EVAL_FULL = 2;
+
+        if (getLocation(y, x) != EMPTY) {
             return -1;
         }
 
         int eval = 0;
 
-//        for (int d : new int[]{1, COLS - 1, COLS, COLS + 1}) {
-//            //Check the range
-//            int length = 0, count = 0;
-//            boolean goPos = true, goNeg = true;
-//            for (int i = 0; i < 4; i++) {
-//                int probePos = getLocation(location + d * i);
-//                int probeNeg = getLocation(location - d * i);
-//
-//                if (goPos && (probePos == player || probePos == 0)) {
-//                    length++;
-//                    if (probePos == player) {
-//                        count++;
-//                    }
-//                } else {
-//                    goPos = false;
-//                }
-//
-//                if (goNeg && (probeNeg == player || probeNeg == 0)) {
-//                    length++;
-//                    if (probeNeg == player) {
-//                        count++;
-//                    }
-//                } else {
-//                    goNeg = false;
-//                }
-//            }
-//            if (length >= 3) {
-//                eval += count;
-//            }
-//        }
         for (int[] d : new int[][]{{0, 1}, {1, -1}, {1, 0}, {1, 1}}) {
             int dy = d[0], dx = d[1];
-            int length = 0, count = 0;
-            boolean goPos = true, goNeg = true;
-            for (int i = 0; i < 4; i++) {
-                int probePos = getLocation(y + dy * i, x + dx * i);
-                int probeNeg = getLocation(y - dy * i, x - dx * i);
-                if (goPos && (probePos == player || probePos == 0)) {
-                    length++;
-                    if (probePos == player) {
-                        count++;
-                    }
-                } else {
-                    goPos = false;
-                }
+            int dirDistance = 0;
+            int dirEval = 0;
+            for (int c = -1; c <= 1; c += 2) {
+                for (int i = 1; i < 4; i++) {
+                    int ty = y + dy * i * c, tx = x + dx * i * c;
+                    int tVal = getLocation(ty, tx);
 
-                if (goNeg && (probeNeg == player || probeNeg == 0)) {
-                    length++;
-                    if (probeNeg == player) {
-                        count++;
+                    if (tVal == EMPTY || tVal == player) {
+                        dirDistance++;
+                        dirEval += EVAL_EMPTY;
+                        if (tVal == player) {
+                            dirEval += EVAL_FULL;
+                        }
+                    } else {
+                        break;
                     }
-                } else {
-                    goNeg = false;
                 }
-
             }
-            if (length >= 3) {
-                eval += count;
+            if (dirDistance >= 3) {
+                eval += dirEval;
             }
         }
-
         return eval;
     }
 
