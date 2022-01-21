@@ -28,7 +28,7 @@ public class FourInARow implements IGame {
     /**
      * Coefficient of how an evaluation should weigh the worth of a populated space near it (in a valid line)
      */
-    private static final int COEFFICIENT_POPULATED = 3;
+    private static final int COEFFICIENT_POPULATED = 5;
     /**
      * Coefficient of how an evaluation should weigh the worth of an empty space near it (in a valid line)
      */
