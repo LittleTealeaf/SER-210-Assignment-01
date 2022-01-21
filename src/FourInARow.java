@@ -14,12 +14,17 @@ import java.util.Random;
  */
 public class FourInARow implements IGame {
 
+    /**
+     * Color IDs indicating which player gets which color (I wish the assignment was more specific)
+     */
     public static final int ID_PLAYER, ID_COMPUTER;
     private static final int ROWS, COLS;
     /**
      * Directional points used for checks
      */
-    private static final Point[] DIRECTIONAL_POINTS;
+    private static final Point[] DIRECTIONAL_POINTS = new Point[]{
+            new Point(1, 0), new Point(-1, 1), new Point(0, 1), new Point(1, 1)
+    };
 
     /**
      * Coefficient of how the computer should weigh the worth of a location to a player. Higher values in relation to COEFFICIENT_COMPUTER will
@@ -41,9 +46,6 @@ public class FourInARow implements IGame {
     private static final int WEIGHT_EMPTY = 1;
 
     static {
-        DIRECTIONAL_POINTS = new Point[]{
-                new Point(1, 0), new Point(-1, 1), new Point(0, 1), new Point(1, 1)
-        };
         ROWS = COLS = 6;
         ID_PLAYER = RED;
         ID_COMPUTER = BLUE;
@@ -58,6 +60,17 @@ public class FourInARow implements IGame {
         board = new int[ROWS][COLS];
     }
 
+    /**
+     * Converts a given point to a location
+     *
+     * @param point Point containing coordinates on the board
+     *
+     * @return Location representing the given coordinates. Returns -1 if coordinates are out of range
+     */
+    public static int pointToLocation(Point point) {
+        return inRange(point) ? point.y * COLS + point.x : -1;
+    }
+
     @Override
     public void clearBoard() {
         for (int r = 0; r < ROWS; r++) {
@@ -67,11 +80,15 @@ public class FourInARow implements IGame {
         }
     }
 
-    @Override
-    public void setMove(int player, int location) {
-        if (get(location) == EMPTY) {
-            set(location, player);
-        }
+    /**
+     * Checks if a given point is within the range of the board
+     *
+     * @param point Coordinates to check
+     *
+     * @return True if the point can be found on the board, False if the point can not be found on the board
+     */
+    public static boolean inRange(Point point) {
+        return point.x >= 0 && point.x < COLS && point.y >= 0 && point.y < ROWS;
     }
 
     /**
@@ -85,26 +102,10 @@ public class FourInARow implements IGame {
         return inRange(location) ? board[location / COLS][location % COLS] : -1;
     }
 
-    /**
-     * Checks if a given location can be found on the board
-     *
-     * @param location Location to check on the board
-     *
-     * @return True if the location is between 0 and ROWS * COLS, False otherwise
-     */
-    public boolean inRange(int location) {
-        return location >= 0 && location < ROWS * COLS;
-    }
-
-    /**
-     * Sets the board value at a given location
-     *
-     * @param location Location (between 0 and ROWS * COLS) to set the value of
-     * @param value    Value to set the location to
-     */
-    public void set(int location, int value) {
-        if (inRange(location)) {
-            board[location / COLS][location % COLS] = value;
+    @Override
+    public void setMove(int player, int location) {
+        if (get(location) == EMPTY) {
+            board[location / COLS][location % COLS] = player;
         }
     }
 
@@ -158,7 +159,7 @@ public class FourInARow implements IGame {
     }
 
     /**
-     * Evaluates the given location. Converts the location to a point and passes it along to the other method
+     * Evaluates the given point by the worth of having a piece there in regards to the ability to make a 4-in-a-row
      *
      * @param location Location (between 0 and 35) of the object to evaluate
      * @param player   The player to evaluate the location for
@@ -166,18 +167,7 @@ public class FourInARow implements IGame {
      * @return Evaluation of the given location for the given player
      */
     private int evaluateLocation(int location, int player) {
-        return evaluateLocation(locationToPoint(location), player);
-    }
-
-    /**
-     * Evaluates the given point by the worth of having a piece there in regards to the ability to make a 4-in-a-row
-     *
-     * @param point  Point containing coordinates to evaluate on the board
-     * @param player Player to evaluate the given coordinates for
-     *
-     * @return Evaluation of the given point for a given player
-     */
-    private int evaluateLocation(Point point, int player) {
+        Point point = locationToPoint(location);
         if (get(point) != EMPTY) {
             return -1;
         }
@@ -215,7 +205,7 @@ public class FourInARow implements IGame {
      *
      * @return The location represented as a point with the matrix coordinates. Returns null if the location is out of bounds
      */
-    private Point locationToPoint(int location) {
+    private static Point locationToPoint(int location) {
         return inRange(location) ? new Point(location % COLS, location / COLS) : null;
     }
 
@@ -231,37 +221,14 @@ public class FourInARow implements IGame {
     }
 
     /**
-     * Checks if a given point is within the range of the board
+     * Checks if a given location can be found on the board
      *
-     * @param point Coordinates to check
+     * @param location Location to check on the board
      *
-     * @return True if the point can be found on the board, False if the point can not be found on the board
+     * @return True if the location is between 0 and ROWS * COLS, False otherwise
      */
-    public boolean inRange(Point point) {
-        return point.x >= 0 && point.x < COLS && point.y >= 0 && point.y < ROWS;
-    }
-
-    /**
-     * Converts a given point to a location
-     *
-     * @param point Point containing coordinates on the board
-     *
-     * @return Location representing the given coordinates. Returns -1 if coordinates are out of range
-     */
-    private int pointToLocation(Point point) {
-        return inRange(point) ? point.y * COLS + point.x : -1;
-    }
-
-    /**
-     * Sets the board value at a given point
-     *
-     * @param point Coordinates to change the value of on the board
-     * @param value Value to set on the board at the given coordinates
-     */
-    public void set(Point point, int value) {
-        if (inRange(point)) {
-            board[point.y][point.x] = value;
-        }
+    public static boolean inRange(int location) {
+        return location >= 0 && location < ROWS * COLS;
     }
 
     /**
