@@ -144,7 +144,6 @@ public class FourInARow implements IGame {
      * @return The value at that given location. Returns -1 if location is not in the correct bounds.
      */
     public int getLocation(int location) {
-//        return inBounds(location) ? board[location / COLS][location % COLS] : -1;
         return getLocation(location / COLS, location % COLS);
     }
 
@@ -154,15 +153,6 @@ public class FourInARow implements IGame {
             for (int col = 0; col < COLS; col++) {
                 int value = getLocation(row, col);
                 if (value != EMPTY) {
-//                    for (int d : new int[]{1, COLS - 1, COLS, COLS + 1}) {
-//                        for (int i = 0; i < 4; i++) {
-//                            if (getLocation(location + d * i) != value) {
-//                                break;
-//                            } else if (i == 3) {
-//                                return value == BLUE ? BLUE_WON : RED_WON;
-//                            }
-//                        }
-//                    }
                     for (int[] d : new int[][]{{0, 1}, {1, -1}, {1, 0}, {1, 1}}) {
                         for (int i = 0; i < 4; i++) {
                             if (getLocation(row + d[0] * i, col + d[1] * i) != value) {
