@@ -27,6 +27,9 @@ public class FourInARow implements IGame {
         random = new Random();
     }
 
+    /**
+     * Clears the board
+     */
     @Override
     public void clearBoard() {
         for (int i = 0; i < ROWS; i++) {
@@ -35,6 +38,7 @@ public class FourInARow implements IGame {
             }
         }
     }
+
 
     @Override
     public void setMove(int player, int location) {
@@ -84,10 +88,15 @@ public class FourInARow implements IGame {
         return bestMoves.get(random.nextInt(bestMoves.size()));
     }
 
-    public int getLocation(int location) {
-        return inBounds(location) ? board[location / COLS][location % COLS] : -1;
-    }
-
+    /**
+     * Evaluates how good a position is based on how close it is to making a four-in-a-row
+     *
+     * @param location The location to evaluate, between 0-35
+     * @param player   The player to evaluate the location based on
+     *
+     * @return The locations' evaluation. Higher numbers means the spot is a better move for the specified player, and lower numbers means it is a
+     * worse move for the player
+     */
     private int evaluatePosition(int location, int player) {
 
         if (getLocation(location) != EMPTY) {
@@ -130,6 +139,24 @@ public class FourInARow implements IGame {
         return eval;
     }
 
+    /**
+     * Returns the value at the provided location if it is valid
+     *
+     * @param location A location number between 0-35
+     *
+     * @return The value at that given location. Returns -1 if location is not in the correct bounds.
+     */
+    public int getLocation(int location) {
+        return inBounds(location) ? board[location / COLS][location % COLS] : -1;
+    }
+
+    /**
+     * Whether or not a give location is within the specified bounds
+     *
+     * @param location The location number in question
+     *
+     * @return True if the location is within the proper bounds, False if it is not in the bounds
+     */
     public boolean inBounds(int location) {
         return location >= 0 && location < ROWS * COLS;
     }
