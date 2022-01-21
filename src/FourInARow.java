@@ -183,20 +183,6 @@ public class FourInARow implements IGame {
         }
     }
 
-//    /**
-//     * Temporarily makes a move, checks for winner, reverts the move, and returns the result.
-//     * @param player
-//     * @param location
-//     * @return
-//     */
-//    private int checkMoveResult(int player, int location) {
-//        int original = getLocation(location);
-//        setLocation(location, player);
-//        int result = checkForWinner();
-//        setLocation(location, original);
-//        return result;
-//    }
-
     public boolean inBounds(int y, int x) {
         return y >= 0 && y < ROWS && x >= 0 && x < COLS;
     }
