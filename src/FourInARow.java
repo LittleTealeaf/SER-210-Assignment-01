@@ -86,9 +86,6 @@ public class FourInARow implements IGame {
                 bestMoves.add(move);
             }
         }
-
-        System.out.println("FINAL MOVES: " + bestMoves);
-
         return bestMoves.get(random.nextInt(bestMoves.size()));
     }
 
