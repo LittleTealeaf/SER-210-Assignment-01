@@ -17,6 +17,23 @@ public class FourInARow implements IGame {
 
     public static int COLOR_PLAYER = RED, COLOR_COMPUTER = BLUE;
 
+    /**
+     * Coefficient of how the computer should weigh the worth of a location to a player
+     */
+    private static final int COEFFICIENT_PLAYER = 2;
+    /**
+     * Coefficient of how the computer should weigh the worth of a location to itself
+     */
+    private static final int COEFFICIENT_COMPUTER = 1;
+    /**
+     * Coefficient of how an evaluation should weigh the worth of a populated space near it (in a valid line)
+     */
+    private static final int COEFFICIENT_POPULATED = 3;
+    /**
+     * Coefficient of how an evaluation should weigh the worth of an empty space near it (in a valid line)
+     */
+    private static final int COEFFICIENT_EMPTY = 1;
+
     private final Random random;
 
     /**
@@ -49,21 +66,10 @@ public class FourInARow implements IGame {
 
     @Override
     public int getComputerMove() {
-        List<Integer> validMoves = new ArrayList<>();
-
-        for(int i = 0; i < ROWS * COLS; i++) {
-            if(getLocation(i) == EMPTY) {
-                validMoves.add(i);
-            }
-        }
-
         List<Integer> bestMoves = new ArrayList<>();
         int bestEval = 0;
-
-        final int COMPUTER_COEFF = 1, PLAYER_COEFF = 1;
-
-        for (Integer move : validMoves) {
-            int eval = evaluatePosition(move, COLOR_COMPUTER) * COMPUTER_COEFF + evaluatePosition(move, COLOR_PLAYER) * PLAYER_COEFF;
+        for (int move = 0; move < ROWS * COLS; move++) {
+            int eval = evaluatePosition(move, COLOR_COMPUTER) * COEFFICIENT_COMPUTER + evaluatePosition(move, COLOR_PLAYER) * COEFFICIENT_PLAYER;
             if (eval > bestEval) {
                 bestEval = eval;
                 bestMoves.clear();
@@ -87,8 +93,6 @@ public class FourInARow implements IGame {
     private int evaluatePosition(int location, int player) {
         int y = location / COLS, x = location % COLS;
 
-        final int EVAL_EMPTY = 1, EVAL_FULL = 2;
-
         if (getLocation(y, x) != EMPTY) {
             return -1;
         }
@@ -106,10 +110,7 @@ public class FourInARow implements IGame {
 
                     if (tVal == EMPTY || tVal == player) {
                         dirDistance++;
-                        dirEval += EVAL_EMPTY;
-                        if (tVal == player) {
-                            dirEval += EVAL_FULL;
-                        }
+                        dirEval += tVal == player ? COEFFICIENT_POPULATED : COEFFICIENT_EMPTY;
                     } else {
                         break;
                     }
