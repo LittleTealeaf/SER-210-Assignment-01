@@ -74,8 +74,10 @@ public class FourInARow implements IGame {
         List<Integer> bestMoves = new ArrayList<>();
         int bestEval = 0;
 
+        final int COMPUTER_COEFF = 1, PLAYER_COEFF = 2;
+
         for (Integer move : validMoves) {
-            int eval = evaluatePosition(move, COLOR_COMPUTER);
+            int eval = evaluatePosition(move, COLOR_COMPUTER) * COMPUTER_COEFF + evaluatePosition(move, COLOR_PLAYER) * PLAYER_COEFF;
             if (eval > bestEval) {
                 bestEval = eval;
                 bestMoves.clear();
