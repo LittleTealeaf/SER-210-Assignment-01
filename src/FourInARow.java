@@ -1,4 +1,9 @@
 import java.awt.Point;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 /**
@@ -16,6 +21,25 @@ public class FourInARow implements IGame {
      * Directional points used for checks
      */
     private static final Point[] DIRECTIONAL_POINTS;
+
+        /**
+     * Coefficient of how the computer should weigh the worth of a location to a player
+     */
+    private static final int COEFFICIENT_PLAYER = 1;
+    /**
+     * Coefficient of how the computer should weigh the worth of a location to itself
+     */
+    private static final int COEFFICIENT_COMPUTER = 1;
+    /**
+     * Coefficient of how an evaluation should weigh the worth of a populated space near it (in a valid line)
+     */
+    private static final int COEFFICIENT_POPULATED = 5;
+    /**
+     * Coefficient of how an evaluation should weigh the worth of an empty space near it (in a valid line)
+     */
+    private static final int COEFFICIENT_EMPTY = 1;
+
+
 
     static {
         DIRECTIONAL_POINTS = new Point[]{
@@ -67,7 +91,44 @@ public class FourInARow implements IGame {
 
     @Override
     public int getComputerMove() {
-        return 0;
+        List<Integer> bestMoves = new LinkedList<>();
+        int currentEval = 0;
+        for(int l = 0; l < ROWS * COLS; l++) {
+            int eval = evaluateLocation(l,ID_COMPUTER) * COEFFICIENT_COMPUTER + evaluateLocation(l,ID_PLAYER) * COEFFICIENT_PLAYER;
+            System.out.printf("(%d,%d), ",l,eval);
+            if(currentEval < eval) {
+                currentEval = eval;
+                bestMoves.clear();
+            }
+            if(currentEval == eval) {
+                bestMoves.add(l);
+            }
+        }
+
+        System.out.println();
+
+        return bestMoves.get(random.nextInt(bestMoves.size()));
+
+//        Map<Integer, Integer> evaluations = new HashMap<>();
+//        int evalSum = 0;
+//        for(int l = 0; l < ROWS * COLS; l++) {
+//            int eval = evaluateLocation(l,ID_COMPUTER) * COEFFICIENT_COMPUTER + evaluateLocation(l,ID_PLAYER) * COEFFICIENT_PLAYER;
+//            evalSum += eval;
+//            evaluations.put(l,eval);
+//        }
+//
+//        int selection = random.nextInt(evalSum);
+//
+//        for(Integer l : evaluations.keySet()) {
+//            if(evaluations.get(l) > 0) {
+//                selection -= evaluations.get(l);
+//                if(selection <= 0) {
+//                    return l;
+//                }
+//            }
+//        }
+//
+//        return -1;
     }
 
     @Override
@@ -119,6 +180,83 @@ public class FourInARow implements IGame {
     public boolean inRange(Point point) {
         return point.x >= 0 && point.x < COLS && point.y >= 0 && point.y < ROWS;
     }
+
+    private int evaluateLocation(int location, int player) {
+        return evaluateLocation(locationToPoint(location),player);
+    }
+
+    private int evaluateLocation(Point point, int player) {
+        if(get(point) != EMPTY) {
+            return -1;
+        }
+
+        int evalSum = 0;
+
+        for(Point d : DIRECTIONAL_POINTS) {
+            int distance = 0, dirEval = 0;
+            for(int c = -1; c <= 1; c += 2) {
+                for(int i = 1; i < 4; i++) {
+                    int val = get(new Point(point.x + d.x * i * c, point.y + d.y * i * c));
+                    if(val == EMPTY || val == player) {
+                        distance++;
+                        dirEval += val == EMPTY ? COEFFICIENT_EMPTY : COEFFICIENT_POPULATED;
+                    } else {
+                        break;
+                    }
+                }
+            }
+            if(dirEval >= 3 * COEFFICIENT_POPULATED + (distance - 3) * COEFFICIENT_EMPTY) {
+                dirEval *= 2;
+            }
+            if(distance >= 3) {
+                evalSum += dirEval;
+            }
+        }
+
+        return evalSum;
+    }
+
+    //    /**
+//     * Evaluates how good a position is based on how close it is to making a four-in-a-row
+//     *
+//     * @param location The location to evaluate, between 0-35
+//     * @param player   The player to evaluate the location based on
+//     *
+//     * @return The locations' evaluation. Higher numbers means the spot is a better move for the specified player, and lower numbers means it is a
+//     * worse move for the player
+//     */
+//    private int evaluatePosition(int location, int player) {
+//        int y = location / COLS, x = location % COLS;
+//
+//        if (getLocation(y, x) != EMPTY) {
+//            return -1;
+//        }
+//
+//        int eval = 0;
+//
+//        for (int[] d : new int[][]{{0, 1}, {1, -1}, {1, 0}, {1, 1}}) {
+//            int dy = d[0], dx = d[1];
+//            int dirDistance = 0;
+//            int dirEval = 0;
+//            for (int c = -1; c <= 1; c += 2) {
+//                for (int i = 1; i < 4; i++) {
+//                    int ty = y + dy * i * c, tx = x + dx * i * c;
+//                    int tVal = getLocation(ty, tx);
+//
+//                    if (tVal == EMPTY || tVal == player) {
+//                        dirDistance++;
+//                        dirEval += tVal == player ? COEFFICIENT_POPULATED : COEFFICIENT_EMPTY;
+//                    } else {
+//                        break;
+//                    }
+//                }
+//            }
+//            if (dirDistance >= 3) {
+//                eval += dirEval;
+//            }
+//        }
+//        return eval;
+//    }
 
     //    @Override
 //    public int checkForWinner() {
