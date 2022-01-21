@@ -31,7 +31,9 @@ public class FIRConsole {
 
             try {
                 FIRboard.setMove(IGame.RED, Integer.parseInt(userInput));
-                FIRboard.setMove(IGame.BLUE, FIRboard.getComputerMove());
+                if (FIRboard.checkForWinner() == IGame.PLAYING) {
+                    FIRboard.setMove(IGame.BLUE, FIRboard.getComputerMove());
+                }
             } catch (Exception ignored) {
             }
 
