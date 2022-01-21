@@ -33,11 +33,18 @@ public class FIRConsole {
 
             currentState = game.checkForWinner();
         } while ((currentState == IGame.PLAYING) && (!userInput.equals("q"))); // repeat if not game-over
+
         game.printBoard();
+
         switch (currentState) {
-            case IGame.RED_WON -> System.out.println("YOU WON!");
-            case IGame.BLUE_WON -> System.out.println("YOU LOST!");
-            default -> System.out.println("TIE!");
+            case IGame.RED_WON:
+                System.out.println("YOU WON!");
+                break;
+            case IGame.BLUE_WON:
+                System.out.println("YOU LOST!");
+                break;
+            default:
+                System.out.println("TIE!");
         }
     }
 }
