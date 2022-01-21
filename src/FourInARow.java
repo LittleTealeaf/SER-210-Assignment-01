@@ -74,7 +74,7 @@ public class FourInARow implements IGame {
         List<Integer> bestMoves = new ArrayList<>();
         int bestEval = 0;
 
-        final int COMPUTER_COEFF = 1, PLAYER_COEFF = 2;
+        final int COMPUTER_COEFF = 1, PLAYER_COEFF = 1;
 
         for (Integer move : validMoves) {
             int eval = evaluatePosition(move, COLOR_COMPUTER) * COMPUTER_COEFF + evaluatePosition(move, COLOR_PLAYER) * PLAYER_COEFF;
@@ -104,7 +104,7 @@ public class FourInARow implements IGame {
     private int evaluatePosition(int location, int player) {
         int y = location / COLS, x = location % COLS;
 
-        final int EVAL_EMPTY = 1, EVAL_FULL = 5;
+        final int EVAL_EMPTY = 1, EVAL_FULL = 2;
 
         if (getLocation(y, x) != EMPTY) {
             return -1;
@@ -115,7 +115,6 @@ public class FourInARow implements IGame {
         for (int[] d : new int[][]{{0, 1}, {1, -1}, {1, 0}, {1, 1}}) {
             int dy = d[0], dx = d[1];
             int dirDistance = 0;
-            int dirCount = 0;
             int dirEval = 0;
             for (int c = -1; c <= 1; c += 2) {
                 for (int i = 1; i < 4; i++) {
