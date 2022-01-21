@@ -98,6 +98,7 @@ public class FourInARow implements IGame {
      * worse move for the player
      */
     private int evaluatePosition(int location, int player) {
+        int y = location / COLS, x = location % COLS;
 
         if (getLocation(location) != EMPTY) {
             return -1;
@@ -105,14 +106,43 @@ public class FourInARow implements IGame {
 
         int eval = 0;
 
-        for (int d : new int[]{1, COLS - 1, COLS, COLS + 1}) {
-            //Check the range
+//        for (int d : new int[]{1, COLS - 1, COLS, COLS + 1}) {
+//            //Check the range
+//            int length = 0, count = 0;
+//            boolean goPos = true, goNeg = true;
+//            for (int i = 0; i < 4; i++) {
+//                int probePos = getLocation(location + d * i);
+//                int probeNeg = getLocation(location - d * i);
+//
+//                if (goPos && (probePos == player || probePos == 0)) {
+//                    length++;
+//                    if (probePos == player) {
+//                        count++;
+//                    }
+//                } else {
+//                    goPos = false;
+//                }
+//
+//                if (goNeg && (probeNeg == player || probeNeg == 0)) {
+//                    length++;
+//                    if (probeNeg == player) {
+//                        count++;
+//                    }
+//                } else {
+//                    goNeg = false;
+//                }
+//            }
+//            if (length >= 3) {
+//                eval += count;
+//            }
+//        }
+        for (int[] d : new int[][]{{0, 1}, {1, -1}, {1, 0}, {1, 1}}) {
+            int dy = d[0], dx = d[1];
             int length = 0, count = 0;
             boolean goPos = true, goNeg = true;
             for (int i = 0; i < 4; i++) {
-                int probePos = getLocation(location + d * i);
-                int probeNeg = getLocation(location - d * i);
-
+                int probePos = getLocation(y + dy * i, x + dx * i);
+                int probeNeg = getLocation(y - dy * i, x - dx * i);
                 if (goPos && (probePos == player || probePos == 0)) {
                     length++;
                     if (probePos == player) {
@@ -130,6 +160,7 @@ public class FourInARow implements IGame {
                 } else {
                     goNeg = false;
                 }
+
             }
             if (length >= 3) {
                 eval += count;
@@ -147,50 +178,28 @@ public class FourInARow implements IGame {
      * @return The value at that given location. Returns -1 if location is not in the correct bounds.
      */
     public int getLocation(int location) {
-        return inBounds(location) ? board[location / COLS][location % COLS] : -1;
-    }
-
-    /**
-     * Whether or not a give location is within the specified bounds
-     *
-     * @param location The location number in question
-     *
-     * @return True if the location is within the proper bounds, False if it is not in the bounds
-     */
-    public boolean inBounds(int location) {
-        return location >= 0 && location < ROWS * COLS;
-    }
-
-    public void setLocation(int location, int value) {
-        if (inBounds(location)) {
-            board[location / COLS][location % COLS] = value;
-        }
-    }
-
-    /**
-     * Temporarily makes a move, checks for winner, reverts the move, and returns the result.
-     * @param player
-     * @param location
-     * @return
-     */
-    private int checkMoveResult(int player, int location) {
-        int original = getLocation(location);
-        setLocation(location,player);
-        int result = checkForWinner();
-        setLocation(location,original);
-        return result;
+//        return inBounds(location) ? board[location / COLS][location % COLS] : -1;
+        return getLocation(location / COLS, location % COLS);
     }
 
     @Override
     public int checkForWinner() {
         for (int row = 0; row < ROWS; row++) {
             for (int col = 0; col < COLS; col++) {
-                int location = row * COLS + col;
-                int value = getLocation(location);
+                int value = getLocation(row, col);
                 if (value != EMPTY) {
-                    for (int d : new int[]{1, COLS - 1, COLS, COLS + 1}) {
+//                    for (int d : new int[]{1, COLS - 1, COLS, COLS + 1}) {
+//                        for (int i = 0; i < 4; i++) {
+//                            if (getLocation(location + d * i) != value) {
+//                                break;
+//                            } else if (i == 3) {
+//                                return value == BLUE ? BLUE_WON : RED_WON;
+//                            }
+//                        }
+//                    }
+                    for (int[] d : new int[][]{{0, 1}, {1, -1}, {1, 0}, {1, 1}}) {
                         for (int i = 0; i < 4; i++) {
-                            if (getLocation(location + d * i) != value) {
+                            if (getLocation(row + d[0] * i, col + d[1] * i) != value) {
                                 break;
                             } else if (i == 3) {
                                 return value == BLUE ? BLUE_WON : RED_WON;
@@ -209,6 +218,45 @@ public class FourInARow implements IGame {
             }
         }
         return TIE;
+    }
+
+    /**
+     * Whether or not a give location is within the specified bounds
+     *
+     * @param location The location number in question
+     *
+     * @return True if the location is within the proper bounds, False if it is not in the bounds
+     */
+    public boolean inBounds(int location) {
+        return location >= 0 && location < ROWS * COLS;
+    }
+
+    public int getLocation(int y, int x) {
+        return inBounds(y, x) ? board[y][x] : -1;
+    }
+
+    public void setLocation(int location, int value) {
+        if (inBounds(location)) {
+            board[location / COLS][location % COLS] = value;
+        }
+    }
+
+    /**
+     * Temporarily makes a move, checks for winner, reverts the move, and returns the result.
+     * @param player
+     * @param location
+     * @return
+     */
+    private int checkMoveResult(int player, int location) {
+        int original = getLocation(location);
+        setLocation(location, player);
+        int result = checkForWinner();
+        setLocation(location, original);
+        return result;
+    }
+
+    public boolean inBounds(int y, int x) {
+        return y >= 0 && y < ROWS && x >= 0 && x < COLS;
     }
 
     /**
