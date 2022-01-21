@@ -1,4 +1,4 @@
-import java.awt.Point;
+import java.awt.*;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
@@ -18,7 +18,7 @@ public class FourInARow implements IGame {
      * Color IDs indicating which player gets which color (I wish the assignment was more specific)
      */
     public static final int ID_PLAYER, ID_COMPUTER;
-    private static final int ROWS, COLS;
+    private static final int ROWS, COLS, LINE_LENGTH;
     /**
      * Directional points used for checks
      */
@@ -30,12 +30,12 @@ public class FourInARow implements IGame {
      * Coefficient of how the computer should weigh the worth of a location to a player. Higher values in relation to COEFFICIENT_COMPUTER will
      * cause the Computer to focus more on obstructing the player strategies than trying to win itself
      */
-    private static final int WEIGHT_PLAYER_EVAL = 1;
+    private static final int WEIGHT_PLAYER_EVAL = 4;
     /**
      * Coefficient of how the computer should weigh the worth of a location to itself. Higher values in relation to COEFFICIENT_PLAYER will cause
      * the computer to focus more on winning than obstructing the player strategies
      */
-    private static final int WEIGHT_COMPUTER_EVAL = 1;
+    private static final int WEIGHT_COMPUTER_EVAL = 3;
     /**
      * Coefficient of how an evaluation should weigh the worth of a populated space near it (in a valid line).
      */
@@ -47,6 +47,7 @@ public class FourInARow implements IGame {
 
     static {
         ROWS = COLS = 6;
+        LINE_LENGTH = 4;
         ID_PLAYER = RED;
         ID_COMPUTER = BLUE;
     }
@@ -116,7 +117,7 @@ public class FourInARow implements IGame {
         int currentEval = 0; //Current highest evaluation, set to 0 to ignore negative values
         for (int l = 0; l < ROWS * COLS; l++) {
             //Calculates net eval based on the evaluation function for each player and the weight
-            int eval = evaluateLocation(l, ID_COMPUTER) * WEIGHT_COMPUTER_EVAL + evaluateLocation(l, ID_PLAYER) * WEIGHT_PLAYER_EVAL;
+            int eval = evaluateLocation(l, ID_COMPUTER, 3) * WEIGHT_COMPUTER_EVAL + evaluateLocation(l, ID_PLAYER, 2) * WEIGHT_PLAYER_EVAL;
             //If the eval is higher than what the current list is, clear the list
             if (currentEval < eval) {
                 currentEval = eval;
@@ -138,10 +139,10 @@ public class FourInARow implements IGame {
             int val = get(p);
             if (val != EMPTY) {
                 for (Point d : DIRECTIONAL_POINTS) {
-                    for (int i = 0; i < 4; i++) {
+                    for (int i = 0; i < LINE_LENGTH; i++) {
                         if (get(new Point(p.x + d.x * i, p.y + d.y * i)) != val) {
                             break;
-                        } else if (i == 3) {
+                        } else if (i == LINE_LENGTH - 1) {
                             return val == BLUE ? BLUE_WON : RED_WON;
                         }
                     }
@@ -161,14 +162,15 @@ public class FourInARow implements IGame {
     /**
      * Evaluates the given point by the worth of having a piece there in regards to the ability to make a 4-in-a-row
      *
-     * @param location Location (between 0 and 35) of the object to evaluate
-     * @param player   The player to evaluate the location for
+     * @param location           Location (between 0 and 35) of the object to evaluate
+     * @param player             The player to evaluate the location for
+     * @param oneMoveCoefficient The coefficient to apply to the total evaluation if a given line is one move from completion
      *
      * @return Evaluation of the given location for the given player
      */
-    private int evaluateLocation(int location, int player) {
+    private int evaluateLocation(int location, int player, int oneMoveCoefficient) {
         Point point = locationToPoint(location);
-        if (get(point) != EMPTY) {
+        if (point == null || get(point) != EMPTY) {
             return -1;
         }
 
@@ -177,7 +179,7 @@ public class FourInARow implements IGame {
         for (Point d : DIRECTIONAL_POINTS) {
             int distance = 0, dirEval = 0;
             for (int c = -1; c <= 1; c += 2) {
-                for (int i = 1; i < 4; i++) {
+                for (int i = 1; i < LINE_LENGTH; i++) {
                     int val = get(new Point(point.x + d.x * i * c, point.y + d.y * i * c));
                     if (val == EMPTY || val == player) {
                         distance++;
@@ -187,10 +189,10 @@ public class FourInARow implements IGame {
                     }
                 }
             }
-            if (dirEval >= 3 * WEIGHT_POPULATED + (distance - 3) * WEIGHT_EMPTY) {
-                dirEval *= 2;
+            if (dirEval >= (LINE_LENGTH - 1) * WEIGHT_POPULATED + (distance - LINE_LENGTH + 1) * WEIGHT_EMPTY) {
+                dirEval *= oneMoveCoefficient;
             }
-            if (distance >= 3) {
+            if (distance >= LINE_LENGTH - 1) {
                 evalSum += dirEval;
             }
         }
@@ -245,7 +247,13 @@ public class FourInARow implements IGame {
             }
             System.out.println();
             if (row != ROWS - 1) {
-                System.out.println("-----------------------"); // print horizontal partition
+                for (int col = 0; col < COLS; col++) {
+                    System.out.print("---");
+                    if (col != COLS - 1) {
+                        System.out.print("-");
+                    }
+                }
+                System.out.println();
             }
         }
         System.out.println();
