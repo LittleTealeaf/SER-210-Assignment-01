@@ -39,11 +39,20 @@ public class FourInARow implements IGame {
     /**
      * Coefficient of how an evaluation should weigh the worth of a populated space near it (in a valid line).
      */
-    private static final int WEIGHT_POPULATED = 3;
+    private static final int WEIGHT_POPULATED = 2;
     /**
      * Coefficient of how an evaluation should weigh the worth of an empty space near it (in a valid line)
      */
     private static final int WEIGHT_EMPTY = 1;
+
+    /**
+     * How much the total evaluation of a line be multiplied by for every streak
+     */
+    private static final int STREAK_PLAYER = 3;
+    /**
+     * How much the total evaluation of a line be multiplied by for every streak
+     */
+    private static final int STREAK_COMPUTER = STREAK_PLAYER + 1;
 
     static {
         ROWS = COLS = 6;
@@ -117,7 +126,8 @@ public class FourInARow implements IGame {
         int currentEval = 0; //Current highest evaluation, set to 0 to ignore negative values
         for (int l = 0; l < ROWS * COLS; l++) {
             //Calculates net eval based on the evaluation function for each player and the weight
-            int eval = evaluateLocation(l, ID_COMPUTER, 3) * WEIGHT_COMPUTER_EVAL + evaluateLocation(l, ID_PLAYER, 2) * WEIGHT_PLAYER_EVAL;
+            int eval =
+                    evaluateLocation(l, ID_COMPUTER,STREAK_COMPUTER) * WEIGHT_COMPUTER_EVAL + evaluateLocation(l, ID_PLAYER,STREAK_PLAYER) * WEIGHT_PLAYER_EVAL;
             //If the eval is higher than what the current list is, clear the list
             if (currentEval < eval) {
                 currentEval = eval;
@@ -164,11 +174,11 @@ public class FourInARow implements IGame {
      *
      * @param location           Location (between 0 and 35) of the object to evaluate
      * @param player             The player to evaluate the location for
-     * @param oneMoveCoefficient The coefficient to apply to the total evaluation if a given line is one move from completion
+     * @param streakMultiplier The coefficient to multiply the resulting eval function by for every item in the line
      *
      * @return Evaluation of the given location for the given player
      */
-    private int evaluateLocation(int location, int player, int oneMoveCoefficient) {
+    private int evaluateLocation(int location, int player, int streakMultiplier) {
         Point point = locationToPoint(location);
         if (point == null || get(point) != EMPTY) {
             return -1;
@@ -178,22 +188,32 @@ public class FourInARow implements IGame {
 
         for (Point d : DIRECTIONAL_POINTS) {
             int distance = 0, dirEval = 0;
+            int empty = 0, populated = 0;
             for (int c = -1; c <= 1; c += 2) {
                 for (int i = 1; i < LINE_LENGTH; i++) {
                     int val = get(new Point(point.x + d.x * i * c, point.y + d.y * i * c));
-                    if (val == EMPTY || val == player) {
-                        distance++;
-                        dirEval += val == EMPTY ? WEIGHT_EMPTY : WEIGHT_POPULATED;
+//                    if (val == EMPTY || val == player) {
+//
+//                        distance++;
+//                        dirEval += val == EMPTY ? WEIGHT_EMPTY : WEIGHT_POPULATED;
+//                    } else {
+//                        break;
+//                    }
+                    if(val == EMPTY) {
+                        empty++;
+                    } else if(val == player) {
+                        populated++;
                     } else {
                         break;
                     }
                 }
             }
-            if (dirEval >= (LINE_LENGTH - 1) * WEIGHT_POPULATED + (distance - LINE_LENGTH + 1) * WEIGHT_EMPTY) {
-                dirEval *= oneMoveCoefficient;
-            }
-            if (distance >= LINE_LENGTH - 1) {
-                evalSum += dirEval;
+
+//            if (dirEval >= (LINE_LENGTH - 1) * WEIGHT_POPULATED + (distance - LINE_LENGTH + 1) * WEIGHT_EMPTY) {
+//                dirEval *= oneMoveCoefficient;
+//            }
+            if (empty + populated >= LINE_LENGTH - 1) {
+                evalSum += (empty * WEIGHT_EMPTY + populated * WEIGHT_POPULATED) * Math.pow(streakMultiplier,populated);
             }
         }
 
