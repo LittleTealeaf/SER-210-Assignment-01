@@ -187,7 +187,6 @@ public class FourInARow implements IGame {
         int evalSum = 0;
 
         for (Point d : DIRECTIONAL_POINTS) {
-            int distance = 0, dirEval = 0;
             int empty = 0, populated = 0;
             for (int c = -1; c <= 1; c += 2) {
                 for (int i = 1; i < LINE_LENGTH; i++) {
