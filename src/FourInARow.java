@@ -192,13 +192,7 @@ public class FourInARow implements IGame {
             for (int c = -1; c <= 1; c += 2) {
                 for (int i = 1; i < LINE_LENGTH; i++) {
                     int val = get(new Point(point.x + d.x * i * c, point.y + d.y * i * c));
-//                    if (val == EMPTY || val == player) {
-//
-//                        distance++;
-//                        dirEval += val == EMPTY ? WEIGHT_EMPTY : WEIGHT_POPULATED;
-//                    } else {
-//                        break;
-//                    }
+
                     if(val == EMPTY) {
                         empty++;
                     } else if(val == player) {
@@ -208,10 +202,6 @@ public class FourInARow implements IGame {
                     }
                 }
             }
-
-//            if (dirEval >= (LINE_LENGTH - 1) * WEIGHT_POPULATED + (distance - LINE_LENGTH + 1) * WEIGHT_EMPTY) {
-//                dirEval *= oneMoveCoefficient;
-//            }
             if (empty + populated >= LINE_LENGTH - 1) {
                 evalSum += (empty * WEIGHT_EMPTY + populated * WEIGHT_POPULATED) * Math.pow(streakMultiplier,populated);
             }
