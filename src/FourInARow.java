@@ -126,8 +126,10 @@ public class FourInARow implements IGame {
         int currentEval = 0; //Current highest evaluation, set to 0 to ignore negative values
         for (int l = 0; l < ROWS * COLS; l++) {
             //Calculates net eval based on the evaluation function for each player and the weight
-            int eval =
-                    evaluateLocation(l, ID_COMPUTER,STREAK_COMPUTER) * WEIGHT_COMPUTER_EVAL + evaluateLocation(l, ID_PLAYER,STREAK_PLAYER) * WEIGHT_PLAYER_EVAL;
+            int computer_eval = evaluateLocation(l, ID_COMPUTER,STREAK_COMPUTER) * WEIGHT_COMPUTER_EVAL;
+            int player_eval = evaluateLocation(l, ID_PLAYER,STREAK_PLAYER) * WEIGHT_PLAYER_EVAL;
+            int eval = computer_eval + player_eval;
+//            System.out.printf("%d (%d), ",l,eval);
             //If the eval is higher than what the current list is, clear the list
             if (currentEval < eval) {
                 currentEval = eval;
@@ -138,6 +140,7 @@ public class FourInARow implements IGame {
                 bestMoves.add(l);
             }
         }
+//        System.out.println();
         //Choose a random element from the list
         return bestMoves.get(random.nextInt(bestMoves.size()));
     }
