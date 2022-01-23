@@ -9,9 +9,9 @@ import java.util.Scanner;
  */
 public class FIRConsole {
 
-    public static Scanner in = new Scanner(System.in); // the input Scanner
+    public static final Scanner in = new Scanner(System.in); // the input Scanner
 
-    public static FourInARow game = new FourInARow();
+    public static final FourInARow game = new FourInARow();
 
     /** The entry main method (the program starts here) */
     public static void main(String[] args) {
