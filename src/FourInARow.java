@@ -81,6 +81,27 @@ public class FourInARow implements IGame {
         return inRange(point) ? point.y * COLS + point.x : -1;
     }
 
+    /**
+     * Checks if a given point is within the range of the board
+     *
+     * @param point Coordinates to check
+     *
+     * @return True if the point can be found on the board, False if the point is out of bounds of the board
+     */
+    public static boolean inRange(Point point) {
+        return inRange(point.x, point.y);
+    }
+
+    /**
+     * Checks if a given point is within the range of the board
+     * @param col Column of the point to check
+     * @param row Row of the point to check
+     * @return True if the point can be found on the board, False if the point is out of bounds of the board
+     */
+    public static boolean inRange(int col, int row) {
+        return row >= 0 && row < ROWS && col >= 0 && col < COLS;
+    }
+
     @Override
     public void clearBoard() {
         for (int r = 0; r < ROWS; r++) {
@@ -90,15 +111,11 @@ public class FourInARow implements IGame {
         }
     }
 
-    /**
-     * Checks if a given point is within the range of the board
-     *
-     * @param point Coordinates to check
-     *
-     * @return True if the point can be found on the board, False if the point can not be found on the board
-     */
-    public static boolean inRange(Point point) {
-        return point.x >= 0 && point.x < COLS && point.y >= 0 && point.y < ROWS;
+    @Override
+    public void setMove(int player, int location) {
+        if (get(location) == EMPTY) {
+            board[location / COLS][location % COLS] = player;
+        }
     }
 
     /**
@@ -112,38 +129,44 @@ public class FourInARow implements IGame {
         return inRange(location) ? board[location / COLS][location % COLS] : -1;
     }
 
-    @Override
-    public void setMove(int player, int location) {
-        if (get(location) == EMPTY) {
-            board[location / COLS][location % COLS] = player;
-        }
+    /**
+     * Checks if a given location can be found on the board
+     *
+     * @param location Location to check on the board
+     *
+     * @return True if the location is between 0 and ROWS * COLS, False if the location is out of bounds of the board
+     */
+    public static boolean inRange(int location) {
+        return location >= 0 && location < ROWS * COLS;
     }
 
     @Override
     public int getComputerMove() {
-        return getComputerMove(ID_COMPUTER,ID_PLAYER);
+        return getComputerMove(ID_COMPUTER, ID_PLAYER);
     }
 
     /**
      * Calculates the computer's move given the id of the computer and the id of the player
+     *
      * @param idComputer token ID of the computer's pieces
-     * @param idPlayer token ID of the player's pieces
+     * @param idPlayer   token ID of the player's pieces
+     *
      * @return Computer Evaluation on the best move to make
      */
     public int getComputerMove(int idComputer, int idPlayer) {
         List<Integer> bestMoves = new LinkedList<>();
         int currentEval = 0;
-        for(int l = 0; l < ROWS * COLS; l++) {
-            int computer_eval = evaluateLocation(l,idComputer,STREAK_COMPUTER) * WEIGHT_COMPUTER_EVAL;
-            int player_eval = evaluateLocation(l,idPlayer, STREAK_PLAYER) * WEIGHT_PLAYER_EVAL;
+        for (int l = 0; l < ROWS * COLS; l++) {
+            int computer_eval = evaluateLocation(l, idComputer, STREAK_COMPUTER) * WEIGHT_COMPUTER_EVAL;
+            int player_eval = evaluateLocation(l, idPlayer, STREAK_PLAYER) * WEIGHT_PLAYER_EVAL;
             int eval = computer_eval + player_eval;
 
-            if(currentEval < eval) {
+            if (currentEval < eval) {
                 currentEval = eval;
                 bestMoves.clear();
             }
 
-            if(currentEval == eval) {
+            if (currentEval == eval) {
                 bestMoves.add(l);
             }
         }
@@ -151,38 +174,11 @@ public class FourInARow implements IGame {
         return bestMoves.get(random.nextInt(bestMoves.size()));
     }
 
-    @Override
-    public int checkForWinner() {
-        for (int l = 0; l < ROWS * COLS; l++) {
-            Point p = locationToPoint(l);
-            int val = get(p);
-            if (val != EMPTY) {
-                for (Point d : DIRECTIONAL_POINTS) {
-                    for (int i = 0; i < LINE_LENGTH; i++) {
-                        if (get(new Point(p.x + d.x * i, p.y + d.y * i)) != val) {
-                            break;
-                        } else if (i == LINE_LENGTH - 1) {
-                            return val == BLUE ? BLUE_WON : RED_WON;
-                        }
-                    }
-                }
-            }
-        }
-
-        for (int l = 0; l < ROWS * COLS; l++) {
-            if (get(l) == EMPTY) {
-                return PLAYING;
-            }
-        }
-
-        return TIE;
-    }
-
     /**
      * Evaluates the given point by the worth of having a piece there in regards to the ability to make a 4-in-a-row
      *
-     * @param location           Location (between 0 and 35) of the object to evaluate
-     * @param player             The player to evaluate the location for
+     * @param location         Location (between 0 and 35) of the object to evaluate
+     * @param player           The player to evaluate the location for
      * @param streakMultiplier The coefficient to multiply the resulting eval function by for every item in the line
      *
      * @return Evaluation of the given location for the given player
@@ -199,11 +195,10 @@ public class FourInARow implements IGame {
             int empty = 0, populated = 0;
             for (int c = -1; c <= 1; c += 2) {
                 for (int i = 1; i < LINE_LENGTH; i++) {
-                    int val = get(new Point(point.x + d.x * i * c, point.y + d.y * i * c));
-
-                    if(val == EMPTY) {
+                    int val = get(point.x + d.x * i * c, point.y + d.y * i * c);
+                    if (val == EMPTY) {
                         empty++;
-                    } else if(val == player) {
+                    } else if (val == player) {
                         populated++;
                     } else {
                         break;
@@ -211,7 +206,7 @@ public class FourInARow implements IGame {
                 }
             }
             if (empty + populated >= LINE_LENGTH - 1) {
-                evalSum += (empty * WEIGHT_EMPTY + populated * WEIGHT_POPULATED) * Math.pow(streakMultiplier,populated);
+                evalSum += (empty * WEIGHT_EMPTY + populated * WEIGHT_POPULATED) * Math.pow(streakMultiplier, populated);
             }
         }
 
@@ -237,18 +232,45 @@ public class FourInARow implements IGame {
      * @return Value on the board at the given coordinates. Returns -1 if point is out of bounds
      */
     public int get(Point point) {
-        return inRange(point) ? board[point.y][point.x] : -1;
+        return get(point.x,point.y);
     }
 
     /**
-     * Checks if a given location can be found on the board
-     *
-     * @param location Location to check on the board
-     *
-     * @return True if the location is between 0 and ROWS * COLS, False otherwise
+     * Checks if the point is in the range of the board, and returns the value at that location
+     * @param col Column of the point to get
+     * @param row Row of the point to get
+     * @return Value of the board at the given coordinates. Returns -1 if the point is out of bounds
      */
-    public static boolean inRange(int location) {
-        return location >= 0 && location < ROWS * COLS;
+    public int get(int col, int row) {
+        return inRange(col, row) ? board[row][col] : -1;
+    }
+
+    @Override
+    public int checkForWinner() {
+        for (int row = 0; row < ROWS; row++) {
+            for (int col = 0; col < COLS; col++) {
+                int val = get(col, row);
+                if (val != EMPTY && val != -1) {
+                    for (Point d : DIRECTIONAL_POINTS) {
+                        for (int i = 1; i < LINE_LENGTH; i++) {
+                            if (get(col + d.x * i, row + d.y * i) != val) {
+                                break;
+                            } else if (i == LINE_LENGTH - 1) {
+                                return val;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        for (int l = 0; l < ROWS * COLS; l++) {
+            if (get(l) == EMPTY) {
+                return PLAYING;
+            }
+        }
+
+        return TIE;
     }
 
     /**
