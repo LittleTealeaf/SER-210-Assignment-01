@@ -71,32 +71,10 @@ public class FourInARow implements IGame {
     }
 
     /**
-     * Converts a given point to a location
-     *
-     * @param point Point containing coordinates on the board
-     *
-     * @return Location representing the given coordinates. Returns -1 if coordinates are out of range
-     */
-    public static int pointToLocation(Point point) {
-        return inRange(point) ? point.y * COLS + point.x : -1;
-    }
-
-    /**
-     * Checks if a given point is within the range of the board
-     *
-     * @param point Coordinates to check
-     *
-     * @return True if the point can be found on the board, False if the point is out of bounds of the board
-     */
-    public static boolean inRange(Point point) {
-        return inRange(point.x, point.y);
-    }
-
-    /**
-     * Checks if a given point is within the range of the board
-     * @param col Column of the point to check
-     * @param row Row of the point to check
-     * @return True if the point can be found on the board, False if the point is out of bounds of the board
+     * Checks if a given location is within the bounds of the board
+     * @param col The column, or the x value, of the location, counting from left to right
+     * @param row The row, or the y value, of the location, counting from top to bottom
+     * @return True if the location is within the bounds of the board. False if the location is outside the bounds of the board
      */
     public static boolean inRange(int col, int row) {
         return row >= 0 && row < ROWS && col >= 0 && col < COLS;
@@ -119,22 +97,20 @@ public class FourInARow implements IGame {
     }
 
     /**
-     * Gets the board value at a given location
-     *
-     * @param location Location (between 0 and ROWS * COLS) to get the value of
-     *
-     * @return The value at the given location. Returns -1 if the location is not within range
+     * Returns the value on the board at the given location
+     * @param location The location value. The top left of the board is location 0, and the location counts up going across the board, and further
+     *                 down each row. For example, for a 6x6 board, the top left corner is 0, and the bottom right corner is 35.
+     * @return The value found at the specified location. Returns -1 if the location is not within the bounds of the board
      */
     public int get(int location) {
         return inRange(location) ? board[location / COLS][location % COLS] : -1;
     }
 
     /**
-     * Checks if a given location can be found on the board
-     *
-     * @param location Location to check on the board
-     *
-     * @return True if the location is between 0 and ROWS * COLS, False if the location is out of bounds of the board
+     * Returns whether a given location is within the bounds of the board
+     * @param location The location value. The top left of the board is location 0, and the location counts up going across the board, and further
+     *                 down each row. For example, for a 6x6 board, the top left corner is 0, and the bottom right corner is 35.
+     * @return True if the location is within the bounds of the board. False if the location is outside the bounds of the board
      */
     public static boolean inRange(int location) {
         return location >= 0 && location < ROWS * COLS;
@@ -236,7 +212,7 @@ public class FourInARow implements IGame {
     }
 
     /**
-     * Checks if the point is in the range of the board, and returns the value at that location
+     * Returns the value on the board at the given location
      * @param col Column of the point to get
      * @param row Row of the point to get
      * @return Value of the board at the given coordinates. Returns -1 if the point is out of bounds
