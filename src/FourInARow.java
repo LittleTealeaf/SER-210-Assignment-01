@@ -26,40 +26,6 @@ public class FourInARow implements IGame {
             new Point(1, 0), new Point(-1, 1), new Point(0, 1), new Point(1, 1)
     };
 
-    /**
-     * A collection of variables / configurations used within the AI, allowing for customizing of the AI's behavior
-     * @author Thomas Kwashnak
-     */
-    private static class AI {
-        /**
-         * Coefficient of how the computer should weigh the worth of a location to a player. Higher values in relation to COEFFICIENT_COMPUTER will
-         * cause the Computer to focus more on obstructing the player strategies than trying to win itself
-         */
-        private static final int WEIGHT_PLAYER_EVAL = 4;
-        /**
-         * Coefficient of how the computer should weigh the worth of a location to itself. Higher values in relation to COEFFICIENT_PLAYER will cause
-         * the computer to focus more on winning than obstructing the player strategies
-         */
-        private static final int WEIGHT_COMPUTER_EVAL = 3;
-        /**
-         * Coefficient of how an evaluation should weigh the worth of a populated space near it (in a valid line).
-         */
-        private static final int WEIGHT_POPULATED = 2;
-        /**
-         * Coefficient of how an evaluation should weigh the worth of an empty space near it (in a valid line)
-         */
-        private static final int WEIGHT_EMPTY = 1;
-
-        /**
-         * How much the total evaluation of a line be multiplied by for every streak
-         */
-        private static final int STREAK_PLAYER = 3;
-        /**
-         * How much the total evaluation of a line be multiplied by for every streak
-         */
-        private static final int STREAK_COMPUTER = STREAK_PLAYER + 1;
-    }
-
     static {
         ROWS = COLS = 6;
         LINE_LENGTH = 4;
@@ -68,7 +34,6 @@ public class FourInARow implements IGame {
     }
 
     private final int[][] board;
-
     private final Random random;
 
     public FourInARow() {
@@ -303,5 +268,41 @@ public class FourInARow implements IGame {
             case RED: System.out.print(" R ");
                 break;
         }
+    }
+
+    /**
+     * A collection of variables / configurations used within the AI, allowing for customizing of the AI's behavior
+     *
+     * @author Thomas Kwashnak
+     */
+    private static class AI {
+
+        /**
+         * Coefficient of how the computer should weigh the worth of a location to a player. Higher values in relation to COEFFICIENT_COMPUTER will
+         * cause the Computer to focus more on obstructing the player strategies than trying to win itself
+         */
+        private static final int WEIGHT_PLAYER_EVAL = 4;
+        /**
+         * Coefficient of how the computer should weigh the worth of a location to itself. Higher values in relation to COEFFICIENT_PLAYER will cause
+         * the computer to focus more on winning than obstructing the player strategies
+         */
+        private static final int WEIGHT_COMPUTER_EVAL = 3;
+        /**
+         * Coefficient of how an evaluation should weigh the worth of a populated space near it (in a valid line).
+         */
+        private static final int WEIGHT_POPULATED = 2;
+        /**
+         * Coefficient of how an evaluation should weigh the worth of an empty space near it (in a valid line)
+         */
+        private static final int WEIGHT_EMPTY = 1;
+
+        /**
+         * How much the total evaluation of a line be multiplied by for every streak
+         */
+        private static final int STREAK_PLAYER = 3;
+        /**
+         * How much the total evaluation of a line be multiplied by for every streak
+         */
+        private static final int STREAK_COMPUTER = STREAK_PLAYER + 1;
     }
 }
