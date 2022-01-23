@@ -154,12 +154,12 @@ public class FourInARow implements IGame {
      * @return Computer Evaluation on the best move to make
      */
     public int getComputerMove(int idComputer, int idPlayer) {
-        List<Integer> bestMoves = new LinkedList<>();
+        final List<Integer> bestMoves = new LinkedList<>();
         int currentEval = 0;
         for (int l = 0; l < ROWS * COLS; l++) {
-            int computer_eval = evaluateLocation(l, idComputer, STREAK_COMPUTER) * WEIGHT_COMPUTER_EVAL;
-            int player_eval = evaluateLocation(l, idPlayer, STREAK_PLAYER) * WEIGHT_PLAYER_EVAL;
-            int eval = computer_eval + player_eval;
+            final int computer_eval = evaluateLocation(l, idComputer, STREAK_COMPUTER) * WEIGHT_COMPUTER_EVAL;
+            final int player_eval = evaluateLocation(l, idPlayer, STREAK_PLAYER) * WEIGHT_PLAYER_EVAL;
+            final int eval = computer_eval + player_eval;
 
             if (currentEval < eval) {
                 currentEval = eval;
@@ -184,7 +184,7 @@ public class FourInARow implements IGame {
      * @return Evaluation of the given location for the given player
      */
     private int evaluateLocation(int location, int player, int streakMultiplier) {
-        Point point = locationToPoint(location);
+        final Point point = locationToPoint(location);
         if (point == null || get(point) != EMPTY) {
             return -1;
         }
@@ -195,7 +195,7 @@ public class FourInARow implements IGame {
             int empty = 0, populated = 0;
             for (int c = -1; c <= 1; c += 2) {
                 for (int i = 1; i < LINE_LENGTH; i++) {
-                    int val = get(point.x + d.x * i * c, point.y + d.y * i * c);
+                    final int val = get(point.x + d.x * i * c, point.y + d.y * i * c);
                     if (val == EMPTY) {
                         empty++;
                     } else if (val == player) {
@@ -249,7 +249,7 @@ public class FourInARow implements IGame {
     public int checkForWinner() {
         for (int row = 0; row < ROWS; row++) {
             for (int col = 0; col < COLS; col++) {
-                int val = get(col, row);
+                final int val = get(col, row);
                 if (val != EMPTY && val != -1) {
                     for (Point d : DIRECTIONAL_POINTS) {
                         for (int i = 1; i < LINE_LENGTH; i++) {
