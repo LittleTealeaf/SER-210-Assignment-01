@@ -27,32 +27,38 @@ public class FourInARow implements IGame {
     };
 
     /**
-     * Coefficient of how the computer should weigh the worth of a location to a player. Higher values in relation to COEFFICIENT_COMPUTER will
-     * cause the Computer to focus more on obstructing the player strategies than trying to win itself
+     * A collection of variables / configurations used within the AI, allowing for customizing of the AI's behavior
+     * @author Thomas Kwashnak
      */
-    private static final int WEIGHT_PLAYER_EVAL = 4;
-    /**
-     * Coefficient of how the computer should weigh the worth of a location to itself. Higher values in relation to COEFFICIENT_PLAYER will cause
-     * the computer to focus more on winning than obstructing the player strategies
-     */
-    private static final int WEIGHT_COMPUTER_EVAL = 3;
-    /**
-     * Coefficient of how an evaluation should weigh the worth of a populated space near it (in a valid line).
-     */
-    private static final int WEIGHT_POPULATED = 2;
-    /**
-     * Coefficient of how an evaluation should weigh the worth of an empty space near it (in a valid line)
-     */
-    private static final int WEIGHT_EMPTY = 1;
+    private static class AI {
+        /**
+         * Coefficient of how the computer should weigh the worth of a location to a player. Higher values in relation to COEFFICIENT_COMPUTER will
+         * cause the Computer to focus more on obstructing the player strategies than trying to win itself
+         */
+        private static final int WEIGHT_PLAYER_EVAL = 4;
+        /**
+         * Coefficient of how the computer should weigh the worth of a location to itself. Higher values in relation to COEFFICIENT_PLAYER will cause
+         * the computer to focus more on winning than obstructing the player strategies
+         */
+        private static final int WEIGHT_COMPUTER_EVAL = 3;
+        /**
+         * Coefficient of how an evaluation should weigh the worth of a populated space near it (in a valid line).
+         */
+        private static final int WEIGHT_POPULATED = 2;
+        /**
+         * Coefficient of how an evaluation should weigh the worth of an empty space near it (in a valid line)
+         */
+        private static final int WEIGHT_EMPTY = 1;
 
-    /**
-     * How much the total evaluation of a line be multiplied by for every streak
-     */
-    private static final int STREAK_PLAYER = 3;
-    /**
-     * How much the total evaluation of a line be multiplied by for every streak
-     */
-    private static final int STREAK_COMPUTER = STREAK_PLAYER + 1;
+        /**
+         * How much the total evaluation of a line be multiplied by for every streak
+         */
+        private static final int STREAK_PLAYER = 3;
+        /**
+         * How much the total evaluation of a line be multiplied by for every streak
+         */
+        private static final int STREAK_COMPUTER = STREAK_PLAYER + 1;
+    }
 
     static {
         ROWS = COLS = 6;
@@ -190,8 +196,8 @@ public class FourInARow implements IGame {
         final List<Integer> bestMoves = new LinkedList<>();
         int currentEval = 0;
         for (int l = 0; l < ROWS * COLS; l++) {
-            final int computer_eval = evaluateLocation(l, idComputer, STREAK_COMPUTER) * WEIGHT_COMPUTER_EVAL;
-            final int player_eval = evaluateLocation(l, idPlayer, STREAK_PLAYER) * WEIGHT_PLAYER_EVAL;
+            final int computer_eval = evaluateLocation(l, idComputer, AI.STREAK_COMPUTER) * AI.WEIGHT_COMPUTER_EVAL;
+            final int player_eval = evaluateLocation(l, idPlayer, AI.STREAK_PLAYER) * AI.WEIGHT_PLAYER_EVAL;
             final int eval = computer_eval + player_eval;
 
             if (currentEval < eval) {
@@ -239,7 +245,7 @@ public class FourInARow implements IGame {
                 }
             }
             if (empty + populated >= LINE_LENGTH - 1) {
-                evalSum += (empty * WEIGHT_EMPTY + populated * WEIGHT_POPULATED) * Math.pow(streakMultiplier, populated);
+                evalSum += (empty * AI.WEIGHT_EMPTY + populated * AI.WEIGHT_POPULATED) * Math.pow(streakMultiplier, populated);
             }
         }
 
