@@ -256,7 +256,7 @@ public class FourInARow implements IGame {
                             if (get(col + d.x * i, row + d.y * i) != val) {
                                 break;
                             } else if (i == LINE_LENGTH - 1) {
-                                return val;
+                                return val == RED ? RED_WON : BLUE_WON;
                             }
                         }
                     }
