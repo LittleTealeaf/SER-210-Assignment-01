@@ -153,17 +153,17 @@ public class FourInARow implements IGame {
      * Calculates the computer's move given the id of the computer and the id of the player
      *
      * @param idComputer token ID of the computer's pieces
-     * @param idPlayer   token ID of the player's pieces
+     * @param idOpponent   token ID of the player's pieces
      *
      * @return Computer Evaluation on the best move to make
      */
-    public int getComputerMove(int idComputer, int idPlayer) {
+    public int getComputerMove(int idComputer, int idOpponent) {
         final List<Integer> bestMoves = new LinkedList<>();
         int currentEval = 0;
         for (int l = 0; l < ROWS * COLS; l++) {
             final int computer_eval = evaluateLocation(l, idComputer, AI.STREAK_COMPUTER) * AI.WEIGHT_COMPUTER_EVAL;
-            final int player_eval = evaluateLocation(l, idPlayer, AI.STREAK_PLAYER) * AI.WEIGHT_PLAYER_EVAL;
-            final int eval = computer_eval + player_eval;
+            final int opponent_eval = evaluateLocation(l, idOpponent, AI.STREAK_OPPONENT) * AI.WEIGHT_OPPONENT_EVAL;
+            final int eval = computer_eval + opponent_eval;
 
             if (currentEval < eval) {
                 currentEval = eval;
@@ -182,12 +182,12 @@ public class FourInARow implements IGame {
      * Evaluates the given point by the worth of having a piece there in regards to the ability to make a 4-in-a-row
      *
      * @param location         Location (between 0 and 35) of the object to evaluate
-     * @param player           The player to evaluate the location for
+     * @param idPlayer           The player to evaluate the location for
      * @param streakMultiplier The coefficient to multiply the resulting eval function by for every item in the line
      *
      * @return Evaluation of the given location for the given player
      */
-    private int evaluateLocation(int location, int player, int streakMultiplier) {
+    private int evaluateLocation(int location, int idPlayer, int streakMultiplier) {
         final Point point = locationToPoint(location);
         if (point == null || get(point) != EMPTY) {
             return -1;
@@ -202,7 +202,7 @@ public class FourInARow implements IGame {
                     final int val = get(point.x + d.x * i * c, point.y + d.y * i * c);
                     if (val == EMPTY) {
                         empty++;
-                    } else if (val == player) {
+                    } else if (val == idPlayer) {
                         populated++;
                     } else {
                         break;
@@ -278,12 +278,13 @@ public class FourInARow implements IGame {
     private static class AI {
 
         /**
-         * Coefficient of how the computer should weigh the worth of a location to a player. Higher values in relation to COEFFICIENT_COMPUTER will
-         * cause the Computer to focus more on obstructing the player strategies than trying to win itself
+         * Coefficient of how the computer should weigh the worth of a location to an opponent. Higher values in relation to WEIGHT_COMPUTER_EVAL will
+         * cause the Computer to focus more on obstructing the opponent's strategies than trying to win itself
          */
-        private static final int WEIGHT_PLAYER_EVAL = 4;
+        private static final int WEIGHT_OPPONENT_EVAL = 4;
         /**
-         * Coefficient of how the computer should weigh the worth of a location to itself. Higher values in relation to COEFFICIENT_PLAYER will cause
+         * Coefficient of how the computer should weigh the worth of a location to itself. Higher values in relation to WEIGHT_OPPONENT_EVAL will
+         * cause
          * the computer to focus more on winning than obstructing the player strategies
          */
         private static final int WEIGHT_COMPUTER_EVAL = 3;
@@ -299,10 +300,10 @@ public class FourInARow implements IGame {
         /**
          * How much the total evaluation of a line be multiplied by for every streak
          */
-        private static final int STREAK_PLAYER = 3;
+        private static final int STREAK_OPPONENT = 3;
         /**
          * How much the total evaluation of a line be multiplied by for every streak
          */
-        private static final int STREAK_COMPUTER = STREAK_PLAYER + 1;
+        private static final int STREAK_COMPUTER = STREAK_OPPONENT + 1;
     }
 }
