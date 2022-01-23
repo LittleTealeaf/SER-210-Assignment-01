@@ -21,19 +21,19 @@ public class FIRConsole {
         //game loop
         do {
             game.printBoard();
-
             userInput = in.nextLine();
 
             try {
-                game.setMove(IGame.RED, Integer.parseInt(userInput));
-                if (game.checkForWinner() == IGame.PLAYING) {
-                    game.setMove(IGame.BLUE, game.getComputerMove());
-                }
-            } catch (Exception ignored) {
+                game.setMove(IGame.RED,Integer.parseInt(userInput));
+            } catch(NumberFormatException exception) {
+                continue;
             }
 
-            currentState = game.checkForWinner();
-        } while ((currentState == IGame.PLAYING) && (!userInput.equals("q"))); // repeat if not game-over
+            if(game.checkForWinner() == IGame.PLAYING) {
+                game.setMove(IGame.BLUE,game.getComputerMove());
+            }
+
+        } while (((currentState = game.checkForWinner()) == IGame.PLAYING) && (!userInput.equals("q"))); // repeat if not game-over
 
         game.printBoard();
 
