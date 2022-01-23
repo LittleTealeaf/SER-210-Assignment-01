@@ -121,27 +121,33 @@ public class FourInARow implements IGame {
 
     @Override
     public int getComputerMove() {
-        //Keeps a list of best moves (in the instance that there is more than one)
+        return getComputerMove(ID_COMPUTER,ID_PLAYER);
+    }
+
+    /**
+     * Calculates the computer's move given the id of the computer and the id of the player
+     * @param idComputer token ID of the computer's pieces
+     * @param idPlayer token ID of the player's pieces
+     * @return Computer Evaluation on the best move to make
+     */
+    public int getComputerMove(int idComputer, int idPlayer) {
         List<Integer> bestMoves = new LinkedList<>();
-        int currentEval = 0; //Current highest evaluation, set to 0 to ignore negative values
-        for (int l = 0; l < ROWS * COLS; l++) {
-            //Calculates net eval based on the evaluation function for each player and the weight
-            int computer_eval = evaluateLocation(l, ID_COMPUTER,STREAK_COMPUTER) * WEIGHT_COMPUTER_EVAL;
-            int player_eval = evaluateLocation(l, ID_PLAYER,STREAK_PLAYER) * WEIGHT_PLAYER_EVAL;
+        int currentEval = 0;
+        for(int l = 0; l < ROWS * COLS; l++) {
+            int computer_eval = evaluateLocation(l,idComputer,STREAK_COMPUTER) * WEIGHT_COMPUTER_EVAL;
+            int player_eval = evaluateLocation(l,idPlayer, STREAK_PLAYER) * WEIGHT_PLAYER_EVAL;
             int eval = computer_eval + player_eval;
-//            System.out.printf("%d (%d), ",l,eval);
-            //If the eval is higher than what the current list is, clear the list
-            if (currentEval < eval) {
+
+            if(currentEval < eval) {
                 currentEval = eval;
                 bestMoves.clear();
             }
-            //Add to the list if it is of equal evaluation
-            if (currentEval == eval) {
+
+            if(currentEval == eval) {
                 bestMoves.add(l);
             }
         }
-//        System.out.println();
-        //Choose a random element from the list
+
         return bestMoves.get(random.nextInt(bestMoves.size()));
     }
 
