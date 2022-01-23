@@ -4,6 +4,7 @@ import java.util.Scanner;
  * Four in a row: Two-player console, non-graphics
  *
  * @author relkharboutly
+ * @author Thomas Kwashnak
  * @date 1/22/2020
  */
 public class FIRConsole {
