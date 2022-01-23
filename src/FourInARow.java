@@ -1,4 +1,4 @@
-import java.awt.*;
+import java.awt.Point;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
@@ -71,13 +71,14 @@ public class FourInARow implements IGame {
     }
 
     /**
-     * Checks if a given location is within the bounds of the board
-     * @param col The column, or the x value, of the location, counting from left to right
-     * @param row The row, or the y value, of the location, counting from top to bottom
-     * @return True if the location is within the bounds of the board. False if the location is outside the bounds of the board
+     * Converts a given location to a point object
+     *
+     * @param location Location, a number between 0 and ROWS * COLS
+     *
+     * @return The location represented as a point with the matrix coordinates. Returns null if the location is out of bounds
      */
-    public static boolean inRange(int col, int row) {
-        return row >= 0 && row < ROWS && col >= 0 && col < COLS;
+    private static Point locationToPoint(int location) {
+        return inRange(location) ? new Point(location % COLS, location / COLS) : null;
     }
 
     @Override
@@ -98,8 +99,10 @@ public class FourInARow implements IGame {
 
     /**
      * Returns the value on the board at the given location
+     *
      * @param location The location value. The top left of the board is location 0, and the location counts up going across the board, and further
      *                 down each row. For example, for a 6x6 board, the top left corner is 0, and the bottom right corner is 35.
+     *
      * @return The value found at the specified location. Returns -1 if the location is not within the bounds of the board
      */
     public int get(int location) {
@@ -108,8 +111,10 @@ public class FourInARow implements IGame {
 
     /**
      * Returns whether a given location is within the bounds of the board
+     *
      * @param location The location value. The top left of the board is location 0, and the location counts up going across the board, and further
      *                 down each row. For example, for a 6x6 board, the top left corner is 0, and the bottom right corner is 35.
+     *
      * @return True if the location is within the bounds of the board. False if the location is outside the bounds of the board
      */
     public static boolean inRange(int location) {
@@ -119,6 +124,58 @@ public class FourInARow implements IGame {
     @Override
     public int getComputerMove() {
         return getComputerMove(ID_COMPUTER, ID_PLAYER);
+    }
+
+    @Override
+    public int checkForWinner() {
+        for (int row = 0; row < ROWS; row++) {
+            for (int col = 0; col < COLS; col++) {
+                final int val = get(col, row);
+                if (val != EMPTY && val != -1) {
+                    for (Point d : DIRECTIONAL_POINTS) {
+                        for (int i = 1; i < LINE_LENGTH; i++) {
+                            if (get(col + d.x * i, row + d.y * i) != val) {
+                                break;
+                            } else if (i == LINE_LENGTH - 1) {
+                                return val == RED ? RED_WON : BLUE_WON;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        for (int l = 0; l < ROWS * COLS; l++) {
+            if (get(l) == EMPTY) {
+                return PLAYING;
+            }
+        }
+
+        return TIE;
+    }
+
+    /**
+     * Returns the value on the board at the given location
+     *
+     * @param col Column of the point to get
+     * @param row Row of the point to get
+     *
+     * @return Value of the board at the given coordinates. Returns -1 if the point is out of bounds
+     */
+    public int get(int col, int row) {
+        return inRange(col, row) ? board[row][col] : -1;
+    }
+
+    /**
+     * Checks if a given location is within the bounds of the board
+     *
+     * @param col The column, or the x value, of the location, counting from left to right
+     * @param row The row, or the y value, of the location, counting from top to bottom
+     *
+     * @return True if the location is within the bounds of the board. False if the location is outside the bounds of the board
+     */
+    public static boolean inRange(int col, int row) {
+        return row >= 0 && row < ROWS && col >= 0 && col < COLS;
     }
 
     /**
@@ -190,17 +247,6 @@ public class FourInARow implements IGame {
     }
 
     /**
-     * Converts a given location to a point object
-     *
-     * @param location Location, a number between 0 and ROWS * COLS
-     *
-     * @return The location represented as a point with the matrix coordinates. Returns null if the location is out of bounds
-     */
-    private static Point locationToPoint(int location) {
-        return inRange(location) ? new Point(location % COLS, location / COLS) : null;
-    }
-
-    /**
      * Checks if the point is within the range, and returns the value at that location
      *
      * @param point Point containing coordinates to lookup within the board
@@ -208,45 +254,7 @@ public class FourInARow implements IGame {
      * @return Value on the board at the given coordinates. Returns -1 if point is out of bounds
      */
     public int get(Point point) {
-        return get(point.x,point.y);
-    }
-
-    /**
-     * Returns the value on the board at the given location
-     * @param col Column of the point to get
-     * @param row Row of the point to get
-     * @return Value of the board at the given coordinates. Returns -1 if the point is out of bounds
-     */
-    public int get(int col, int row) {
-        return inRange(col, row) ? board[row][col] : -1;
-    }
-
-    @Override
-    public int checkForWinner() {
-        for (int row = 0; row < ROWS; row++) {
-            for (int col = 0; col < COLS; col++) {
-                final int val = get(col, row);
-                if (val != EMPTY && val != -1) {
-                    for (Point d : DIRECTIONAL_POINTS) {
-                        for (int i = 1; i < LINE_LENGTH; i++) {
-                            if (get(col + d.x * i, row + d.y * i) != val) {
-                                break;
-                            } else if (i == LINE_LENGTH - 1) {
-                                return val == RED ? RED_WON : BLUE_WON;
-                            }
-                        }
-                    }
-                }
-            }
-        }
-
-        for (int l = 0; l < ROWS * COLS; l++) {
-            if (get(l) == EMPTY) {
-                return PLAYING;
-            }
-        }
-
-        return TIE;
+        return get(point.x, point.y);
     }
 
     /**
