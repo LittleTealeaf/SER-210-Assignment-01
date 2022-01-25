@@ -6,7 +6,7 @@ import java.util.Random;
 /**
  * TicTacToe class implements the interface
  *
- * The Computer can be beat.
+ * I have beaten the computer before, so it is not perfect
  *
  * @author relkharboutly
  * @author Thomas Kwashnak
