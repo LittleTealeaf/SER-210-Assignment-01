@@ -1,5 +1,7 @@
 # SER 210 Assignment 1
 
+[![Java CI with Gradle](https://github.com/LittleTealeaf/SER-210-Assignment-1/actions/workflows/gradle.yml/badge.svg)](https://github.com/LittleTealeaf/SER-210-Assignment-1/actions/workflows/gradle.yml)
+
 A Four-in-a-row Game created as an assignment for `SER-210: Software Engineering Design and Development` (Android Development)
 
 Assignment Instructions can be found in [Assignment Instructions.pdf](Assignment%20Instructions.pdf).
