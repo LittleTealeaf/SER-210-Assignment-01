@@ -1,3 +1,5 @@
+package edu.quinnipiac.ser210.fourinarow;
+
 import java.util.Scanner;
 
 /**

@@ -1,4 +1,6 @@
-import java.awt.Point;
+package edu.quinnipiac.ser210.fourinarow;
+
+import android.graphics.Point;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;

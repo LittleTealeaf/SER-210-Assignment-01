@@ -1,3 +1,5 @@
+package edu.quinnipiac.ser210.fourinarow;
+
 /**
  * IGame interface.
  * @author relkharboutly
