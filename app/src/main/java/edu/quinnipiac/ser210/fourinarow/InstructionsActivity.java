@@ -1,7 +1,8 @@
 package edu.quinnipiac.ser210.fourinarow;
 
-import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class InstructionsActivity extends AppCompatActivity {
 
@@ -10,5 +11,4 @@ public class InstructionsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_instructions);
     }
-
 }

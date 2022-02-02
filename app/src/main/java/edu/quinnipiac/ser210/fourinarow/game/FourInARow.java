@@ -1,6 +1,7 @@
 package edu.quinnipiac.ser210.fourinarow.game;
 
 import android.graphics.Point;
+
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
@@ -155,7 +156,7 @@ public class FourInARow implements IGame {
      * Calculates the computer's move given the id of the computer and the id of the player
      *
      * @param idComputer token ID of the computer's pieces
-     * @param idOpponent   token ID of the player's pieces
+     * @param idOpponent token ID of the player's pieces
      *
      * @return Computer Evaluation on the best move to make
      */
@@ -184,7 +185,7 @@ public class FourInARow implements IGame {
      * Evaluates the given point by the worth of having a piece there in regards to the ability to make a 4-in-a-row
      *
      * @param location         Location (between 0 and 35) of the object to evaluate
-     * @param idPlayer           The player to evaluate the location for
+     * @param idPlayer         The player to evaluate the location for
      * @param streakMultiplier The coefficient to multiply the resulting eval function by for every item in the line
      *
      * @return Evaluation of the given location for the given player
