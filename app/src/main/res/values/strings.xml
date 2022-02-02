@@ -3,4 +3,5 @@
     <string name="input_name_hint">Your Name</string>
     <string name="game_instructions">The game takes place on a 6x6 grid. Each player takes turns placing a piece on an empty square on the board. The first player to align 4 of their pieces in a line wins. Lines can be horizontal, vertical, or either diagonal direction</string>
     <string name="text_opponent_name">Computer</string>
+    <string name="empty_location">Empty Location</string>
 </resources>

@@ -16,5 +16,12 @@
             app:layout_constraintHorizontal_bias="0.495"
             android:id="@+id/game_board">
 
+        <Button
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                app:layout_row="0"
+                app:layout_column="0"
+                android:contentDescription="@string/empty_location"
+                android:id="@+id/button_location_0" />
     </androidx.gridlayout.widget.GridLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
