@@ -9,4 +9,5 @@
     <color name="white">#FFFFFFFF</color>
     <color name="color_player">#0000FF</color>
     <color name="color_computer">#FF0000</color>
+    <color name="color_empty">@color/white</color>
 </resources>

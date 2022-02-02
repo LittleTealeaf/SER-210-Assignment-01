@@ -26,7 +26,8 @@
                 android:insetTop="1dp"
                 android:insetBottom="1dp"
                 android:insetLeft="1dp"
-                android:insetRight="1dp"/>
+                android:insetRight="1dp"
+                android:backgroundTint="@color/color_empty" />
 
         <Button
                 android:layout_width="50dp"
@@ -38,7 +39,8 @@
                 android:insetTop="1dp"
                 android:insetBottom="1dp"
                 android:insetLeft="1dp"
-                android:insetRight="1dp" />
+                android:insetRight="1dp"
+                android:backgroundTint="@color/color_empty" />
 
         <Button
                 android:layout_width="50dp"
@@ -50,7 +52,8 @@
                 android:insetTop="1dp"
                 android:insetBottom="1dp"
                 android:insetLeft="1dp"
-                android:insetRight="1dp" />
+                android:insetRight="1dp"
+                android:backgroundTint="@color/color_empty" />
 
         <Button
                 android:layout_width="50dp"
@@ -62,7 +65,8 @@
                 android:insetTop="1dp"
                 android:insetBottom="1dp"
                 android:insetLeft="1dp"
-                android:insetRight="1dp" />
+                android:insetRight="1dp"
+                android:backgroundTint="@color/color_empty" />
 
         <Button
                 android:layout_width="50dp"
@@ -74,7 +78,8 @@
                 android:insetTop="1dp"
                 android:insetBottom="1dp"
                 android:insetLeft="1dp"
-                android:insetRight="1dp" />
+                android:insetRight="1dp"
+                android:backgroundTint="@color/color_empty" />
 
         <Button
                 android:layout_width="50dp"
@@ -86,7 +91,8 @@
                 android:insetTop="1dp"
                 android:insetBottom="1dp"
                 android:insetLeft="1dp"
-                android:insetRight="1dp" />
+                android:insetRight="1dp"
+                android:backgroundTint="@color/color_empty" />
 
         <Button
                 android:layout_width="50dp"
@@ -98,7 +104,8 @@
                 android:insetTop="1dp"
                 android:insetBottom="1dp"
                 android:insetLeft="1dp"
-                android:insetRight="1dp" />
+                android:insetRight="1dp"
+                android:backgroundTint="@color/color_empty" />
 
         <Button
                 android:layout_width="50dp"
@@ -110,7 +117,8 @@
                 android:insetTop="1dp"
                 android:insetBottom="1dp"
                 android:insetLeft="1dp"
-                android:insetRight="1dp" />
+                android:insetRight="1dp"
+                android:backgroundTint="@color/color_empty" />
 
         <Button
                 android:layout_width="50dp"
@@ -122,7 +130,8 @@
                 android:insetTop="1dp"
                 android:insetBottom="1dp"
                 android:insetLeft="1dp"
-                android:insetRight="1dp" />
+                android:insetRight="1dp"
+                android:backgroundTint="@color/color_empty" />
 
         <Button
                 android:layout_width="50dp"
@@ -134,7 +143,8 @@
                 android:insetTop="1dp"
                 android:insetBottom="1dp"
                 android:insetLeft="1dp"
-                android:insetRight="1dp" />
+                android:insetRight="1dp"
+                android:backgroundTint="@color/color_empty" />
 
         <Button
                 android:layout_width="50dp"
@@ -146,7 +156,8 @@
                 android:insetTop="1dp"
                 android:insetBottom="1dp"
                 android:insetLeft="1dp"
-                android:insetRight="1dp" />
+                android:insetRight="1dp"
+                android:backgroundTint="@color/color_empty" />
 
         <Button
                 android:layout_width="50dp"
@@ -158,7 +169,8 @@
                 android:insetTop="1dp"
                 android:insetBottom="1dp"
                 android:insetLeft="1dp"
-                android:insetRight="1dp" />
+                android:insetRight="1dp"
+                android:backgroundTint="@color/color_empty" />
 
         <Button
                 android:layout_width="50dp"
@@ -170,7 +182,8 @@
                 android:insetTop="1dp"
                 android:insetBottom="1dp"
                 android:insetLeft="1dp"
-                android:insetRight="1dp" />
+                android:insetRight="1dp"
+                android:backgroundTint="@color/color_empty" />
 
         <Button
                 android:layout_width="50dp"
@@ -182,7 +195,8 @@
                 android:insetTop="1dp"
                 android:insetBottom="1dp"
                 android:insetLeft="1dp"
-                android:insetRight="1dp" />
+                android:insetRight="1dp"
+                android:backgroundTint="@color/color_empty" />
 
         <Button
                 android:layout_width="50dp"
@@ -194,7 +208,8 @@
                 android:insetTop="1dp"
                 android:insetBottom="1dp"
                 android:insetLeft="1dp"
-                android:insetRight="1dp" />
+                android:insetRight="1dp"
+                android:backgroundTint="@color/color_empty" />
 
         <Button
                 android:layout_width="50dp"
@@ -206,7 +221,8 @@
                 android:insetTop="1dp"
                 android:insetBottom="1dp"
                 android:insetLeft="1dp"
-                android:insetRight="1dp" />
+                android:insetRight="1dp"
+                android:backgroundTint="@color/color_empty" />
 
         <Button
                 android:layout_width="50dp"
@@ -218,7 +234,8 @@
                 android:insetTop="1dp"
                 android:insetBottom="1dp"
                 android:insetLeft="1dp"
-                android:insetRight="1dp" />
+                android:insetRight="1dp"
+                android:backgroundTint="@color/color_empty" />
 
         <Button
                 android:layout_width="50dp"
@@ -230,7 +247,8 @@
                 android:insetTop="1dp"
                 android:insetBottom="1dp"
                 android:insetLeft="1dp"
-                android:insetRight="1dp" />
+                android:insetRight="1dp"
+                android:backgroundTint="@color/color_empty" />
 
         <Button
                 android:layout_width="50dp"
@@ -242,7 +260,8 @@
                 android:insetTop="1dp"
                 android:insetBottom="1dp"
                 android:insetLeft="1dp"
-                android:insetRight="1dp" />
+                android:insetRight="1dp"
+                android:backgroundTint="@color/color_empty" />
 
         <Button
                 android:layout_width="50dp"
@@ -254,7 +273,8 @@
                 android:insetTop="1dp"
                 android:insetBottom="1dp"
                 android:insetLeft="1dp"
-                android:insetRight="1dp" />
+                android:insetRight="1dp"
+                android:backgroundTint="@color/color_empty" />
 
         <Button
                 android:layout_width="50dp"
@@ -266,7 +286,8 @@
                 android:insetTop="1dp"
                 android:insetBottom="1dp"
                 android:insetLeft="1dp"
-                android:insetRight="1dp" />
+                android:insetRight="1dp"
+                android:backgroundTint="@color/color_empty" />
 
         <Button
                 android:layout_width="50dp"
@@ -278,7 +299,8 @@
                 android:insetTop="1dp"
                 android:insetBottom="1dp"
                 android:insetLeft="1dp"
-                android:insetRight="1dp" />
+                android:insetRight="1dp"
+                android:backgroundTint="@color/color_empty" />
 
         <Button
                 android:layout_width="50dp"
@@ -290,7 +312,8 @@
                 android:insetTop="1dp"
                 android:insetBottom="1dp"
                 android:insetLeft="1dp"
-                android:insetRight="1dp" />
+                android:insetRight="1dp"
+                android:backgroundTint="@color/color_player" />
 
         <Button
                 android:layout_width="50dp"
@@ -302,7 +325,8 @@
                 android:insetTop="1dp"
                 android:insetBottom="1dp"
                 android:insetLeft="1dp"
-                android:insetRight="1dp" />
+                android:insetRight="1dp"
+                android:backgroundTint="@color/color_computer" />
 
         <Button
                 android:layout_width="50dp"
@@ -314,7 +338,8 @@
                 android:insetTop="1dp"
                 android:insetBottom="1dp"
                 android:insetLeft="1dp"
-                android:insetRight="1dp" />
+                android:insetRight="1dp"
+                android:backgroundTint="@color/color_empty" />
 
         <Button
                 android:layout_width="50dp"
@@ -326,7 +351,8 @@
                 android:insetTop="1dp"
                 android:insetBottom="1dp"
                 android:insetLeft="1dp"
-                android:insetRight="1dp" />
+                android:insetRight="1dp"
+                android:backgroundTint="@color/color_empty" />
 
         <Button
                 android:layout_width="50dp"
@@ -338,7 +364,8 @@
                 android:insetTop="1dp"
                 android:insetBottom="1dp"
                 android:insetLeft="1dp"
-                android:insetRight="1dp" />
+                android:insetRight="1dp"
+                android:backgroundTint="@color/color_empty" />
 
         <Button
                 android:layout_width="50dp"
@@ -350,7 +377,8 @@
                 android:insetTop="1dp"
                 android:insetBottom="1dp"
                 android:insetLeft="1dp"
-                android:insetRight="1dp" />
+                android:insetRight="1dp"
+                android:backgroundTint="@color/color_empty" />
 
         <Button
                 android:layout_width="50dp"
@@ -362,7 +390,8 @@
                 android:insetTop="1dp"
                 android:insetBottom="1dp"
                 android:insetLeft="1dp"
-                android:insetRight="1dp" />
+                android:insetRight="1dp"
+                android:backgroundTint="@color/color_empty" />
 
         <Button
                 android:layout_width="50dp"
@@ -374,7 +403,8 @@
                 android:insetTop="1dp"
                 android:insetBottom="1dp"
                 android:insetLeft="1dp"
-                android:insetRight="1dp" />
+                android:insetRight="1dp"
+                android:backgroundTint="@color/color_empty" />
 
         <Button
                 android:layout_width="50dp"
@@ -386,7 +416,8 @@
                 android:insetTop="1dp"
                 android:insetBottom="1dp"
                 android:insetLeft="1dp"
-                android:insetRight="1dp" />
+                android:insetRight="1dp"
+                android:backgroundTint="@color/color_empty" />
 
         <Button
                 android:layout_width="50dp"
@@ -398,7 +429,8 @@
                 android:insetTop="1dp"
                 android:insetBottom="1dp"
                 android:insetLeft="1dp"
-                android:insetRight="1dp" />
+                android:insetRight="1dp"
+                android:backgroundTint="@color/color_empty" />
 
         <Button
                 android:layout_width="50dp"
@@ -410,7 +442,8 @@
                 android:insetTop="1dp"
                 android:insetBottom="1dp"
                 android:insetLeft="1dp"
-                android:insetRight="1dp" />
+                android:insetRight="1dp"
+                android:backgroundTint="@color/color_empty" />
 
         <Button
                 android:layout_width="50dp"
@@ -422,7 +455,8 @@
                 android:insetTop="1dp"
                 android:insetBottom="1dp"
                 android:insetLeft="1dp"
-                android:insetRight="1dp" />
+                android:insetRight="1dp"
+                android:backgroundTint="@color/color_empty" />
 
         <Button
                 android:layout_width="50dp"
@@ -434,7 +468,8 @@
                 android:insetTop="1dp"
                 android:insetBottom="1dp"
                 android:insetLeft="1dp"
-                android:insetRight="1dp" />
+                android:insetRight="1dp"
+                android:backgroundTint="@color/color_empty" />
 
         <Button
                 android:layout_width="50dp"
@@ -446,6 +481,7 @@
                 android:insetTop="1dp"
                 android:insetBottom="1dp"
                 android:insetLeft="1dp"
-                android:insetRight="1dp" />
+                android:insetRight="1dp"
+                android:backgroundTint="@color/color_empty" />
     </androidx.gridlayout.widget.GridLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
