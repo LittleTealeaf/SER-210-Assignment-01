@@ -24,7 +24,9 @@
                 android:contentDescription="@string/empty_location"
                 android:id="@+id/button_location_0"
                 android:insetTop="0dp"
-                android:insetBottom="0dp" />
+                android:insetBottom="0dp"
+                android:insetLeft="0dp"
+                android:insetRight="0dp" />
 
         <Button
                 android:layout_width="50dp"
@@ -34,7 +36,9 @@
                 android:contentDescription="@string/empty_location"
                 android:id="@+id/button_location_11"
                 android:insetTop="0dp"
-                android:insetBottom="0dp" />
+                android:insetBottom="0dp"
+                android:insetLeft="0dp"
+                android:insetRight="0dp" />
 
         <Button
                 android:layout_width="50dp"
@@ -44,7 +48,9 @@
                 android:contentDescription="@string/empty_location"
                 android:id="@+id/button_location_12"
                 android:insetTop="0dp"
-                android:insetBottom="0dp" />
+                android:insetBottom="0dp"
+                android:insetLeft="0dp"
+                android:insetRight="0dp" />
 
         <Button
                 android:layout_width="50dp"
@@ -54,7 +60,9 @@
                 android:contentDescription="@string/empty_location"
                 android:id="@+id/button_location_13"
                 android:insetTop="0dp"
-                android:insetBottom="0dp" />
+                android:insetBottom="0dp"
+                android:insetLeft="0dp"
+                android:insetRight="0dp" />
 
         <Button
                 android:layout_width="50dp"
@@ -64,7 +72,9 @@
                 android:contentDescription="@string/empty_location"
                 android:id="@+id/button_location_14"
                 android:insetTop="0dp"
-                android:insetBottom="0dp" />
+                android:insetBottom="0dp"
+                android:insetLeft="0dp"
+                android:insetRight="0dp" />
 
         <Button
                 android:layout_width="50dp"
@@ -74,7 +84,9 @@
                 android:contentDescription="@string/empty_location"
                 android:id="@+id/button_location_15"
                 android:insetTop="0dp"
-                android:insetBottom="0dp" />
+                android:insetBottom="0dp"
+                android:insetLeft="0dp"
+                android:insetRight="0dp" />
 
         <Button
                 android:layout_width="50dp"
@@ -84,7 +96,9 @@
                 android:contentDescription="@string/empty_location"
                 android:id="@+id/button_location_16"
                 android:insetTop="0dp"
-                android:insetBottom="0dp" />
+                android:insetBottom="0dp"
+                android:insetLeft="0dp"
+                android:insetRight="0dp" />
 
         <Button
                 android:layout_width="50dp"
@@ -94,7 +108,9 @@
                 android:contentDescription="@string/empty_location"
                 android:id="@+id/button_location_17"
                 android:insetTop="0dp"
-                android:insetBottom="0dp" />
+                android:insetBottom="0dp"
+                android:insetLeft="0dp"
+                android:insetRight="0dp" />
 
         <Button
                 android:layout_width="50dp"
@@ -104,7 +120,9 @@
                 android:contentDescription="@string/empty_location"
                 android:id="@+id/button_location_18"
                 android:insetTop="0dp"
-                android:insetBottom="0dp" />
+                android:insetBottom="0dp"
+                android:insetLeft="0dp"
+                android:insetRight="0dp" />
 
         <Button
                 android:layout_width="50dp"
@@ -114,7 +132,9 @@
                 android:contentDescription="@string/empty_location"
                 android:id="@+id/button_location_19"
                 android:insetTop="0dp"
-                android:insetBottom="0dp" />
+                android:insetBottom="0dp"
+                android:insetLeft="0dp"
+                android:insetRight="0dp" />
 
         <Button
                 android:layout_width="50dp"
@@ -124,7 +144,9 @@
                 android:contentDescription="@string/empty_location"
                 android:id="@+id/button_location_20"
                 android:insetTop="0dp"
-                android:insetBottom="0dp" />
+                android:insetBottom="0dp"
+                android:insetLeft="0dp"
+                android:insetRight="0dp" />
 
         <Button
                 android:layout_width="50dp"
@@ -134,7 +156,9 @@
                 android:contentDescription="@string/empty_location"
                 android:id="@+id/button_location_21"
                 android:insetTop="0dp"
-                android:insetBottom="0dp" />
+                android:insetBottom="0dp"
+                android:insetLeft="0dp"
+                android:insetRight="0dp" />
 
         <Button
                 android:layout_width="50dp"
@@ -144,7 +168,9 @@
                 android:contentDescription="@string/empty_location"
                 android:id="@+id/button_location_22"
                 android:insetTop="0dp"
-                android:insetBottom="0dp" />
+                android:insetBottom="0dp"
+                android:insetLeft="0dp"
+                android:insetRight="0dp" />
 
         <Button
                 android:layout_width="50dp"
@@ -154,7 +180,9 @@
                 android:contentDescription="@string/empty_location"
                 android:id="@+id/button_location_23"
                 android:insetTop="0dp"
-                android:insetBottom="0dp" />
+                android:insetBottom="0dp"
+                android:insetLeft="0dp"
+                android:insetRight="0dp" />
 
         <Button
                 android:layout_width="50dp"
@@ -164,7 +192,9 @@
                 android:contentDescription="@string/empty_location"
                 android:id="@+id/button_location_24"
                 android:insetTop="0dp"
-                android:insetBottom="0dp" />
+                android:insetBottom="0dp"
+                android:insetLeft="0dp"
+                android:insetRight="0dp" />
 
         <Button
                 android:layout_width="50dp"
@@ -174,7 +204,9 @@
                 android:contentDescription="@string/empty_location"
                 android:id="@+id/button_location_25"
                 android:insetTop="0dp"
-                android:insetBottom="0dp" />
+                android:insetBottom="0dp"
+                android:insetLeft="0dp"
+                android:insetRight="0dp" />
 
         <Button
                 android:layout_width="50dp"
@@ -184,7 +216,9 @@
                 android:contentDescription="@string/empty_location"
                 android:id="@+id/button_location_26"
                 android:insetTop="0dp"
-                android:insetBottom="0dp" />
+                android:insetBottom="0dp"
+                android:insetLeft="0dp"
+                android:insetRight="0dp" />
 
         <Button
                 android:layout_width="50dp"
@@ -194,7 +228,9 @@
                 android:contentDescription="@string/empty_location"
                 android:id="@+id/button_location_27"
                 android:insetTop="0dp"
-                android:insetBottom="0dp" />
+                android:insetBottom="0dp"
+                android:insetLeft="0dp"
+                android:insetRight="0dp" />
 
         <Button
                 android:layout_width="50dp"
@@ -204,7 +240,9 @@
                 android:contentDescription="@string/empty_location"
                 android:id="@+id/button_location_28"
                 android:insetTop="0dp"
-                android:insetBottom="0dp" />
+                android:insetBottom="0dp"
+                android:insetLeft="0dp"
+                android:insetRight="0dp" />
 
         <Button
                 android:layout_width="50dp"
@@ -214,7 +252,9 @@
                 android:contentDescription="@string/empty_location"
                 android:id="@+id/button_location_29"
                 android:insetTop="0dp"
-                android:insetBottom="0dp" />
+                android:insetBottom="0dp"
+                android:insetLeft="0dp"
+                android:insetRight="0dp" />
 
         <Button
                 android:layout_width="50dp"
@@ -224,7 +264,9 @@
                 android:contentDescription="@string/empty_location"
                 android:id="@+id/button_location_35"
                 android:insetTop="0dp"
-                android:insetBottom="0dp" />
+                android:insetBottom="0dp"
+                android:insetLeft="0dp"
+                android:insetRight="0dp" />
 
         <Button
                 android:layout_width="50dp"
@@ -234,7 +276,9 @@
                 android:contentDescription="@string/empty_location"
                 android:id="@+id/button_location_6"
                 android:insetTop="0dp"
-                android:insetBottom="0dp" />
+                android:insetBottom="0dp"
+                android:insetLeft="0dp"
+                android:insetRight="0dp" />
 
         <Button
                 android:layout_width="50dp"
@@ -244,7 +288,9 @@
                 android:contentDescription="@string/empty_location"
                 android:id="@+id/button_location_7"
                 android:insetTop="0dp"
-                android:insetBottom="0dp" />
+                android:insetBottom="0dp"
+                android:insetLeft="0dp"
+                android:insetRight="0dp" />
 
         <Button
                 android:layout_width="50dp"
@@ -254,7 +300,9 @@
                 android:contentDescription="@string/empty_location"
                 android:id="@+id/button_location_8"
                 android:insetTop="0dp"
-                android:insetBottom="0dp" />
+                android:insetBottom="0dp"
+                android:insetLeft="0dp"
+                android:insetRight="0dp" />
 
         <Button
                 android:layout_width="50dp"
@@ -264,7 +312,9 @@
                 android:contentDescription="@string/empty_location"
                 android:id="@+id/button_location_9"
                 android:insetTop="0dp"
-                android:insetBottom="0dp" />
+                android:insetBottom="0dp"
+                android:insetLeft="0dp"
+                android:insetRight="0dp" />
 
         <Button
                 android:layout_width="50dp"
@@ -274,7 +324,9 @@
                 android:contentDescription="@string/empty_location"
                 android:id="@+id/button_location_10"
                 android:insetTop="0dp"
-                android:insetBottom="0dp" />
+                android:insetBottom="0dp"
+                android:insetLeft="0dp"
+                android:insetRight="0dp" />
 
         <Button
                 android:layout_width="50dp"
@@ -284,7 +336,9 @@
                 android:contentDescription="@string/empty_location"
                 android:id="@+id/button_location_30"
                 android:insetTop="0dp"
-                android:insetBottom="0dp" />
+                android:insetBottom="0dp"
+                android:insetLeft="0dp"
+                android:insetRight="0dp" />
 
         <Button
                 android:layout_width="50dp"
@@ -294,7 +348,9 @@
                 android:contentDescription="@string/empty_location"
                 android:id="@+id/button_location_31"
                 android:insetTop="0dp"
-                android:insetBottom="0dp" />
+                android:insetBottom="0dp"
+                android:insetLeft="0dp"
+                android:insetRight="0dp" />
 
         <Button
                 android:layout_width="50dp"
@@ -304,7 +360,9 @@
                 android:contentDescription="@string/empty_location"
                 android:id="@+id/button_location_32"
                 android:insetTop="0dp"
-                android:insetBottom="0dp" />
+                android:insetBottom="0dp"
+                android:insetLeft="0dp"
+                android:insetRight="0dp" />
 
         <Button
                 android:layout_width="50dp"
@@ -314,7 +372,9 @@
                 android:contentDescription="@string/empty_location"
                 android:id="@+id/button_location_33"
                 android:insetTop="0dp"
-                android:insetBottom="0dp" />
+                android:insetBottom="0dp"
+                android:insetLeft="0dp"
+                android:insetRight="0dp" />
 
         <Button
                 android:layout_width="50dp"
@@ -324,7 +384,9 @@
                 android:contentDescription="@string/empty_location"
                 android:id="@+id/button_location_34"
                 android:insetTop="0dp"
-                android:insetBottom="0dp" />
+                android:insetBottom="0dp"
+                android:insetLeft="0dp"
+                android:insetRight="0dp" />
 
         <Button
                 android:layout_width="50dp"
@@ -334,7 +396,9 @@
                 android:contentDescription="@string/empty_location"
                 android:id="@+id/button_location_"
                 android:insetTop="0dp"
-                android:insetBottom="0dp" />
+                android:insetBottom="0dp"
+                android:insetLeft="0dp"
+                android:insetRight="0dp" />
 
         <Button
                 android:layout_width="50dp"
@@ -344,7 +408,9 @@
                 android:contentDescription="@string/empty_location"
                 android:id="@+id/button_location_2"
                 android:insetTop="0dp"
-                android:insetBottom="0dp" />
+                android:insetBottom="0dp"
+                android:insetLeft="0dp"
+                android:insetRight="0dp" />
 
         <Button
                 android:layout_width="50dp"
@@ -354,7 +420,9 @@
                 android:contentDescription="@string/empty_location"
                 android:id="@+id/button_location_3"
                 android:insetTop="0dp"
-                android:insetBottom="0dp" />
+                android:insetBottom="0dp"
+                android:insetLeft="0dp"
+                android:insetRight="0dp" />
 
         <Button
                 android:layout_width="50dp"
@@ -364,7 +432,9 @@
                 android:contentDescription="@string/empty_location"
                 android:id="@+id/button_location_4"
                 android:insetTop="0dp"
-                android:insetBottom="0dp" />
+                android:insetBottom="0dp"
+                android:insetLeft="0dp"
+                android:insetRight="0dp" />
 
         <Button
                 android:layout_width="50dp"
@@ -374,6 +444,8 @@
                 android:contentDescription="@string/empty_location"
                 android:id="@+id/button_location_5"
                 android:insetTop="0dp"
-                android:insetBottom="0dp" />
+                android:insetBottom="0dp"
+                android:insetLeft="0dp"
+                android:insetRight="0dp" />
     </androidx.gridlayout.widget.GridLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
