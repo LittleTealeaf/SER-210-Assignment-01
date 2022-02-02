@@ -26,7 +26,7 @@
                 android:insetTop="1dp"
                 android:insetBottom="1dp"
                 android:insetLeft="1dp"
-                android:insetRight="1dp" />
+                android:insetRight="1dp"/>
 
         <Button
                 android:layout_width="50dp"
