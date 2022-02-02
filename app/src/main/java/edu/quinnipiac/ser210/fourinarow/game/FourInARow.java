@@ -1,4 +1,4 @@
-package edu.quinnipiac.ser210.fourinarow;
+package edu.quinnipiac.ser210.fourinarow.game;
 
 import android.graphics.Point;
 import java.util.LinkedList;

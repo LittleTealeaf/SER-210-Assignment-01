@@ -1,6 +1,9 @@
-package edu.quinnipiac.ser210.fourinarow;
+package edu.quinnipiac.ser210.fourinarow.game;
 
 import java.util.Scanner;
+
+import edu.quinnipiac.ser210.fourinarow.game.FourInARow;
+import edu.quinnipiac.ser210.fourinarow.game.IGame;
 
 /**
  * Four in a row: Two-player console, non-graphics
@@ -26,7 +29,7 @@ public class FIRConsole {
             userInput = in.nextLine();
 
             try {
-                game.setMove(IGame.RED,Integer.parseInt(userInput));
+                game.setMove(IGame.RED, Integer.parseInt(userInput));
             } catch(NumberFormatException exception) {
                 continue;
             }

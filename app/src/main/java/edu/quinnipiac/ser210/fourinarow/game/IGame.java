@@ -1,4 +1,4 @@
-package edu.quinnipiac.ser210.fourinarow;
+package edu.quinnipiac.ser210.fourinarow.game;
 
 /**
  * IGame interface.
