@@ -13,7 +13,7 @@
             android:hint="@string/input_name_hint"
             android:text=""
             android:ems="10"
-            android:id="@+id/textname"
+            android:id="@+id/textname"awef
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
