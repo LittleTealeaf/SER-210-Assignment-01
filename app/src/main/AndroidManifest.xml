@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FourInARow" >
         <activity
-            android:name=".SplashScreen"
+            android:name=".InstructionsActivity"
             android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
