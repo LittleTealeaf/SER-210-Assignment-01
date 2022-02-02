@@ -1,7 +1,6 @@
 package edu.quinnipiac.ser210.fourinarow.elements;
 
 import android.content.Context;
-import android.content.res.ColorStateList;
 import android.util.AttributeSet;
 
 import androidx.annotation.NonNull;
