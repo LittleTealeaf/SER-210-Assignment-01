@@ -1,6 +1,6 @@
 # SER 210 Assignment 1
 
-[![Java CI with Gradle](https://github.com/LittleTealeaf/SER-210-Assignment-1/actions/workflows/gradle.yml/badge.svg)](https://github.com/LittleTealeaf/SER-210-Assignment-1/actions/workflows/gradle.yml) [![Android CI](https://github.com/LittleTealeaf/SER-210-Assignment-1/actions/workflows/android.yml/badge.svg?branch=main)](https://github.com/LittleTealeaf/SER-210-Assignment-1/actions/workflows/android.yml)
+[![Android CI](https://github.com/LittleTealeaf/SER-210-Assignment-1/actions/workflows/android.yml/badge.svg?branch=main)](https://github.com/LittleTealeaf/SER-210-Assignment-1/actions/workflows/android.yml)
 
 A Four-in-a-row Game created as an assignment for `SER-210: Software Engineering Design and Development` (Android Development)
 
