@@ -6,7 +6,7 @@ A Four-in-a-row Game created as an assignment for `SER-210: Software Engineering
 
 Assignment Instructions can be found in [Assignment Instructions.pdf](Assignment%20Instructions.pdf).
 
-This project was created using [IntelliJ IDEA](https://www.jetbrains.com/idea/) and [Android Studio](https://developer.android.com/studio). An initial source code was provided to create an initial structure for the project.
+This project was created using [Android Studio](https://developer.android.com/studio). An initial source code was provided to create an initial structure for the project.
 
 ## Game Rules:
 
