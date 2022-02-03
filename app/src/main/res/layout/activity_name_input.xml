@@ -14,15 +14,15 @@
             android:text=""
             android:ems="10"
             android:id="@+id/text_name"
-            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="50dp"
             app:layout_constraintHorizontal_bias="0.0"
             android:layout_marginStart="25dp"
             android:layout_marginEnd="25dp"
             android:autofillHints=""
-            android:onClick="onStart"/>
+            android:onClick="onStart"
+            app:layout_constraintTop_toBottomOf="@+id/textview_title"
+            android:layout_marginTop="50dp" />
 
     <Button
             android:text="@string/button_text_start"
@@ -33,5 +33,28 @@
             app:layout_constraintEnd_toEndOf="@+id/text_name"
             app:layout_constraintTop_toBottomOf="@+id/text_name"
             android:layout_marginStart="25dp"
-            android:layout_marginEnd="25dp" />
+            android:layout_marginEnd="25dp"
+            android:layout_marginTop="56dp"
+            app:layout_constraintHorizontal_bias="0.0" />
+
+    <TextView
+            android:text="@string/text_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/textview_title"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginStart="25dp"
+            android:layout_marginEnd="25dp"
+            android:contentDescription="@string/text_title"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display3"
+            android:fontFamily="casual"
+            android:textSize="70sp"
+            android:layout_marginTop="50dp"
+            app:layout_constraintHorizontal_bias="0.0"
+            android:textColor="@android:color/black"
+            android:textStyle="bold|italic"
+            android:textAllCaps="false"
+            android:textAlignment="center" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -6,5 +6,6 @@
     <string name="desc_loc_empty">Empty Location</string>
     <string name="desc_loc_player">Your Piece</string>
     <string name="desc_loc_computer">Computer Piece</string>
-    <string name="button_text_start">Start</string>
+    <string name="button_text_start">Begin!</string>
+    <string name="text_title">4 In A Row</string>
 </resources>
