@@ -24,15 +24,14 @@ public class FIRConsole {
             userInput = in.nextLine();
 
             try {
-                game.setMove(IGame.RED,Integer.parseInt(userInput));
-            } catch(NumberFormatException exception) {
+                game.setMove(IGame.RED, Integer.parseInt(userInput));
+            } catch (NumberFormatException exception) {
                 continue;
             }
 
-            if(game.checkForWinner() == IGame.PLAYING) {
-                game.setMove(IGame.BLUE,game.getComputerMove());
+            if (game.checkForWinner() == IGame.PLAYING) {
+                game.setMove(IGame.BLUE, game.getComputerMove());
             }
-
         } while (((currentState = game.checkForWinner()) == IGame.PLAYING) && (!userInput.equals("q"))); // repeat if not game-over
 
         game.printBoard();
