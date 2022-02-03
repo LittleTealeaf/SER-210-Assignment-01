@@ -7,12 +7,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import edu.quinnipiac.ser210.fourinarow.R;
 
-public class NameInputActivity extends AppCompatActivity {
+public class GreeterActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_name_input);
+        setContentView(R.layout.activity_greeter);
     }
 
     public void onStart(View view) {

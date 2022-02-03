@@ -13,7 +13,7 @@
                 android:name=".activities.InstructionsActivity"
                 android:exported="false" />
         <activity
-                android:name=".activities.NameInputActivity"
+                android:name=".activities.GreeterActivity"
                 android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
