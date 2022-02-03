@@ -15,6 +15,8 @@ public class GreeterActivity extends AppCompatActivity {
 
     public static final String KEY_NAME;
 
+
+
     static {
         KEY_NAME = "name";
     }
@@ -37,10 +39,12 @@ public class GreeterActivity extends AppCompatActivity {
         String name = inputName.getText().toString();
         Intent intent = new Intent(this,GameActivity.class);
         intent.putExtra(KEY_NAME,name);
+        startActivity(intent);
     }
 
     public void onClickInstructions(View view) {
-
+        Intent intent = new Intent(this,InstructionsActivity.class);
+        startActivity(intent);
     }
 
     @Override

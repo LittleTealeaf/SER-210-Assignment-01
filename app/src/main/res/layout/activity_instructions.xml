@@ -6,4 +6,46 @@
         android:layout_height="match_parent"
         tools:context=".activities.InstructionsActivity">
 
+    <TextView
+            android:text="@string/game_instructions"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/textview_instructions"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/button"
+            android:layout_marginBottom="50dp"
+            android:layout_marginLeft="@dimen/padding_instructions"
+            android:layout_marginRight="@dimen/padding_instructions"
+            android:textSize="20sp"
+            android:textAlignment="center"
+            android:fontFamily="casual" />
+
+    <Button
+            android:text="@string/button_text_back"
+            android:onClick="onBack"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/button"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="@dimen/padding_instructions"
+            android:layout_marginEnd="@dimen/padding_instructions"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            android:layout_marginBottom="@dimen/padding_instructions" />
+
+    <TextView
+            android:text="@string/text_instructions_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textview_instructions_title"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/textview_instructions"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display3"
+            android:fontFamily="casual"
+            android:textStyle="bold"
+            android:textSize="56sp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

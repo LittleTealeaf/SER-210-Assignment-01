@@ -8,4 +8,7 @@
     <string name="desc_loc_computer">Computer Piece</string>
     <string name="button_text_start">Begin!</string>
     <string name="text_title">4 In A Row</string>
+    <string name="button_text_back">Back</string>
+    <string name="text_instructions_title">Instructions</string>
+    <string name="button_text_instructions">Instructions</string>
 </resources>
