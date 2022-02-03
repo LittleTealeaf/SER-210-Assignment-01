@@ -8,7 +8,7 @@
 
     <EditText
             android:layout_width="0dp"
-            android:layout_height="50dp"
+            android:layout_height="75dp"
             android:inputType="textPersonName"
             android:hint="@string/hint_input_name"
             android:text=""
@@ -22,12 +22,13 @@
             android:autofillHints=""
             android:onClick="onStart"
             app:layout_constraintTop_toBottomOf="@+id/textview_title"
-            android:layout_marginTop="50dp" />
+            android:layout_marginTop="50dp"
+            android:textSize="28sp" />
 
     <Button
             android:text="@string/button_text_start"
             android:layout_width="0dp"
-            android:layout_height="50dp"
+            android:layout_height="75dp"
             android:id="@+id/buttonStart"
             app:layout_constraintStart_toStartOf="@+id/text_name"
             app:layout_constraintEnd_toEndOf="@+id/text_name"
@@ -35,7 +36,9 @@
             android:layout_marginStart="25dp"
             android:layout_marginEnd="25dp"
             android:layout_marginTop="56dp"
-            app:layout_constraintHorizontal_bias="0.0" />
+            app:layout_constraintHorizontal_bias="0.0"
+            android:textSize="30sp"
+            android:backgroundTint="@color/location_player"/>
 
     <TextView
             android:text="@string/text_title"
