@@ -7,7 +7,7 @@
         tools:context=".activities.InstructionsActivity">
 
     <TextView
-            android:text="@string/game_instructions"
+            android:text="@string/text_instructions"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:id="@+id/textview_instructions"

@@ -10,7 +10,7 @@
             android:layout_width="0dp"
             android:layout_height="75dp"
             android:inputType="textPersonName"
-            android:hint="@string/hint_input_name"
+            android:hint="@string/hint_name"
             android:text=""
             android:ems="10"
             android:id="@+id/input_name"

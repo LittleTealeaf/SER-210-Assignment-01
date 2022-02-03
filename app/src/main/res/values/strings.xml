@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Four In A Row</string>
-    <string name="hint_input_name">Your Name</string>
-    <string name="game_instructions">The game takes place on a 6x6 grid. Each player takes turns placing a piece on an empty square on the board. The first player to align 4 of their pieces in a line wins. Lines can be horizontal, vertical, or either diagonal direction</string>
+    <string name="hint_name">Your Name</string>
+    <string name="text_instructions">The game takes place on a 6x6 grid. Each player takes turns placing a piece on an empty square on the board. The first player to align 4 of their pieces in a line wins. Lines can be horizontal, vertical, or either diagonal direction</string>
     <string name="name_opponent">Computer</string>
     <string name="desc_loc_empty">Empty Location</string>
     <string name="desc_loc_player">Your Piece</string>
