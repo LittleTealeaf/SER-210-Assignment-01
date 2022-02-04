@@ -6,7 +6,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:gravity="end"
-        android:layout_margin="20dp"
+        android:layout_margin="@dimen/app_margin"
         tools:context=".activities.InstructionsActivity">
 
     <TextView

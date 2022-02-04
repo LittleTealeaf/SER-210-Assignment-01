@@ -1,77 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_margin="@dimen/app_margin"
+        android:orientation="vertical"
         tools:context=".activities.GreeterActivity">
 
-    <EditText
-            android:layout_width="0dp"
-            android:layout_height="75dp"
-            android:inputType="textPersonName"
-            android:hint="@string/hint_name"
-            android:text=""
-            android:ems="10"
-            android:id="@+id/input_name"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            android:layout_marginStart="25dp"
-            android:layout_marginEnd="25dp"
-            android:autofillHints=""
-            android:onClick="onClickBegin"
-            app:layout_constraintTop_toBottomOf="@+id/textview_title"
-            android:layout_marginTop="50dp"
-            android:textSize="24sp"
-            android:textColorHint="#78909C" />
-
-    <Button
-            android:text="@string/button_text_start"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/button_start"
-            app:layout_constraintStart_toStartOf="@+id/input_name"
-            app:layout_constraintEnd_toEndOf="@+id/input_name"
-            app:layout_constraintTop_toBottomOf="@+id/input_name"
-            android:layout_marginStart="25dp"
-            android:layout_marginEnd="25dp"
-            android:layout_marginTop="56dp"
-            app:layout_constraintHorizontal_bias="0.0"
-            android:textSize="24sp"
-            android:backgroundTint="@color/location_player"
-            android:onClick="onClickBegin"/>
-
-    <Button
-            android:text="@string/button_text_instructions"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/buttonStart2"
-            app:layout_constraintStart_toStartOf="@+id/button_start"
-            app:layout_constraintEnd_toEndOf="@+id/button_start"
-            android:layout_marginTop="50dp"
-            android:textSize="24sp"
-            android:backgroundTint="@color/location_player"
-            app:layout_constraintTop_toBottomOf="@+id/button_start"
-            android:onClick="onClickInstructions" />
-
     <TextView
-            android:text="@string/text_title"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/textview_title"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginStart="25dp"
-            android:layout_marginEnd="25dp"
-            android:contentDescription="@string/text_title"
-            android:textAppearance="@style/TextAppearance.AppCompat.Display3"
-            android:fontFamily="casual"
-            android:textSize="54sp"
-            android:layout_marginTop="50dp"
-            app:layout_constraintHorizontal_bias="0.0"
-            android:textStyle="bold|italic"
-            android:textAllCaps="false"
-            android:textAlignment="center" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+            android:id="@+id/greeter_title"
+            android:text="@string/app_name"
+            android:textSize="50sp"
+            android:layout_marginTop="@dimen/app_margin" />
+
+    <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/greeter_input_name"
+            android:hint="@string/greeter_name_hint"
+            android:layout_marginVertical="40sp"/>
+
+    <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/greeter_button_play"
+            android:text="@string/button_text_play"
+            android:layout_marginHorizontal="14dp"
+            android:textSize="36sp" />
+
+    <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/greeter_button_instructions"
+            android:text="@string/button_text_instructions"
+            android:layout_gravity="center"
+            android:textSize="30sp"/>
+
+</LinearLayout>

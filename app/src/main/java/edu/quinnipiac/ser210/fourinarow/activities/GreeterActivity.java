@@ -2,7 +2,6 @@ package edu.quinnipiac.ser210.fourinarow.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
@@ -28,7 +27,7 @@ public class GreeterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_greeter);
 
-        inputName = (EditText) findViewById(R.id.input_name);
+        inputName = (EditText) findViewById(R.id.greeter_input_name);
 
         if(savedInstanceState != null) {
             inputName.setText(savedInstanceState.getString(KEY_NAME));
