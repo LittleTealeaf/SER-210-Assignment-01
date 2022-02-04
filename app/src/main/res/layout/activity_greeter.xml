@@ -24,7 +24,8 @@
             android:gravity="bottom"
             android:inputType="textPersonName"
             android:id="@+id/greeter_input_name"
-            android:hint="@string/greeter_name_hint"/>
+            android:hint="@string/greeter_name_hint"
+            android:textSize="30sp"/>
 
     <Button
             android:layout_width="match_parent"
