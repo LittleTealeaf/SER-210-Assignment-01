@@ -33,5 +33,6 @@
             android:id="@+id/instructions_back"
             android:onClick="onBack"
             android:text="@string/button_text_back"
-            android:layout_gravity="fill_horizontal|center_vertical"/>
+            android:layout_gravity="fill_horizontal|center_vertical"
+            android:layout_marginHorizontal="40dp"/>
 </LinearLayout>
