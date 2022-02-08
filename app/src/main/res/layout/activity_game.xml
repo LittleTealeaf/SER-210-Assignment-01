@@ -6,54 +6,13 @@
         android:layout_height="match_parent"
         tools:context=".activities.GameActivity">
 
-    <GridLayout
+    <edu.quinnipiac.ser210.fourinarow.elements.GameBoard
             android:layout_width="300dp"
             android:layout_height="300dp"
             app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginTop="100dp"
+            android:layout_marginTop="25dp"
+            android:id="@+id/game_board"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintHorizontal_bias="0.495"
-            android:id="@+id/game_board">
-
-        <Button
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                app:layout_row="1"
-                app:layout_column="4"
-                android:contentDescription="@string/desc_loc_empty"
-                android:id="@+id/button_location_0"
-                android:insetTop="1dp"
-                android:insetBottom="1dp"
-                android:insetLeft="1dp"
-                android:insetRight="1dp"
-                android:backgroundTint="@color/location_empty" />
-
-        <Button
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                app:layout_row="1"
-                app:layout_column="4"
-                android:contentDescription="@string/desc_loc_empty"
-                android:id="@+id/button_location_"
-                android:insetTop="1dp"
-                android:insetBottom="1dp"
-                android:insetLeft="1dp"
-                android:insetRight="1dp"
-                android:backgroundTint="@color/location_empty" />
-
-        <Button
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                app:layout_row="1"
-                app:layout_column="4"
-                android:contentDescription="@string/desc_loc_empty"
-                android:id="@+id/button_location_2"
-                android:insetTop="1dp"
-                android:insetBottom="1dp"
-                android:insetLeft="1dp"
-                android:insetRight="1dp"
-                android:backgroundTint="@color/location_empty" />
-
-    </GridLayout>
+            app:layout_constraintHorizontal_bias="0.495" />
 </androidx.constraintlayout.widget.ConstraintLayout>
