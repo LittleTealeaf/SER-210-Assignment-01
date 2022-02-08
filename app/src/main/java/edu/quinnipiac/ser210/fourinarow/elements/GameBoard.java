@@ -7,6 +7,7 @@ import android.widget.GridLayout;
 import androidx.appcompat.widget.AppCompatButton;
 
 import edu.quinnipiac.ser210.fourinarow.R;
+import edu.quinnipiac.ser210.fourinarow.game.FourInARow;
 import edu.quinnipiac.ser210.fourinarow.game.IGame;
 
 public class GameBoard extends GridLayout {
@@ -93,18 +94,18 @@ public class GameBoard extends GridLayout {
                 board[index].setBackgroundTintList(getContext().getResources().getColorStateList(R.color.button_empty, getContext().getTheme()));
                 break;
             case IGame.RED:
-                board[index].setBackgroundTintList(getContext().getResources().getColorStateList(R.color.button_computer, getContext().getTheme()));
+                board[index].setBackgroundTintList(getContext().getResources().getColorStateList(R.color.button_player, getContext().getTheme()));
                 break;
             case IGame.BLUE:
-                board[index].setBackgroundTintList(getContext().getResources().getColorStateList(R.color.button_player, getContext().getTheme()));
+                board[index].setBackgroundTintList(getContext().getResources().getColorStateList(R.color.button_computer, getContext().getTheme()));
         }
     }
 
     protected void move(int location) {
-        game.setMove(IGame.BLUE, location);
+        game.setMove(IGame.RED, location);
         updateBoard();
         if (lastGameState == IGame.PLAYING) {
-            game.setMove(IGame.RED, game.getComputerMove());
+            game.setMove(IGame.BLUE, game.getComputerMove());
             updateBoard();
         }
     }
