@@ -43,7 +43,7 @@ public class GreeterActivity extends AppCompatActivity {
             intent.putExtra(KEY_NAME, name);
             startActivity(intent);
         } else {
-            Toast.makeText(getApplicationContext(),"Please enter a name",Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(),getString(R.string.toast_no_name),Toast.LENGTH_LONG).show();
         }
     }
 

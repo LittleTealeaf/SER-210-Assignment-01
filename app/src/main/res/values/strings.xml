@@ -10,4 +10,5 @@
     <string name="button_text_back">Back</string>
     <string name="instructions_title">Instructions</string>
     <string name="button_text_instructions">Instructions</string>
+    <string name="toast_no_name">Please enter a name</string>
 </resources>
