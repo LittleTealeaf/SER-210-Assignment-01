@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -37,9 +38,13 @@ public class GreeterActivity extends AppCompatActivity {
 
     public void onClickBegin(View view) {
         String name = inputName.getText().toString();
-        Intent intent = new Intent(this, GameActivity.class);
-        intent.putExtra(KEY_NAME, name);
-        startActivity(intent);
+        if(name.length() > 0) {
+            Intent intent = new Intent(this, GameActivity.class);
+            intent.putExtra(KEY_NAME, name);
+            startActivity(intent);
+        } else {
+            Toast.makeText(getApplicationContext(),"Please enter a name",Toast.LENGTH_LONG).show();
+        }
     }
 
     public void onClickInstructions(View view) {
