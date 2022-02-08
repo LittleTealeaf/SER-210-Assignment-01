@@ -2,8 +2,6 @@ package edu.quinnipiac.ser210.fourinarow.elements;
 
 import android.content.Context;
 import android.util.AttributeSet;
-import android.util.Log;
-import android.view.View;
 import android.widget.GridLayout;
 
 import androidx.appcompat.widget.AppCompatButton;
@@ -42,14 +40,19 @@ public class GameBoard extends GridLayout {
         setRowCount(6);
         setColumnCount(6);
         board = new AppCompatButton[6 * 6];
-        for(int i = 0; i < board.length; i++) {
+        for (int i = 0; i < board.length; i++) {
             board[i] = new AppCompatButton(getContext());
             int index = i;
             board[i].setOnClickListener(view -> move(index));
-            board[i].setLayoutParams(new GridLayout.LayoutParams() {{
-                this.height = GameBoard.this.getLayoutParams().height / 6;
-                this.width = GameBoard.this.getLayoutParams().width / 6;
+            /*
+            Adapted from https://stackoverflow.com/a/47492892
+             */
+            Spec gridSpec = GridLayout.spec(GridLayout.UNDEFINED, GridLayout.FILL, 1f);
+            board[i].setLayoutParams(new GridLayout.LayoutParams(gridSpec, gridSpec) {{
+                this.width = 0;
+                this.height = 0;
             }});
+
             addView(board[i]);
         }
         updateBoard();
@@ -59,51 +62,49 @@ public class GameBoard extends GridLayout {
         this.listener = listener;
     }
 
-
     @Override
     protected void onMeasure(int widthSpec, int heightSpec) {
-        int sideLength = Math.min(widthSpec,heightSpec);
-        super.onMeasure(sideLength,sideLength);
+        int sideLength = Math.min(widthSpec, heightSpec);
+        super.onMeasure(sideLength, sideLength);
     }
 
     public void updateBoard() {
         //Update all buttons
-        for(int i = 0; i < board.length; i++) {
+        for (int i = 0; i < board.length; i++) {
             updateButton(i);
         }
 
         int gameState = game.checkForWinner();
-        if(gameState != lastGameState) {
-            if(listener != null) {
+        if (gameState != lastGameState) {
+            if (listener != null) {
                 listener.onGameStateUpdate(gameState);
             }
             lastGameState = gameState;
         }
 
-        for(AppCompatButton button : board) {
+        for (AppCompatButton button : board) {
             button.setClickable(gameState == IGame.PLAYING);
         }
     }
 
-
     private void updateButton(int index) {
-        switch(game.get(index)) {
+        switch (game.get(index)) {
             case IGame.EMPTY:
-                board[index].setBackgroundTintList(getContext().getResources().getColorStateList(R.color.button_empty,getContext().getTheme()));
+                board[index].setBackgroundTintList(getContext().getResources().getColorStateList(R.color.button_empty, getContext().getTheme()));
                 break;
             case IGame.RED:
-                board[index].setBackgroundTintList(getContext().getResources().getColorStateList(R.color.button_computer,getContext().getTheme()));
+                board[index].setBackgroundTintList(getContext().getResources().getColorStateList(R.color.button_computer, getContext().getTheme()));
                 break;
             case IGame.BLUE:
-                board[index].setBackgroundTintList(getContext().getResources().getColorStateList(R.color.button_player,getContext().getTheme()));
+                board[index].setBackgroundTintList(getContext().getResources().getColorStateList(R.color.button_player, getContext().getTheme()));
         }
     }
 
     protected void move(int location) {
-        game.setMove(IGame.BLUE,location);
+        game.setMove(IGame.BLUE, location);
         updateBoard();
-        if(lastGameState == IGame.PLAYING) {
-            game.setMove(IGame.RED,game.getComputerMove());
+        if (lastGameState == IGame.PLAYING) {
+            game.setMove(IGame.RED, game.getComputerMove());
             updateBoard();
         }
     }

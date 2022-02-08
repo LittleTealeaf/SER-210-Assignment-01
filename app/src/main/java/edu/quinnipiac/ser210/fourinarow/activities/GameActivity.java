@@ -1,6 +1,7 @@
 package edu.quinnipiac.ser210.fourinarow.activities;
 
 import android.os.Bundle;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,10 +17,11 @@ import edu.quinnipiac.ser210.fourinarow.game.IGame;
  */
 public class GameActivity extends AppCompatActivity implements GameListener {
 
-    private static final String KEY_GAME_STATE;
+    private static final String KEY_GAME_STATE, TAG;
 
     static {
         KEY_GAME_STATE = "GameState";
+        TAG = "GameActivity";
     }
 
     private IGame game;

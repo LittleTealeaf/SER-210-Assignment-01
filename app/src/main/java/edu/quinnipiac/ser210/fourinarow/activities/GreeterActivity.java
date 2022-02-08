@@ -38,6 +38,7 @@ public class GreeterActivity extends AppCompatActivity {
 
     public void onClickBegin(View view) {
         String name = inputName.getText().toString();
+        name = "awef";
         if(name.length() > 0) {
             Intent intent = new Intent(this, GameActivity.class);
             intent.putExtra(KEY_NAME, name);
