@@ -20,7 +20,9 @@ public class GameBoard extends GridLayout implements View.OnClickListener {
     private static final String TAG = "GameBoard";
 
     private DisplayGame game;
-    private AppCompatButton board[];
+    private AppCompatButton[] board;
+    private GameEventListener listener;
+    private boolean isPlayable = true;
 
     public GameBoard(Context context) {
         super(context);
@@ -56,6 +58,17 @@ public class GameBoard extends GridLayout implements View.OnClickListener {
             addView(board[i]);
         }
         updateGame();
+    }
+
+    public void setPlayable(boolean isPlayable) {
+        this.isPlayable = isPlayable;
+        for(int i = 0; i < board.length; i++) {
+            board[i].setClickable(isPlayable);
+        }
+    }
+
+    public void setGameEventListener(GameEventListener listener) {
+        this.listener = listener;
     }
 
 
