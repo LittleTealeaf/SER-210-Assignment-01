@@ -1,23 +1,20 @@
 package edu.quinnipiac.ser210.fourinarow.activities;
 
 import android.os.Bundle;
-import android.view.Display;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.view.ViewCompat;
 
 import edu.quinnipiac.ser210.fourinarow.R;
 import edu.quinnipiac.ser210.fourinarow.elements.GameBoard;
-import edu.quinnipiac.ser210.fourinarow.elements.GameEventListener;
-import edu.quinnipiac.ser210.fourinarow.game.DisplayGame;
+import edu.quinnipiac.ser210.fourinarow.elements.GameListener;
 import edu.quinnipiac.ser210.fourinarow.game.FourInARow;
 import edu.quinnipiac.ser210.fourinarow.game.IGame;
 
 /**
  * @author Thomas Kwashnak
  */
-public class GameActivity extends AppCompatActivity implements GameEventListener {
+public class GameActivity extends AppCompatActivity implements GameListener {
 
     private static final String KEY_GAME_STATE;
 
@@ -25,13 +22,14 @@ public class GameActivity extends AppCompatActivity implements GameEventListener
         KEY_GAME_STATE = "GameState";
     }
 
-    private DisplayGame game;
+    private IGame game;
     private GameBoard gameBoard;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
+        gameBoard = (GameBoard) findViewById(R.id.game_board);
 
         game = new FourInARow();
 
@@ -41,9 +39,7 @@ public class GameActivity extends AppCompatActivity implements GameEventListener
                 game.setMove(boardState[i],i);
             }
         }
-
-        gameBoard = (GameBoard) findViewById(R.id.game_board);
-        gameBoard.setGameEventListener(this);
+        gameBoard.setListener(this);
         gameBoard.setGame(game);
     }
 
@@ -58,7 +54,7 @@ public class GameActivity extends AppCompatActivity implements GameEventListener
     }
 
     @Override
-    public void onGameEnd(int result) {
-        gameBoard.setPlayable(false);
+    public void onGameStateUpdate(int result) {
+
     }
 }
