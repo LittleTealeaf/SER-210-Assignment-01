@@ -1,6 +1,7 @@
 package edu.quinnipiac.ser210.fourinarow.elements;
 
 import android.content.Context;
+import android.content.res.ColorStateList;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
@@ -9,6 +10,8 @@ import android.widget.GridLayout;
 
 import androidx.appcompat.widget.AppCompatButton;
 
+import edu.quinnipiac.ser210.fourinarow.R;
+import edu.quinnipiac.ser210.fourinarow.game.DisplayGame;
 import edu.quinnipiac.ser210.fourinarow.game.FourInARow;
 import edu.quinnipiac.ser210.fourinarow.game.IGame;
 
@@ -16,7 +19,7 @@ public class GameBoard extends GridLayout implements View.OnClickListener {
 
     private static final String TAG = "GameBoard";
 
-    private IGame game;
+    private DisplayGame game;
     private AppCompatButton board[];
 
     public GameBoard(Context context) {
@@ -35,7 +38,7 @@ public class GameBoard extends GridLayout implements View.OnClickListener {
         super(context, attrs, defStyleAttr, defStyleRes);
     }
 
-    public void setGame(IGame game) {
+    public void setGame(DisplayGame game) {
         this.game = game;
         removeAllViews();
         setRowCount(6);
@@ -52,6 +55,7 @@ public class GameBoard extends GridLayout implements View.OnClickListener {
 
             addView(board[i]);
         }
+        updateGame();
     }
 
 
@@ -63,7 +67,25 @@ public class GameBoard extends GridLayout implements View.OnClickListener {
 
     public void onBoardClick(int index) {
         game.setMove(FourInARow.ID_PLAYER,index);
+        game.setMove(FourInARow.ID_COMPUTER,game.getComputerMove());
         Log.d(TAG,"Clicked: " + index);
+        updateGame();
+    }
+
+    public void updateGame() {
+        for(int i = 0; i < board.length; i++) {
+            switch(game.get(i)) {
+                case DisplayGame.EMPTY:
+                    board[i].setBackgroundTintList(getContext().getResources().getColorStateList(R.color.button_empty,getContext().getTheme()));
+                    break;
+                case DisplayGame.BLUE:
+                    board[i].setBackgroundTintList(getContext().getResources().getColorStateList(R.color.button_computer,getContext().getTheme()));
+                    break;
+                case DisplayGame.RED:
+                    board[i].setBackgroundTintList(getContext().getResources().getColorStateList(R.color.button_player,getContext().getTheme()));
+                    break;
+            }
+        }
     }
 
     @Override

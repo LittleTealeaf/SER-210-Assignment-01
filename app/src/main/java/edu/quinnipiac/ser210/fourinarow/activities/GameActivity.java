@@ -1,6 +1,7 @@
 package edu.quinnipiac.ser210.fourinarow.activities;
 
 import android.os.Bundle;
+import android.view.Display;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -8,6 +9,7 @@ import androidx.core.view.ViewCompat;
 
 import edu.quinnipiac.ser210.fourinarow.R;
 import edu.quinnipiac.ser210.fourinarow.elements.GameBoard;
+import edu.quinnipiac.ser210.fourinarow.game.DisplayGame;
 import edu.quinnipiac.ser210.fourinarow.game.FourInARow;
 import edu.quinnipiac.ser210.fourinarow.game.IGame;
 
@@ -30,7 +32,10 @@ public class GameActivity extends AppCompatActivity {
         }
 
         GameBoard gameBoard = (GameBoard) findViewById(R.id.game_board);
-        gameBoard.setGame(game);
+
+        if(game instanceof DisplayGame) {
+            gameBoard.setGame((DisplayGame) game);
+        }
     }
 
     @Override

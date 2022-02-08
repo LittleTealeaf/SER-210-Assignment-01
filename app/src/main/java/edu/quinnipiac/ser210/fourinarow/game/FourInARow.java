@@ -15,7 +15,7 @@ import java.util.Random;
  * @author Thomas Kwashnak
  * @date 2/12/2022
  */
-public class FourInARow implements IGame {
+public class FourInARow implements IGame, DisplayGame {
 
     /**
      * Color IDs indicating which player gets which color (I wish the assignment was more specific)
