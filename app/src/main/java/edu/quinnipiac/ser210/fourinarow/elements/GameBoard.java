@@ -80,9 +80,14 @@ public class GameBoard extends GridLayout implements View.OnClickListener {
 
     public void onBoardClick(int index) {
         game.setMove(FourInARow.ID_PLAYER,index);
-        game.setMove(FourInARow.ID_COMPUTER,game.getComputerMove());
-        Log.d(TAG,"Clicked: " + index);
         updateGame();
+        if(game.checkForWinner() == IGame.PLAYING) {
+            game.setMove(FourInARow.ID_COMPUTER,game.getComputerMove());
+            updateGame();
+        }
+        if(game.checkForWinner() != IGame.PLAYING) {
+            listener.onGameEnd(game.checkForWinner());
+        }
     }
 
     public void updateGame() {

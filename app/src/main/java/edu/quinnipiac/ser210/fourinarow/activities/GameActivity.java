@@ -26,6 +26,7 @@ public class GameActivity extends AppCompatActivity implements GameEventListener
     }
 
     private DisplayGame game;
+    private GameBoard gameBoard;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +42,7 @@ public class GameActivity extends AppCompatActivity implements GameEventListener
             }
         }
 
-        GameBoard gameBoard = (GameBoard) findViewById(R.id.game_board);
+        gameBoard = (GameBoard) findViewById(R.id.game_board);
         gameBoard.setGameEventListener(this);
         gameBoard.setGame(game);
     }
@@ -58,6 +59,6 @@ public class GameActivity extends AppCompatActivity implements GameEventListener
 
     @Override
     public void onGameEnd(int result) {
-
+        gameBoard.setPlayable(false);
     }
 }
