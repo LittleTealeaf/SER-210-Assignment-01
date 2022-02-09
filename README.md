@@ -8,6 +8,8 @@ Assignment Instructions can be found in [Assignment Instructions.pdf](Assignment
 
 This project was created using [Android Studio](https://developer.android.com/studio). An initial source code was provided to create an initial structure for the project.
 
+The first part of this project was created using a console-interfaced java project to create the underlying logic and AI. The console version can be found on the Console branch
+
 ## Game Rules:
 
 The game takes place on a 6x6 grid. Each player takes turns placing their token piece on an empty spot on the board. The first person to get 4 of their tokens in one line wins. The line can be horizontal, vertical, or diagonal.
