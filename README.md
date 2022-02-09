@@ -8,7 +8,7 @@ Assignment Instructions can be found in [Assignment Instructions.pdf](Assignment
 
 This project was created using [Android Studio](https://developer.android.com/studio). An initial source code was provided to create an initial structure for the project.
 
-The first part of this project was created using a console-interfaced java project to create the underlying logic and AI. The console version can be found on the Console branch
+The first part of this project was created using a console-interfaced java project to create the underlying logic and AI. The console version can be found on the [Console Branch](https://github.com/LittleTealeaf/SER-210-Assignment-01/tree/Console)
 
 ## Game Rules:
 
