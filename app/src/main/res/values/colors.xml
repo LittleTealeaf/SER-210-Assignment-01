@@ -9,5 +9,5 @@
     <color name="white">#FFFFFFFF</color>
     <color name="location_player">#6969FF</color>
     <color name="location_computer">#FF0000</color>
-    <color name="location_empty">#808080</color>
+    <color name="location_empty">#C5C5C5</color>
 </resources>
