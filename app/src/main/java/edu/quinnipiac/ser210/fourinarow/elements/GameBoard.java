@@ -16,7 +16,7 @@ public class GameBoard extends GridLayout {
 
     private IGame game;
     private AppCompatButton[] board;
-    private int lastGameState;
+    private int lastGameState = -1;
     private GameListener listener;
 
     public GameBoard(Context context) {

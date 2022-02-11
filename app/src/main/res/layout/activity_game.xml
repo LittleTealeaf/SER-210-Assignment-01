@@ -9,11 +9,30 @@
         android:gravity="center"
         tools:context=".activities.GameActivity">
 
+    <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/game_state"
+            android:textSize="40sp"
+            android:gravity="center"
+            android:textStyle="bold" />
+
     <edu.quinnipiac.ser210.fourinarow.elements.GameBoard
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="top|center"
             android:orientation="vertical"
             android:id="@+id/game_board"
+        />
+    <Space
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+        android:layout_weight="1" />
+    <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/app_margin"
+            android:text="@string/button_play_again"
+            android:id="@+id/button_game_reset"
         />
 </LinearLayout>

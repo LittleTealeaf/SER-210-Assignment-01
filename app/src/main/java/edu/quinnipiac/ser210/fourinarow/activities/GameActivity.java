@@ -2,9 +2,15 @@ package edu.quinnipiac.ser210.fourinarow.activities;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import edu.quinnipiac.ser210.fourinarow.R;
 import edu.quinnipiac.ser210.fourinarow.elements.GameBoard;
@@ -25,13 +31,26 @@ public class GameActivity extends AppCompatActivity implements GameListener {
     }
 
     private IGame game;
-    private GameBoard gameBoard;
+    private TextView gameState;
+    private Map<Integer,String> gameStateMap;
+    private Button resetButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
-        gameBoard = (GameBoard) findViewById(R.id.game_board);
+        gameState = (TextView) findViewById(R.id.game_state);
+        resetButton = (Button) findViewById(R.id.button_game_reset);
+        GameBoard gameBoard = (GameBoard) findViewById(R.id.game_board);
+
+        String name = getIntent().getStringExtra(GreeterActivity.KEY_NAME);
+
+        gameStateMap = new HashMap<Integer,String>() {{
+            put(0,name + "'s Turn");
+            put(1,"Tie");
+            put(2,name + " Won");
+            put(3,"Computer Won");
+        }};
 
         game = new FourInARow();
 
@@ -57,6 +76,7 @@ public class GameActivity extends AppCompatActivity implements GameListener {
 
     @Override
     public void onGameStateUpdate(int result) {
-
+        gameState.setText(gameStateMap.getOrDefault(result,""));
+        resetButton.setVisibility(result == IGame.PLAYING ? View.INVISIBLE : View.VISIBLE);
     }
 }
