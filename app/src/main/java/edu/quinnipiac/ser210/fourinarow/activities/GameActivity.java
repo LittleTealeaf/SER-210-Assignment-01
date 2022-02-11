@@ -32,6 +32,7 @@ public class GameActivity extends AppCompatActivity implements GameListener {
 
     private IGame game;
     private TextView gameState;
+    private GameBoard gameBoard;
     private Map<Integer,String> gameStateMap;
     private Button resetButton;
 
@@ -41,7 +42,7 @@ public class GameActivity extends AppCompatActivity implements GameListener {
         setContentView(R.layout.activity_game);
         gameState = (TextView) findViewById(R.id.game_state);
         resetButton = (Button) findViewById(R.id.button_game_reset);
-        GameBoard gameBoard = (GameBoard) findViewById(R.id.game_board);
+        gameBoard = (GameBoard) findViewById(R.id.game_board);
 
         String name = getIntent().getStringExtra(GreeterActivity.KEY_NAME);
 
@@ -78,5 +79,9 @@ public class GameActivity extends AppCompatActivity implements GameListener {
     public void onGameStateUpdate(int result) {
         gameState.setText(gameStateMap.getOrDefault(result,""));
         resetButton.setVisibility(result == IGame.PLAYING ? View.INVISIBLE : View.VISIBLE);
+    }
+
+    public void onClickReset(View view) {
+        gameBoard.clearBoard();
     }
 }

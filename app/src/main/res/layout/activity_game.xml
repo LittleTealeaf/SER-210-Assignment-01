@@ -34,5 +34,6 @@
             android:layout_marginHorizontal="@dimen/app_margin"
             android:text="@string/button_play_again"
             android:id="@+id/button_game_reset"
+            android:onClick="onClickReset"
         />
 </LinearLayout>

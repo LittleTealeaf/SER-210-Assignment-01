@@ -109,4 +109,12 @@ public class GameBoard extends GridLayout {
             updateBoard();
         }
     }
+
+    public void clearBoard() {
+        game.clearBoard();
+        for(int i = 0; i < 36; i++) {
+            updateButton(i);
+        }
+        updateBoard();
+    }
 }
