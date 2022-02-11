@@ -1,7 +1,6 @@
 package edu.quinnipiac.ser210.fourinarow.activities;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -33,7 +32,7 @@ public class GameActivity extends AppCompatActivity implements GameListener {
     private IGame game;
     private TextView gameState;
     private GameBoard gameBoard;
-    private Map<Integer,String> gameStateMap;
+    private Map<Integer, String> gameStateMap;
     private Button resetButton;
 
     @Override
@@ -46,19 +45,19 @@ public class GameActivity extends AppCompatActivity implements GameListener {
 
         String name = getIntent().getStringExtra(GreeterActivity.KEY_NAME);
 
-        gameStateMap = new HashMap<Integer,String>() {{
-            put(0,name + "'s Turn");
-            put(1,"Tie");
-            put(2,name + " Won");
-            put(3,"Computer Won");
+        gameStateMap = new HashMap<Integer, String>() {{
+            put(0, name + "'s Turn");
+            put(1, "Tie");
+            put(2, name + " Won");
+            put(3, "Computer Won");
         }};
 
         game = new FourInARow();
 
-        if(savedInstanceState != null) {
+        if (savedInstanceState != null) {
             int[] boardState = savedInstanceState.getIntArray(KEY_GAME_STATE);
-            for(int i = 0; i < boardState.length; i++) {
-                game.setMove(boardState[i],i);
+            for (int i = 0; i < boardState.length; i++) {
+                game.setMove(boardState[i], i);
             }
         }
         gameBoard.setListener(this);
@@ -69,15 +68,15 @@ public class GameActivity extends AppCompatActivity implements GameListener {
     protected void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
         int[] board = new int[36];
-        for(int i = 0; i < board.length; i++) {
+        for (int i = 0; i < board.length; i++) {
             board[i] = game.get(i);
         }
-        outState.putIntArray(KEY_GAME_STATE,board);
+        outState.putIntArray(KEY_GAME_STATE, board);
     }
 
     @Override
     public void onGameStateUpdate(int result) {
-        gameState.setText(gameStateMap.getOrDefault(result,""));
+        gameState.setText(gameStateMap.getOrDefault(result, ""));
         resetButton.setVisibility(result == IGame.PLAYING ? View.INVISIBLE : View.VISIBLE);
     }
 

@@ -38,12 +38,12 @@ public class GreeterActivity extends AppCompatActivity {
 
     public void onClickBegin(View view) {
         String name = inputName.getText().toString();
-        if(name.length() > 0) {
+        if (name.length() > 0) {
             Intent intent = new Intent(this, GameActivity.class);
             intent.putExtra(KEY_NAME, name);
             startActivity(intent);
         } else {
-            Toast.makeText(getApplicationContext(),getString(R.string.toast_no_name),Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), getString(R.string.toast_no_name), Toast.LENGTH_LONG).show();
         }
     }
 

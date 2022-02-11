@@ -72,18 +72,6 @@ public class FourInARow implements IGame {
     }
 
     /**
-     * Returns the value on the board at the given location
-     *
-     * @param location The location value. The top left of the board is location 0, and the location counts up going across the board, and further
-     *                 down each row. For example, for a 6x6 board, the top left corner is 0, and the bottom right corner is 35.
-     *
-     * @return The value found at the specified location. Returns -1 if the location is not within the bounds of the board
-     */
-    public int get(int location) {
-        return inRange(location) ? board[location / COLS][location % COLS] : -1;
-    }
-
-    /**
      * Returns whether a given location is within the bounds of the board
      *
      * @param location The location value. The top left of the board is location 0, and the location counts up going across the board, and further
@@ -126,6 +114,18 @@ public class FourInARow implements IGame {
         }
 
         return TIE;
+    }
+
+    /**
+     * Returns the value on the board at the given location
+     *
+     * @param location The location value. The top left of the board is location 0, and the location counts up going across the board, and further
+     *                 down each row. For example, for a 6x6 board, the top left corner is 0, and the bottom right corner is 35.
+     *
+     * @return The value found at the specified location. Returns -1 if the location is not within the bounds of the board
+     */
+    public int get(int location) {
+        return inRange(location) ? board[location / COLS][location % COLS] : -1;
     }
 
     /**

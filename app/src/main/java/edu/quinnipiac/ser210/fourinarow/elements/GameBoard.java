@@ -7,7 +7,6 @@ import android.widget.GridLayout;
 import androidx.appcompat.widget.AppCompatButton;
 
 import edu.quinnipiac.ser210.fourinarow.R;
-import edu.quinnipiac.ser210.fourinarow.game.FourInARow;
 import edu.quinnipiac.ser210.fourinarow.game.IGame;
 
 public class GameBoard extends GridLayout {
@@ -69,6 +68,36 @@ public class GameBoard extends GridLayout {
         super.onMeasure(sideLength, sideLength);
     }
 
+    protected void move(int location) {
+        game.setMove(IGame.RED, location);
+        updateBoard();
+        if (lastGameState == IGame.PLAYING) {
+            game.setMove(IGame.BLUE, game.getComputerMove());
+            updateBoard();
+        }
+    }
+
+    public void clearBoard() {
+        game.clearBoard();
+        for (int i = 0; i < 36; i++) {
+            updateButton(i);
+        }
+        updateBoard();
+    }
+
+    private void updateButton(int index) {
+        switch (game.get(index)) {
+            case IGame.EMPTY:
+                board[index].setBackgroundTintList(getContext().getResources().getColorStateList(R.color.button_empty, getContext().getTheme()));
+                break;
+            case IGame.RED:
+                board[index].setBackgroundTintList(getContext().getResources().getColorStateList(R.color.button_player, getContext().getTheme()));
+                break;
+            case IGame.BLUE:
+                board[index].setBackgroundTintList(getContext().getResources().getColorStateList(R.color.button_computer, getContext().getTheme()));
+        }
+    }
+
     public void updateBoard() {
         //Update all buttons
         for (int i = 0; i < board.length; i++) {
@@ -86,35 +115,5 @@ public class GameBoard extends GridLayout {
         for (AppCompatButton button : board) {
             button.setClickable(gameState == IGame.PLAYING);
         }
-    }
-
-    private void updateButton(int index) {
-        switch (game.get(index)) {
-            case IGame.EMPTY:
-                board[index].setBackgroundTintList(getContext().getResources().getColorStateList(R.color.button_empty, getContext().getTheme()));
-                break;
-            case IGame.RED:
-                board[index].setBackgroundTintList(getContext().getResources().getColorStateList(R.color.button_player, getContext().getTheme()));
-                break;
-            case IGame.BLUE:
-                board[index].setBackgroundTintList(getContext().getResources().getColorStateList(R.color.button_computer, getContext().getTheme()));
-        }
-    }
-
-    protected void move(int location) {
-        game.setMove(IGame.RED, location);
-        updateBoard();
-        if (lastGameState == IGame.PLAYING) {
-            game.setMove(IGame.BLUE, game.getComputerMove());
-            updateBoard();
-        }
-    }
-
-    public void clearBoard() {
-        game.clearBoard();
-        for(int i = 0; i < 36; i++) {
-            updateButton(i);
-        }
-        updateBoard();
     }
 }

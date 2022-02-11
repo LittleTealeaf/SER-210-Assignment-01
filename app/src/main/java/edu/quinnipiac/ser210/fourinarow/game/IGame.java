@@ -51,10 +51,10 @@ public interface IGame {
 
     /**
      * Gets the color indicated at the provided location
+     *
      * @param location Location to get the value of
+     *
      * @return Value of the location
      */
     int get(int location);
-
-
 }

@@ -1,10 +1,9 @@
 package edu.quinnipiac.ser210.fourinarow.activities;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import edu.quinnipiac.ser210.fourinarow.R;
 
