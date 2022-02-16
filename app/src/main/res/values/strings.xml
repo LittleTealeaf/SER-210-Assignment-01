@@ -1,3 +1,11 @@
 <resources>
-    <string name="app_name">Connect N</string>
+    <string name="app_name">Connect~n</string>
+    <string name="game_instructions">The game takes place on a grid. Each player takes turns placing a piece on an empty square on the board. The first player to align N of their pieces in a line wins. Lines can be horizontal, vertical, or either diagonal direction</string>
+    <string name="text_button_instructions">Instructions</string>
+    <string name="text_button_play">Play</string>
+    <string name="text_title_instructions">Instructions</string>
+    <string name="text_button_back">Back</string>
+    <string name="text_button_settings">Settings</string>
+    <string name="text_hint_name">Name</string>
+    <string name="text_title_settings">Settings</string>
 </resources>
