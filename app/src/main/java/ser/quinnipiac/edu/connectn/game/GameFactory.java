@@ -1,5 +1,7 @@
 package ser.quinnipiac.edu.connectn.game;
 
+import android.os.Bundle;
+
 /**
  * @author Thomas Kwashnak
  */
@@ -16,4 +18,12 @@ public class GameFactory {
     private int rows;
     private int columns;
     private int connect_length;
+
+    public void toBundle(Bundle bundle) {
+
+    }
+
+    public static GameFactory fromBundle(Bundle bundle) {
+        return null;
+    }
 }
