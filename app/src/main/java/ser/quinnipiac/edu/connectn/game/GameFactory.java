@@ -1,5 +1,8 @@
 package ser.quinnipiac.edu.connectn.game;
 
+/**
+ * @author Thomas Kwashnak
+ */
 public class GameFactory {
     public static final String KEY_COLUMN_COUNT, KEY_ROW_COUNT, KEY_CONNECT_LENGTH, KEY_GAME_BOARD;
 

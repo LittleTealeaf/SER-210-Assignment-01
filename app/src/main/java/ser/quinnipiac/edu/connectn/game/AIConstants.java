@@ -1,5 +1,8 @@
 package ser.quinnipiac.edu.connectn.game;
 
+/**
+ * @author Thomas Kwashnak
+ */
 public class AIConstants {
 
     public static final AIConstants HARD;

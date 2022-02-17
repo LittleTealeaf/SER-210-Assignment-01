@@ -6,6 +6,9 @@ import android.os.Bundle;
 
 import ser.quinnipiac.edu.connectn.R;
 
+/**
+ * @author Thomas Kwashnak
+ */
 public class SettingsActivity extends AppCompatActivity {
 
     @Override

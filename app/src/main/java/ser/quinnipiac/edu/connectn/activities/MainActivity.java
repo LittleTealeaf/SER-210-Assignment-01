@@ -11,6 +11,9 @@ import android.widget.EditText;
 
 import ser.quinnipiac.edu.connectn.R;
 
+/**
+ * @author Thomas Kwashnak
+ */
 public class MainActivity extends AppCompatActivity {
 
     public static final String KEY_NAME;

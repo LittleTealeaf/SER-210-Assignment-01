@@ -12,6 +12,9 @@ import ser.quinnipiac.edu.connectn.game.GameFactory;
 import ser.quinnipiac.edu.connectn.game.GameListener;
 import ser.quinnipiac.edu.connectn.game.IGame;
 
+/**
+ * @author Thomas Kwashnak
+ */
 public class GameActivity extends AppCompatActivity implements GameListener {
 
     private IGame game;

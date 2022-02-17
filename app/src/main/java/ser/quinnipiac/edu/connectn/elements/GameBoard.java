@@ -11,6 +11,9 @@ import ser.quinnipiac.edu.connectn.R;
 import ser.quinnipiac.edu.connectn.game.GameListener;
 import ser.quinnipiac.edu.connectn.game.IGame;
 
+/**
+ * @author Thomas Kwashnak
+ */
 public class GameBoard extends GridLayout implements GameListener {
 
     private IGame game;

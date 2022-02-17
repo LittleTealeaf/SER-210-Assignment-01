@@ -7,6 +7,9 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * @author Thomas Kwashnak
+ */
 public class Game implements IGame {
 
 

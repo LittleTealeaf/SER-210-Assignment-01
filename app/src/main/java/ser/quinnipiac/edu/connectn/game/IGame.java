@@ -2,6 +2,9 @@ package ser.quinnipiac.edu.connectn.game;
 
 import java.util.Collection;
 
+/**
+ * @author Thomas Kwashnak
+ */
 public interface IGame extends GameListener {
 
     int NONE = -1;
