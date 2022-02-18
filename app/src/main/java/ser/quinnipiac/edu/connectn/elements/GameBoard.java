@@ -9,7 +9,7 @@ import androidx.appcompat.widget.AppCompatButton;
 
 import ser.quinnipiac.edu.connectn.R;
 import ser.quinnipiac.edu.connectn.game.GameListener;
-import ser.quinnipiac.edu.connectn.game.IGame;
+import ser.quinnipiac.edu.connectn.game_old.IGame;
 
 /**
  * @author Thomas Kwashnak
@@ -56,13 +56,13 @@ public class GameBoard extends GridLayout implements GameListener {
             }});
             onBoardChanged(i,game.get(i));
         }
-        onStateChanged(game.getGameState(),IGame.PLAYING);
+        onStateChanged(game.getGameState(), IGame.PLAYING);
     }
 
     protected void playerMove(int location) {
-        game.setMove(IGame.PLAYER,location);
+        game.setMove(IGame.PLAYER, location);
         if(game.getGameState() == IGame.PLAYING) {
-            game.setMove(IGame.COMPUTER,game.getComputerMove());
+            game.setMove(IGame.COMPUTER, game.getComputerMove());
         }
     }
 

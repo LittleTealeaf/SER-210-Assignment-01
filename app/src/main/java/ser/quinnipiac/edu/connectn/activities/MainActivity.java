@@ -5,8 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 
 import ser.quinnipiac.edu.connectn.R;
@@ -16,13 +14,15 @@ import ser.quinnipiac.edu.connectn.R;
  */
 public class MainActivity extends AppCompatActivity {
 
-    public static final String KEY_NAME;
+    public static final String NAME;
 
     static {
-        KEY_NAME = "name";
+        NAME = "name";
     }
 
     private EditText inputName;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,8 +39,9 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.main_button_settings).setOnClickListener(view -> onSettings());
 
         if (savedInstanceState != null) {
-            inputName.setText(savedInstanceState.getString(KEY_NAME));
+            inputName.setText(savedInstanceState.getString(NAME));
         }
+
 
 
     }
@@ -51,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void onPlay() {
         Intent intent = new Intent(this,GameActivity.class);
+        intent.putExtra(NAME, inputName.getText().toString());
         startActivity(intent);
     }
 
@@ -61,6 +63,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putString(KEY_NAME,inputName.getText().toString());
+        outState.putString(NAME, inputName.getText().toString());
     }
 }

@@ -1,12 +1,10 @@
 package ser.quinnipiac.edu.connectn.game;
 
+import android.os.Bundle;
+
 import java.util.Collection;
 
-/**
- * @author Thomas Kwashnak
- */
-public interface IGame extends GameListener {
-
+public interface IGame extends GameListener, GameSettings {
     int NONE = -1;
     int EMPTY = 0;
     int PLAYER = 1;
@@ -14,29 +12,33 @@ public interface IGame extends GameListener {
     int PLAYING = 3;
     int TIE = 4;
 
-    int getColumnCount();
-
-    int getRowCount();
-
-    int getConnectLength();
+    String BOARD = "IGame:Board";
 
     void clearBoard();
-    /**
-     *
-     * @param player {@link #PLAYER} or {@link #COMPUTER}
-     * @param location
-     */
     void setMove(int player, int location);
-
     int getComputerMove();
-
     int getGameState();
-
     int get(int location);
-
     boolean addListener(GameListener listener);
-
     boolean removeListener(GameListener listener);
-
     Collection<GameListener> getListeners();
+
+    int[] getBoard();
+
+    default int getStreak(int player) {
+        switch(player) {
+            case COMPUTER:
+                return getStreakComputer();
+            case PLAYER:
+                return getStreakPlayer();
+            default:
+                return 0;
+        }
+    }
+
+    @Override
+    default void toBundle(Bundle bundle) {
+        GameSettings.super.toBundle(bundle);
+        bundle.putIntArray(BOARD,getBoard());
+    }
 }

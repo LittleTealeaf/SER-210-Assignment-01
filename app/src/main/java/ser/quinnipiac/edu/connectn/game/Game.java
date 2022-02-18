@@ -1,111 +1,122 @@
 package ser.quinnipiac.edu.connectn.game;
 
 import android.graphics.Point;
+import android.os.Bundle;
 
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 
-/**
- * @author Thomas Kwashnak
- */
 public class Game implements IGame {
-
 
     private static final Point[] DIRECTIONS;
 
     static {
-        DIRECTIONS = new Point[] {
-                new Point(1,0),
-                new Point(-1,1),
-                new Point(0,1),
-                new Point(1,1)
+        DIRECTIONS = new Point[]{
+                new Point(1, 0), new Point(-1, 1), new Point(0, 1), new Point(1, 1)
         };
     }
 
-    private final int columns, rows, connectLength;
-    private int gameState;
     private final int[][] board;
-    private final AIConstants ai;
-    private final Random random;
+    private final int rowCount;
+    private final int columnCount;
+    private final int connectLength;
+    private final int weightComputer;
+    private final int weightPlayer;
+    private final int weightEmpty;
+    private final int weightPopulated;
+    private final int streakPlayer;
+    private final int streakComputer;
     private final Collection<GameListener> listeners;
+    private final Random random;
+    private int previousState;
 
-
-    public Game() {
-        this(6,6,4,AIConstants.HARD);
-    }
-
-    public Game(int columns, int rows, int connectLength) {
-        this(columns,rows,connectLength,AIConstants.HARD);
-    }
-
-    public Game(int columns, int rows, int connectLength, AIConstants ai) {
-        this.ai = ai;
-        this.columns = columns;
-        this.rows = rows;
+    public Game(int rowCount, int columnCount, int connectLength, int weightComputer, int weightPlayer, int weightEmpty, int weightPopulated,
+                int streakPlayer, int streakComputer) {
+        this.rowCount = rowCount;
+        this.columnCount = columnCount;
         this.connectLength = connectLength;
-        this.board = new int[rows][columns];
-        random = new Random();
-        listeners = new LinkedList<>();
-    }
+        this.weightComputer = weightComputer;
+        this.weightPlayer = weightPlayer;
+        this.weightEmpty = weightEmpty;
+        this.weightPopulated = weightPopulated;
+        this.streakComputer = streakComputer;
+        this.streakPlayer = streakPlayer;
 
-    @Override
-    public int getColumnCount() {
-        return columns;
-    }
-
-    @Override
-    public int getRowCount() {
-        return rows;
-    }
-
-    @Override
-    public int getConnectLength() {
-        return connectLength;
+        this.board = new int[rowCount][columnCount];
+        this.listeners = new LinkedList<>();
+        this.random = new Random();
     }
 
     @Override
     public void clearBoard() {
-        for(int row = 0; row < rows; row++) {
-            for(int col = 0; col < columns; col++) {
-                set(col,row,EMPTY);
+        for (int row = 0; row < rowCount; row++) {
+            for (int col = 0; col < columnCount; col++) {
+                set(row, col, EMPTY);
             }
         }
     }
 
+    protected void set(int row, int col, int val) {
+        if (inBounds(row, col)) {
+            board[row][col] = val;
+            onBoardChanged(row * columnCount + col, val);
+        }
+    }
+
+    protected boolean inBounds(int row, int col) {
+        return row >= 0 && row < rowCount && col >= 0 && col < columnCount;
+    }
+
+    @Override
+    public void onStateChanged(int newState, int oldState) {
+        for (GameListener listener : listeners) {
+            listener.onStateChanged(newState, oldState);
+        }
+        previousState = newState;
+    }
+
+    @Override
+    public void onBoardChanged(int location, int value) {
+        for (GameListener listener : listeners) {
+            listener.onBoardChanged(location, value);
+        }
+
+        int gameState = getGameState();
+        if (gameState != previousState) {
+            onStateChanged(gameState, previousState);
+        }
+    }
+
+    public int get(int row, int col) {
+        return inBounds(row, col) ? board[row][col] : NONE;
+    }
 
     @Override
     public void setMove(int player, int location) {
-        if(player == PLAYER || player == COMPUTER) {
-            int row = location / columns, col = location % columns;
-            if(get(col,row) == EMPTY) {
-                set(col,row,player);
+        if (player == PLAYER || player == COMPUTER) {
+            int row = location / columnCount, col = location % rowCount;
+            if (get(col, row) == EMPTY) {
+                set(col, row, player);
             }
-
         }
-    }
-
-    public void set(int col, int row, int value) {
-        board[row][col] = value;
-        onBoardChanged(row * columns + col,value);
     }
 
     @Override
     public int getComputerMove() {
-
         final List<Integer> bestMoves = new LinkedList<>();
         int maxEval = 0;
-        for(int l = 0; l < rows * columns; l++) {
-            final int eval_computer = evaluateLocation(l,COMPUTER) * ai.getComputer();
-            final int eval_player = evaluateLocation(l,PLAYER) * ai.getPlayer();
+        for (int l = 0; l < rowCount * columnCount; l++) {
+            final int eval_computer = evaluateLocation(l, COMPUTER) * weightComputer;
+            final int eval_player = evaluateLocation(l, PLAYER) * weightPlayer;
             final int eval = eval_computer + eval_player;
 
-            if(maxEval < eval) {
+            if (maxEval < eval) {
                 maxEval = eval;
                 bestMoves.clear();
                 bestMoves.add(l);
-            } else if(maxEval == eval) {
+            } else if (maxEval == eval) {
                 bestMoves.add(l);
             }
         }
@@ -116,15 +127,15 @@ public class Game implements IGame {
     @Override
     public int getGameState() {
         boolean stillPlayable = false;
-        for(int row = 0; row < rows; row++) {
-            for(int col = 0; col < columns; col++) {
+        for (int row = 0; row < rowCount; row++) {
+            for (int col = 0; col < columnCount; col++) {
                 final int val = board[row][col];
-                if(val != EMPTY) {
-                    for(Point d : DIRECTIONS) {
-                        for(int i = 1; i < connectLength; i++) {
-                            if(get(col + d.x *  i, row + d.y * i) != val) {
+                if (val != EMPTY) {
+                    for (Point d : DIRECTIONS) {
+                        for (int i = 1; i < connectLength; i++) {
+                            if (get(col + d.x * i, row + d.y * i) != val) {
                                 break;
-                            } else if(i == connectLength - 1) {
+                            } else if (i == connectLength - 1) {
                                 return val;
                             }
                         }
@@ -137,47 +148,9 @@ public class Game implements IGame {
         return stillPlayable ? PLAYING : TIE;
     }
 
-    private int evaluateLocation(int location, int player) {
-        int row = location / columns, col = location % columns;
-        int locationVal = get(col,row);
-
-        if(locationVal == EMPTY) {
-            int eval = 0;
-
-            for(Point d : DIRECTIONS) {
-                int countEmpty = 0, countPopulated = 0;
-                for(int c = -1; c <= 1; c++) {
-                    for(int i = 0; i < connectLength; i++) {
-                        final int val = get(col + d.x * i * c, row + d.y * i * c);
-                        if(val == EMPTY) {
-                            countEmpty++;
-                        } else if(val == player) {
-                            countPopulated++;
-                        } else {
-                            break;
-                        }
-                    }
-                }
-                if(countEmpty + countPopulated >= connectLength - 1) {
-                    eval += (countEmpty + ai.getEmpty() + countPopulated * ai.getPopulated()) * Math.pow(ai.getStreak(player), countPopulated);
-                }
-            }
-
-
-            return eval;
-
-        } else {
-            return -1;
-        }
-    }
-
     @Override
     public int get(int location) {
-        if(location > -1 && location < rows * columns) {
-            return board[location/columns][location%columns];
-        } else {
-            return NONE;
-        }
+        return get(location/columnCount,location%rowCount);
     }
 
     @Override
@@ -195,35 +168,89 @@ public class Game implements IGame {
         return listeners;
     }
 
-    public int get(int col, int row) {
-        if(col > -1 && col < columns && row > -1 && row < rows) {
-            return board[row][col];
+    @Override
+    public int[] getBoard() {
+        int[] board = new int[rowCount * columnCount];
+        for (int i = 0; i < board.length; i++) {
+            board[i] = this.board[i / columnCount][i % columnCount];
+        }
+        return board;
+    }
+
+    @Override
+    public int getRowCount() {
+        return rowCount;
+    }
+
+    @Override
+    public int getColumnCount() {
+        return columnCount;
+    }
+
+    @Override
+    public int getConnectLength() {
+        return connectLength;
+    }
+
+    @Override
+    public int getWeightComputer() {
+        return weightComputer;
+    }
+
+    @Override
+    public int getWeightPlayer() {
+        return weightPlayer;
+    }
+
+    @Override
+    public int getWeightEmpty() {
+        return weightEmpty;
+    }
+
+    @Override
+    public int getWeightPopulated() {
+        return weightPopulated;
+    }
+
+    @Override
+    public int getStreakComputer() {
+        return streakComputer;
+    }
+
+    @Override
+    public int getStreakPlayer() {
+        return streakPlayer;
+    }
+
+    private int evaluateLocation(int location, int player) {
+        int row = location / columnCount, col = location % columnCount;
+        int locationVal = get(col, row);
+
+        if (locationVal == EMPTY) {
+            int eval = 0;
+
+            for (Point d : DIRECTIONS) {
+                int countEmpty = 0, countPopulated = 0;
+                for (int c = -1; c <= 1; c++) {
+                    for (int i = 0; i < connectLength; i++) {
+                        final int val = get(col + d.x * i * c, row + d.y * i * c);
+                        if (val == EMPTY) {
+                            countEmpty++;
+                        } else if (val == player) {
+                            countPopulated++;
+                        } else {
+                            break;
+                        }
+                    }
+                }
+                if (countEmpty + countPopulated >= connectLength - 1) {
+                    eval += (countEmpty + weightEmpty + countPopulated * weightPopulated) * Math.pow(getStreak(player), countPopulated);
+                }
+            }
+
+            return eval;
         } else {
-            return NONE;
+            return -1;
         }
-    }
-
-
-    protected void updateState() {
-        int gameState = getGameState();
-        if(this.gameState != gameState) {
-            onStateChanged(gameState,this.gameState);
-            this.gameState = gameState;
-        }
-    }
-
-    @Override
-    public void onStateChanged(int newState, int oldState) {
-        for(GameListener listener : listeners) {
-            listener.onStateChanged(newState,oldState);
-        }
-    }
-
-    @Override
-    public void onBoardChanged(int location, int value) {
-        for(GameListener listener : listeners) {
-            listener.onBoardChanged(location,value);
-        }
-        updateState();
     }
 }

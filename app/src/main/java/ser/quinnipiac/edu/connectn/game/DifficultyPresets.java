@@ -1,31 +1,7 @@
 package ser.quinnipiac.edu.connectn.game;
 
-public class GameFactory implements GameSettings {
+public class DifficultyPresets implements IDifficulty {
 
-
-    private int rowCount = 6;
-    private int columnCount = 6;
-    private int connectLength = 4;
-
-
-    public GameFactory() {
-
-    }
-
-    @Override
-    public int getRowCount() {
-        return 0;
-    }
-
-    @Override
-    public int getColumnCount() {
-        return 0;
-    }
-
-    @Override
-    public int getConnectLength() {
-        return 0;
-    }
 
     @Override
     public int getWeightComputer() {
