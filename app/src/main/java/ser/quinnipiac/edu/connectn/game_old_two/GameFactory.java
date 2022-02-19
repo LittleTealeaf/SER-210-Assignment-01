@@ -1,4 +1,6 @@
-package ser.quinnipiac.edu.connectn.game;
+package ser.quinnipiac.edu.connectn.game_old_two;
+
+import android.os.Bundle;
 
 public class GameFactory implements GameSettings {
 
@@ -12,19 +14,25 @@ public class GameFactory implements GameSettings {
 
     }
 
+    public GameFactory(Bundle bundle) {
+        rowCount = bundle.getInt(ROW_COUNT);
+        columnCount = bundle.getInt(COLUMN_COUNT);
+        connectLength = bundle.getInt(CONNECT_LENGTH);
+    }
+
     @Override
     public int getRowCount() {
-        return 0;
+        return rowCount;
     }
 
     @Override
     public int getColumnCount() {
-        return 0;
+        return columnCount;
     }
 
     @Override
     public int getConnectLength() {
-        return 0;
+        return connectLength;
     }
 
     @Override

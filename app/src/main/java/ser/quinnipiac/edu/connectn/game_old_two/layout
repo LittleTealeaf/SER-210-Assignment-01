@@ -1,0 +1,11 @@
+so the layout that we need to make:
+
+Game Factory
+ -> Handles creating the values of the game
+ -> handles rows, columns, connect size
+ -> Also handles difficulty Option
+Difficulty
+ -> Handles the computer variables
+ -> Built into the actual game once it's created from Game Factory
+ -> 3 hard-coded difficulties: easy, normal, hard
+

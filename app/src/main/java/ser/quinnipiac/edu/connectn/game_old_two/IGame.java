@@ -1,10 +1,12 @@
-package ser.quinnipiac.edu.connectn.game;
+package ser.quinnipiac.edu.connectn.game_old_two;
 
 import android.os.Bundle;
 
 import java.util.Collection;
 
-public interface IGame extends ISettings, IDifficulty, GameListener {
+import ser.quinnipiac.edu.connectn.game.GameListener;
+
+public interface IGame extends GameListener, GameSettings {
     int NONE = -1;
     int EMPTY = 0;
     int PLAYER = 1;
@@ -34,5 +36,11 @@ public interface IGame extends ISettings, IDifficulty, GameListener {
             default:
                 return 0;
         }
+    }
+
+    @Override
+    default void toBundle(Bundle bundle) {
+        GameSettings.super.toBundle(bundle);
+        bundle.putIntArray(BOARD,getBoard());
     }
 }

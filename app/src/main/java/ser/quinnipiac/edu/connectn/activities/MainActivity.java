@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.widget.EditText;
 
 import ser.quinnipiac.edu.connectn.R;
+import ser.quinnipiac.edu.connectn.game_old_two.GameFactory;
 
 /**
  * @author Thomas Kwashnak
@@ -21,6 +22,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private EditText inputName;
+
+    GameFactory gameFactory;
 
 
 
@@ -40,6 +43,9 @@ public class MainActivity extends AppCompatActivity {
 
         if (savedInstanceState != null) {
             inputName.setText(savedInstanceState.getString(NAME));
+            gameFactory = new GameFactory(savedInstanceState);
+        } else {
+            gameFactory = new GameFactory();
         }
 
 
@@ -47,7 +53,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onSettings() {
-        startActivity(new Intent(this,SettingsActivity.class));
+        Intent intent = new Intent(this,SettingsActivity.class);
+        gameFactory.toBundle(intent.getExtras());
+        startActivity(intent);
     }
 
     public void onPlay() {

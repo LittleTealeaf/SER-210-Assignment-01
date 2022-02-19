@@ -1,4 +1,4 @@
-package ser.quinnipiac.edu.connectn.game;
+package ser.quinnipiac.edu.connectn.game_old_two;
 
 import android.os.Bundle;
 
