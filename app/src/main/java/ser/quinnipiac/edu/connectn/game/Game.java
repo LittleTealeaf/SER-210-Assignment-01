@@ -1,13 +1,58 @@
 package ser.quinnipiac.edu.connectn.game;
 
+import android.os.Bundle;
+
 import java.util.Collection;
+import java.util.LinkedList;
+import java.util.Random;
 
 public class Game implements IGame {
 
 
+    private final int[][] board;
+    private final int rowCount;
+    private final int columnCount;
+    private final int connectLength;
+    private final int weightComputer;
+    private final int weightPlayer;
+    private final int weightEmpty;
+    private final int weightPopulated;
+    private final int streakPlayer;
+    private final int streakComputer;
+    private final Collection<GameListener> listeners;
+    private final Random random;
+    private int previousState;
 
-    public Game(ISettings settings, IDifficulty difficulty) {
+    public Game(Bundle bundle) {
+        rowCount = bundle.getInt(ROW_COUNT);
+        columnCount = bundle.getInt(COLUMN_COUNT);
+        connectLength = bundle.getInt(CONNECT_LENGTH);
+        weightComputer = bundle.getInt(WEIGHT_COMPUTER);
+        weightPlayer = bundle.getInt(WEIGHT_PLAYER);
+        weightEmpty = bundle.getInt(WEIGHT_EMPTY);
+        weightPopulated = bundle.getInt(WEIGHT_POPULATED);
+        streakPlayer = bundle.getInt(STREAK_PLAYER);
+        streakComputer = bundle.getInt(STREAK_COMPUTER);
 
+        listeners = new LinkedList<>();
+        random = new Random();
+        board = new int[rowCount][columnCount];
+
+
+        if(bundle.containsKey(BOARD)) {
+            int[] bundleBoard = bundle.getIntArray(BOARD);
+            for(int i = 0; i < bundleBoard.length; i++) {
+                set(i,bundleBoard[i]);
+            }
+        }
+    }
+
+    protected void set(int location, int value) {
+        set(location/columnCount, location%columnCount, value);
+    }
+
+    protected void set(int row, int col, int value) {
+        board[row][col] = value;
     }
 
     @Override
@@ -22,32 +67,32 @@ public class Game implements IGame {
 
     @Override
     public int getWeightComputer() {
-        return 0;
+        return weightComputer;
     }
 
     @Override
     public int getWeightPlayer() {
-        return 0;
+        return weightPlayer;
     }
 
     @Override
     public int getWeightEmpty() {
-        return 0;
+        return weightEmpty;
     }
 
     @Override
     public int getWeightPopulated() {
-        return 0;
+        return weightPopulated;
     }
 
     @Override
     public int getStreakComputer() {
-        return 0;
+        return streakComputer;
     }
 
     @Override
     public int getStreakPlayer() {
-        return 0;
+        return streakPlayer;
     }
 
     @Override
