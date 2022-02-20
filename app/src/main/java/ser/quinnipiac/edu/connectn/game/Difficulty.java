@@ -3,8 +3,8 @@ package ser.quinnipiac.edu.connectn.game;
 import androidx.annotation.NonNull;
 
 public enum Difficulty implements IDifficulty {
-    EASY("Easy",1,1,2,3,2,2),
-    NORMAL("Normal",1,2,1,3,2,3),
+    EASY("Easy",1,1,0,0,1,1),
+    NORMAL("Normal",1,2,1,2,2,2),
     HARD("Hard",3,4,1,5,5,6);
 
     private final int weightComputer;

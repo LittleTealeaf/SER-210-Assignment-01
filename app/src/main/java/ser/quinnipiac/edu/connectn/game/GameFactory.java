@@ -14,7 +14,7 @@ public class GameFactory implements ISettings {
     public GameFactory() {
         rowCount = columnCount = 6;
         connectLength = 4;
-        difficulty = Difficulty.HARD;
+        difficulty = Difficulty.NORMAL;
     }
 
     public GameFactory(Bundle bundle) {
