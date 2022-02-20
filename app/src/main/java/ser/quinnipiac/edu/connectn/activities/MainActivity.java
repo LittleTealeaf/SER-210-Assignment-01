@@ -1,10 +1,14 @@
 package ser.quinnipiac.edu.connectn.activities;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.EditText;
 
 import ser.quinnipiac.edu.connectn.R;
@@ -22,10 +26,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private EditText inputName;
-
     private GameFactory gameFactory;
 
-
+    private ActivityResultLauncher<Intent> settingsLauncher;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,9 +40,9 @@ public class MainActivity extends AppCompatActivity {
         /*
         These are less shaky than defining the method in the XML.
          */
-        findViewById(R.id.main_button_play).setOnClickListener(view -> onPlay());
-        findViewById(R.id.main_button_instructions).setOnClickListener(view -> onInstructions());
-        findViewById(R.id.main_button_settings).setOnClickListener(view -> onSettings());
+        findViewById(R.id.main_button_play).setOnClickListener(this::onPlay);
+        findViewById(R.id.main_button_instructions).setOnClickListener(this::onInstructions);
+        findViewById(R.id.main_button_settings).setOnClickListener(this::onSettings);
 
 
         if (savedInstanceState != null) {
@@ -50,25 +53,31 @@ public class MainActivity extends AppCompatActivity {
         }
 
 
+        settingsLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result ->  {
+            if(result.getResultCode() == Activity.RESULT_OK) {
+                assert result.getData() != null;
+                gameFactory = new GameFactory(result.getData().getExtras());
+            }
+        });
 
     }
 
-    public void onSettings() {
+    public void onSettings(View view) {
         Intent intent = new Intent(this,SettingsActivity.class);
         Bundle bundle = new Bundle();
         gameFactory.toBundle(bundle);
         intent.putExtras(bundle);
-        startActivity(intent);
+        settingsLauncher.launch(intent);
     }
 
-    public void onPlay() {
+    public void onPlay(View view) {
         Intent intent = new Intent(this,GameActivity.class);
         intent.putExtra(NAME,inputName.getText().toString());
         intent.putExtras(gameFactory.createGameBundle());
         startActivity(intent);
     }
 
-    public void onInstructions() {
+    public void onInstructions(View view) {
         startActivity(new Intent(this, InstructionsActivity.class));
     }
 

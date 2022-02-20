@@ -1,9 +1,11 @@
 package ser.quinnipiac.edu.connectn.game;
 
+import androidx.annotation.NonNull;
+
 public enum Difficulty implements IDifficulty {
-    EASY(1,1,2,3,2,2),
-    NORMAL(1,2,1,3,2,3),
-    HARD(3,4,1,5,5,6);
+    EASY("Easy",1,1,2,3,2,2),
+    NORMAL("Normal",1,2,1,3,2,3),
+    HARD("Hard",3,4,1,5,5,6);
 
     private final int weightComputer;
     private final int weightPlayer;
@@ -11,8 +13,10 @@ public enum Difficulty implements IDifficulty {
     private final int weightPopulated;
     private final int streakPlayer;
     private final int streakComputer;
+    private final String name;
 
-    Difficulty(int weightComputer, int weightPlayer, int weightEmpty, int weightPopulated, int streakPlayer, int streakComputer) {
+    Difficulty(String name, int weightComputer, int weightPlayer, int weightEmpty, int weightPopulated, int streakPlayer, int streakComputer) {
+        this.name = name;
         this.weightComputer = weightComputer;
         this.weightPlayer = weightPlayer;
         this.weightEmpty = weightEmpty;
@@ -50,4 +54,11 @@ public enum Difficulty implements IDifficulty {
     public int getStreakPlayer() {
         return streakPlayer;
     }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return name;
+    }
+
 }

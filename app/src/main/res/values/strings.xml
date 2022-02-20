@@ -8,4 +8,9 @@
     <string name="text_button_settings">Settings</string>
     <string name="text_hint_name">Name</string>
     <string name="text_title_settings">Settings</string>
+    <string name="settings_label_columns">Columns</string>
+    <string name="settings_label_rows">Rows</string>
+    <string name="settings_label_connect">Connect</string>
+    <string name="settings_button_save">Save</string>
+    <string name="difficulty">Difficulty</string>
 </resources>
