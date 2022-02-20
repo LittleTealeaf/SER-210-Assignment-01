@@ -1,6 +1,8 @@
 package ser.quinnipiac.edu.connectn.game;
 
-public interface ISettings {
+import android.os.Bundle;
+
+public interface ISettings extends Bundleable {
 
     String ROW_COUNT = "settings_row_count";
     String COLUMN_COUNT = "settings_column_count";
@@ -9,4 +11,11 @@ public interface ISettings {
     int getRowCount();
     int getColumnCount();
     int getConnectLength();
+
+    @Override
+    default void toBundle(Bundle bundle) {
+        bundle.putInt(ROW_COUNT,getRowCount());
+        bundle.putInt(COLUMN_COUNT,getColumnCount());
+        bundle.putInt(CONNECT_LENGTH,getConnectLength());
+    }
 }

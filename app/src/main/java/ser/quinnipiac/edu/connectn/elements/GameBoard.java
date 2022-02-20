@@ -9,7 +9,7 @@ import androidx.appcompat.widget.AppCompatButton;
 
 import ser.quinnipiac.edu.connectn.R;
 import ser.quinnipiac.edu.connectn.game.GameListener;
-import ser.quinnipiac.edu.connectn.game_old.IGame;
+import ser.quinnipiac.edu.connectn.game.IGame;
 
 /**
  * @author Thomas Kwashnak

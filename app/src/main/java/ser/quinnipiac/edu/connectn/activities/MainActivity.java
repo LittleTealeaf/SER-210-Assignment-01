@@ -8,7 +8,7 @@ import android.os.Bundle;
 import android.widget.EditText;
 
 import ser.quinnipiac.edu.connectn.R;
-import ser.quinnipiac.edu.connectn.game_old_two.GameFactory;
+import ser.quinnipiac.edu.connectn.game.GameFactory;
 
 /**
  * @author Thomas Kwashnak
@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
 
     private EditText inputName;
 
-    GameFactory gameFactory;
+    private GameFactory gameFactory;
 
 
 
@@ -41,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.main_button_instructions).setOnClickListener(view -> onInstructions());
         findViewById(R.id.main_button_settings).setOnClickListener(view -> onSettings());
 
+
         if (savedInstanceState != null) {
             inputName.setText(savedInstanceState.getString(NAME));
             gameFactory = new GameFactory(savedInstanceState);
@@ -54,13 +55,18 @@ public class MainActivity extends AppCompatActivity {
 
     public void onSettings() {
         Intent intent = new Intent(this,SettingsActivity.class);
-        gameFactory.toBundle(intent.getExtras());
+        Bundle bundle = new Bundle();
+        gameFactory.toBundle(bundle);
+        intent.putExtras(bundle);
         startActivity(intent);
     }
 
     public void onPlay() {
         Intent intent = new Intent(this,GameActivity.class);
-        intent.putExtra(NAME, inputName.getText().toString());
+        Bundle bundle = new Bundle();
+        gameFactory.toBundle(bundle);
+        bundle.putString(NAME,inputName.getText().toString());
+        intent.putExtras(bundle);
         startActivity(intent);
     }
 
@@ -71,6 +77,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
+        gameFactory.toBundle(outState);
         outState.putString(NAME, inputName.getText().toString());
     }
 }

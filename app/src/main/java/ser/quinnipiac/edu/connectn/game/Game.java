@@ -61,6 +61,7 @@ public class Game implements IGame {
 
     protected void set(int row, int col, int value) {
         board[row][col] = value;
+        onBoardChanged(row * columnCount + col,value);
     }
 
     @Override

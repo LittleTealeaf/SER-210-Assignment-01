@@ -1,6 +1,8 @@
 package ser.quinnipiac.edu.connectn.game;
 
-public interface IDifficulty {
+import android.os.Bundle;
+
+public interface IDifficulty extends Bundleable {
     String WEIGHT_COMPUTER = "difficulty_weight_computer";
     String WEIGHT_PLAYER = "difficulty_weight_player";
     String WEIGHT_EMPTY = "difficulty_weight_empty";
@@ -14,4 +16,13 @@ public interface IDifficulty {
     int getWeightPopulated();
     int getStreakComputer();
     int getStreakPlayer();
+
+    @Override
+    default void toBundle(Bundle bundle) {
+        bundle.putInt(WEIGHT_COMPUTER,getWeightComputer());
+        bundle.putInt(WEIGHT_PLAYER,getWeightPlayer());
+        bundle.putInt(WEIGHT_EMPTY,getWeightEmpty());
+        bundle.putInt(WEIGHT_POPULATED,getWeightPopulated());
+        bundle.putInt(STREAK_COMPUTER,getStreakComputer());
+    }
 }

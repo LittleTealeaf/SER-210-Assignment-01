@@ -7,9 +7,9 @@ import android.os.Bundle;
 
 import ser.quinnipiac.edu.connectn.R;
 import ser.quinnipiac.edu.connectn.elements.GameBoard;
-import ser.quinnipiac.edu.connectn.game_old.Game;
+import ser.quinnipiac.edu.connectn.game.Game;
 import ser.quinnipiac.edu.connectn.game.GameListener;
-import ser.quinnipiac.edu.connectn.game_old.IGame;
+import ser.quinnipiac.edu.connectn.game.IGame;
 
 /**
  * @author Thomas Kwashnak
@@ -24,9 +24,9 @@ public class GameActivity extends AppCompatActivity implements GameListener {
         setContentView(R.layout.activity_game);
 
         if(savedInstanceState != null) {
-            game = loadFromBundle(savedInstanceState);
+            game = new Game(savedInstanceState);
         } else {
-            game = new Game();
+            game = new Game(getIntent().getExtras());
         }
 
         game.addListener(this);
@@ -46,35 +46,7 @@ public class GameActivity extends AppCompatActivity implements GameListener {
     @Override
     protected void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
-        game.saveToBundle(outState);
-//        outState.putInt(GameFactory.ROWS, game.getRowCount());
-//        outState.putInt(GameFactory.COLUMNS, game.getColumnCount());
-//        outState.putInt(GameFactory.CONNECT_LENGTH, game.getConnectLength());
-//        int[] board = new int[game.getRowCount() * game.getColumnCount()];
-//        for(int i = 0; i < board.length; i++) {
-//            board[i] = game.get(i);
-//        }
-//        outState.putIntArray(IGame.BOARD, board);
+        game.toBundle(outState);
     }
 
-    private IGame loadFromBundle(Bundle bundle) {
-        return null;
-//        if(bundle.containsKey(GameFactory.COLUMNS) && bundle.containsKey(GameFactory.ROWS) && bundle.containsKey(GameFactory.CONNECT_LENGTH)) {
-//            int rowCount = bundle.getInt(GameFactory.ROWS);
-//            int columnCount = bundle.getInt(GameFactory.COLUMNS);
-//            int connectLength = bundle.getInt(GameFactory.CONNECT_LENGTH);
-//
-//            Game game = new Game(rowCount,columnCount,connectLength);
-//
-//            if(bundle.containsKey(IGame.BOARD)) {
-//                int[] board = bundle.getIntArray(IGame.BOARD);
-//                for(int i = 0; i < board.length; i++) {
-//                    game.set(i%columnCount,i/rowCount,board[i]);
-//                }
-//            }
-//            return game;
-//        } else {
-//            return new Game();
-//        }
-    }
 }

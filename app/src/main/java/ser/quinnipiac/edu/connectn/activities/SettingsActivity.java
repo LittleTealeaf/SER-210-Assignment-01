@@ -6,7 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 
 import ser.quinnipiac.edu.connectn.R;
-import ser.quinnipiac.edu.connectn.game_old_two.GameFactory;
+import ser.quinnipiac.edu.connectn.game.GameFactory;
 
 /**
  * @author Thomas Kwashnak
@@ -20,9 +20,14 @@ public class SettingsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
 
-        gameFactory = new GameFactory(savedInstanceState != null ? savedInstanceState : getIntent().getExtras());
+        if(savedInstanceState != null) {
+            gameFactory = new GameFactory(savedInstanceState);
+        } else {
+            gameFactory = new GameFactory(getIntent().getExtras());
+        }
 
         System.out.println(gameFactory.getColumnCount());
+        gameFactory.setColumnCount(10);
     }
 
     @Override

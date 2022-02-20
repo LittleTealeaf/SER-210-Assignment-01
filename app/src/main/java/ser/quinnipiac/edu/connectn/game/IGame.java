@@ -12,7 +12,7 @@ public interface IGame extends ISettings, IDifficulty, GameListener {
     int PLAYING = 3;
     int TIE = 4;
 
-    String BOARD = "IGame:Board";
+    String BOARD = "IGame_board";
 
     void clearBoard();
     void setMove(int player, int location);
@@ -34,5 +34,12 @@ public interface IGame extends ISettings, IDifficulty, GameListener {
             default:
                 return 0;
         }
+    }
+
+    @Override
+    default void toBundle(Bundle bundle) {
+        ISettings.super.toBundle(bundle);
+        IDifficulty.super.toBundle(bundle);
+        bundle.putIntArray(BOARD,getBoard());
     }
 }
