@@ -8,6 +8,9 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * TODO: FIX THIS BECAUSE IT'S MESSING UP SOMEHOW
+ */
 public class Game implements IGame {
 
     private static final Point[] DIRECTIONS;
