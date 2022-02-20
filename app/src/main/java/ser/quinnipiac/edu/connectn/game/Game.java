@@ -185,10 +185,10 @@ public class Game implements IGame {
     }
 
     public int get(int col, int row) {
-        if (col > -1 && col < columnCount && row > -1 && row < rowCount) {
+        if (col >= 0 && col < columnCount && row >= 0 && row < rowCount) {
             return board[row][col];
         } else {
-            return NONE;
+            return OUT_OF_BOUNDS;
         }
     }
 
@@ -221,7 +221,7 @@ public class Game implements IGame {
         if (location > -1 && location < columnCount * rowCount) {
             return board[location / columnCount][location % columnCount];
         } else {
-            return NONE;
+            return OUT_OF_BOUNDS;
         }
     }
 

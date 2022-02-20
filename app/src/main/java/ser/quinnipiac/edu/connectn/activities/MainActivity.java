@@ -63,10 +63,8 @@ public class MainActivity extends AppCompatActivity {
 
     public void onPlay() {
         Intent intent = new Intent(this,GameActivity.class);
-        Bundle bundle = new Bundle();
-        gameFactory.toBundle(bundle);
-        bundle.putString(NAME,inputName.getText().toString());
-        intent.putExtras(bundle);
+        intent.putExtra(NAME,inputName.getText().toString());
+        intent.putExtras(gameFactory.createGameBundle());
         startActivity(intent);
     }
 

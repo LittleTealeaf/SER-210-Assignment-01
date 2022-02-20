@@ -5,7 +5,7 @@ import android.os.Bundle;
 import java.util.Collection;
 
 public interface IGame extends ISettings, IDifficulty, GameListener {
-    int NONE = -1;
+    int OUT_OF_BOUNDS = -1;
     int EMPTY = 0;
     int PLAYER = 1;
     int COMPUTER = 2;

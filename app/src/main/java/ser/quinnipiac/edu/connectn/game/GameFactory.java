@@ -54,6 +54,19 @@ public class GameFactory implements ISettings {
     }
 
     @Override
+    public void toBundle(Bundle bundle) {
+        ISettings.super.toBundle(bundle);
+        bundle.putString(DIFFICULTY,difficulty.name());
+    }
+
+    public Bundle createGameBundle() {
+        Bundle bundle = new Bundle();
+        toBundle(bundle);
+        difficulty.toBundle(bundle);
+        return bundle;
+    }
+
+    @Override
     public int getColumnCount() {
         return columnCount;
     }
@@ -62,4 +75,5 @@ public class GameFactory implements ISettings {
     public int getConnectLength() {
         return connectLength;
     }
+
 }

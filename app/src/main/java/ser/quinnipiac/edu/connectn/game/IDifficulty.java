@@ -24,5 +24,6 @@ public interface IDifficulty extends Bundleable {
         bundle.putInt(WEIGHT_EMPTY,getWeightEmpty());
         bundle.putInt(WEIGHT_POPULATED,getWeightPopulated());
         bundle.putInt(STREAK_COMPUTER,getStreakComputer());
+        bundle.putInt(STREAK_PLAYER,getStreakPlayer());
     }
 }
