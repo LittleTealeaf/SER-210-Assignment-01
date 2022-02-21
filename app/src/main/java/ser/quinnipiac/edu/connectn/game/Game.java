@@ -193,7 +193,9 @@ public class Game implements IGame {
         for (int row = 0; row < rowCount; row++) {
             for (int col = 0; col < columnCount; col++) {
                 final int val = board[row][col];
-                if (val != EMPTY) {
+                if(val == EMPTY) {
+                    stillPlayable = true;
+                } else if(val != OUT_OF_BOUNDS) {
                     for (Point d : DIRECTIONS) {
                         for (int i = 1; i < connectLength; i++) {
                             if (get(col + d.x * i, row + d.y * i) != val) {
@@ -203,8 +205,6 @@ public class Game implements IGame {
                             }
                         }
                     }
-                } else {
-                    stillPlayable = true;
                 }
             }
         }

@@ -107,14 +107,13 @@ public class SettingsActivity extends AppCompatActivity implements NumberPicker.
 
     protected void updateConnectRange() {
         int max = Math.min(gameFactory.getRowCount(),gameFactory.getColumnCount());
-        int suggested = Math.min(max * 3 / 4,3);
+        int suggested = Math.max(max * 3 / 4,3);
 
         connectPicker.setMinValue(3);
         connectPicker.setMaxValue(max);
 
-        if(gameFactory.getConnectLength() > max) {
-            connectPicker.setValue(suggested);
-        }
+        connectPicker.setValue(suggested);
+        gameFactory.setConnectLength(suggested);
     }
 
     public void onSaveAndClose(View view) {
