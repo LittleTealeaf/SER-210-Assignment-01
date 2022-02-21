@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
         inputName = findViewById(R.id.main_input_name);
 
         /*
-        These are less shaky than defining the method in the XML.
+        It's best practice to use this instead of using the XML file, because specifying it in the XML file uses extra memory
          */
         findViewById(R.id.main_button_play).setOnClickListener(this::onPlay);
         findViewById(R.id.main_button_instructions).setOnClickListener(this::onInstructions);

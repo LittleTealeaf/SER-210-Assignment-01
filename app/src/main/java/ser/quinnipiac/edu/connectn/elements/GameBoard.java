@@ -18,7 +18,6 @@ public class GameBoard extends GridLayout implements GameListener {
 
     private IGame game;
     private Button[] board;
-    private Button resetButton;
 
     public GameBoard(Context context) {
         super(context);

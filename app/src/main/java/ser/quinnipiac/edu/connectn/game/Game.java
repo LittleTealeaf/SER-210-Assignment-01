@@ -22,15 +22,7 @@ public class Game implements IGame {
     }
 
     private final int[][] board;
-    private final int rowCount;
-    private final int columnCount;
-    private final int connectLength;
-    private final int weightComputer;
-    private final int weightPlayer;
-    private final int weightEmpty;
-    private final int weightPopulated;
-    private final int streakPlayer;
-    private final int streakComputer;
+    private final int rowCount, columnCount, connectLength, weightComputer, weightPlayer, weightEmpty, weightPopulated, streakPlayer, streakComputer;
     private final Collection<GameListener> listeners;
     private final Random random;
     private int previousState;
