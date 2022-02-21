@@ -2,6 +2,9 @@ package ser.quinnipiac.edu.connectn.game;
 
 import androidx.annotation.NonNull;
 
+/**
+ * @author Thomas Kwashnak
+ */
 public enum Difficulty implements IDifficulty {
     EASY("Easy",1,1,0,0,1,1),
     NORMAL("Normal",1,2,1,2,2,2),

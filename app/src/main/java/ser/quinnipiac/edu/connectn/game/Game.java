@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Random;
 
 /**
- * TODO: FIX THIS BECAUSE IT'S MESSING UP SOMEHOW
+ * @author Thomas Kwashnak
  */
 public class Game implements IGame {
 

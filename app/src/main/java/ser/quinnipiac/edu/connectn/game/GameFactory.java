@@ -2,6 +2,9 @@ package ser.quinnipiac.edu.connectn.game;
 
 import android.os.Bundle;
 
+/**
+ * @author Thomas Kwashnak
+ */
 public class GameFactory implements ISettings {
 
     public static final String DIFFICULTY = "GameFactory_difficulty";

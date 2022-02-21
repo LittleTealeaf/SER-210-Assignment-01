@@ -14,6 +14,7 @@ import ser.quinnipiac.edu.connectn.game.GameListener;
 import ser.quinnipiac.edu.connectn.game.IGame;
 
 /**
+ * Activity that displays the game, winner, and the current player's turn
  * @author Thomas Kwashnak
  */
 public class GameActivity extends AppCompatActivity implements GameListener {
