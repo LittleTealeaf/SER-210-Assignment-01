@@ -7,7 +7,7 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="location_player">#6969FF</color>
-    <color name="location_computer">#FF0000</color>
-    <color name="location_empty">#C5C5C5</color>
+    <color name="player">#0028B8</color>
+    <color name="computer">#FF0000</color>
+    <color name="empty">#d6d7d7</color>
 </resources>
