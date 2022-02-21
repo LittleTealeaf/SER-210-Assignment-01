@@ -30,28 +30,35 @@ public class SettingsActivity extends AppCompatActivity implements NumberPicker.
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
 
+        //Initializes the difficulties with the values from difficulties
         Difficulty[] difficulties = Difficulty.values();
 
+        //Sets the back button
         findViewById(R.id.settings_button_back).setOnClickListener(this::onSaveAndClose);
 
+        //Initialize View Variables.
         NumberPicker rowPicker = findViewById(R.id.settings_number_rows);
         NumberPicker columnPicker = findViewById(R.id.settings_number_columns);
         connectPicker = findViewById(R.id.settings_number_connect);
 
+        //Sets onValueChangedListeners
         rowPicker.setOnValueChangedListener(this);
         columnPicker.setOnValueChangedListener(this);
         connectPicker.setOnValueChangedListener(this);
 
+        //Populates the adapter with the difficulty values, and registers this as a listener
         Spinner spinner = findViewById(R.id.settings_spinner_difficulty);
         spinner.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, difficulties));
         spinner.setOnItemSelectedListener(this);
 
+        //Creates the game factory from the savedInstanceState if it exists, otherwise pulls from the intent
         if(savedInstanceState != null) {
             gameFactory = new GameFactory(savedInstanceState);
         } else {
             gameFactory = new GameFactory(getIntent().getExtras());
         }
 
+        //Cycle through difficulties until it gets to the set difficulty, then sets the spinner to select that value
         for(int i = 0; i < difficulties.length; i++) {
             if(difficulties[i] == gameFactory.getDifficulty()) {
                 spinner.setSelection(i);
@@ -59,6 +66,7 @@ public class SettingsActivity extends AppCompatActivity implements NumberPicker.
             }
         }
 
+        //Sets min and max value for rowPicker, columnPicker, and the connectRange
         int min = 3, max = 20;
         rowPicker.setMinValue(min);
         rowPicker.setMaxValue(max);
@@ -66,10 +74,12 @@ public class SettingsActivity extends AppCompatActivity implements NumberPicker.
         columnPicker.setMaxValue(max);
         updateConnectRange();
 
+        //Stores the current values (in case values get changed from methods)
         int rows = gameFactory.getRowCount();
         int cols = gameFactory.getColumnCount();
         int connect = gameFactory.getConnectLength();
 
+        //Sets spinner values (will modify gameFactory because of listeners
         connectPicker.setValue(connect);
         rowPicker.setValue(rows);
         columnPicker.setValue(cols);
