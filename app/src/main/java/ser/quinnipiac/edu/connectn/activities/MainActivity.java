@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import ser.quinnipiac.edu.connectn.R;
 import ser.quinnipiac.edu.connectn.game.GameFactory;
@@ -71,10 +72,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onPlay(View view) {
-        Intent intent = new Intent(this,GameActivity.class);
-        intent.putExtra(NAME,inputName.getText().toString());
-        intent.putExtras(gameFactory.createGameBundle());
-        startActivity(intent);
+        if(!inputName.getText().toString().equals("")) {
+            Intent intent = new Intent(this,GameActivity.class);
+            intent.putExtra(NAME,inputName.getText().toString());
+            intent.putExtras(gameFactory.createGameBundle());
+            startActivity(intent);
+        } else {
+            Toast.makeText(this,"Please Enter a Name",Toast.LENGTH_LONG).show();
+        }
     }
 
     public void onInstructions(View view) {
