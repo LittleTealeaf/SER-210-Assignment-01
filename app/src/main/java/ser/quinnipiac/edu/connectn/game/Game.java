@@ -120,7 +120,7 @@ public class Game implements IGame {
                     }
                 }
                 if (countEmpty + countPopulated >= connectLength - 1) {
-                    eval += (countEmpty + getWeightEmpty() + countPopulated * getWeightPopulated()) * Math.pow(getStreak(player), countPopulated);
+                    eval += (int) ((countEmpty + getWeightEmpty() + countPopulated * getWeightPopulated()) * Math.pow(getStreak(player), countPopulated));
                 }
             }
 
